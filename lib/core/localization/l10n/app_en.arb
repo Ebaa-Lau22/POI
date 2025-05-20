@@ -1,0 +1,10 @@
+{
+  "@@locale": "en",
+  "helloWorld": "Hello World!",
+  "@helloWorld": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "startCall": "Start Call",
+  "waitingForRemoteVideo": "Waiting for Remote Video",
+  "yourVideo": "Your Video Preview"
+}
