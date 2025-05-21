@@ -12,7 +12,7 @@ Widget searchFieldBuilder({
   double width = 200,
   double height = 40,
   double contentPadding = 0,
-  Color bgColor = mainLightColor
+  Color bgColor = AppColors.mainLight
 }) {
   return Material(
     borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
@@ -34,7 +34,7 @@ Widget searchFieldBuilder({
             padding: EdgeInsetsDirectional.only(start: 10.0),
             child: Icon(
               Icons.search,
-              color: blackColor,
+              color: AppColors.blackColor,
               size: 24,
             ), // myIcon is a 48px-wide widget.
           ),

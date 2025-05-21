@@ -21,7 +21,7 @@ class DetailsDialog extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
       ),
       elevation: 0,
-      backgroundColor: lightBlueColor,
+      backgroundColor: AppColors.lightBlue,
       child: buildDialogContent(context),
     );
   }
@@ -62,7 +62,7 @@ class DetailsDialog extends StatelessWidget {
               ),
               IconButton(
                   onPressed: () => Navigator.pop(context),
-                  icon: const Icon(Icons.clear, color: blackColor, size: 14,)
+                  icon: const Icon(Icons.clear, color: AppColors.blackColor, size: 14,)
               ),
             ],
           ),

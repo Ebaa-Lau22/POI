@@ -30,8 +30,8 @@ class CustomToast {
       icon = Icons.check;
       firstLine = "تمت العملية بنجاح";
     } else if (type == "Warning") {
-      brightColor = lightRedColor;
-      mainColor = darkRedColor;
+      brightColor = AppColors.lightRed;
+      mainColor = AppColors.darkRed;
       icon = Icons.error;
       firstLine = "إجراء مطلوب";
     } else {
@@ -52,7 +52,7 @@ class CustomToast {
               child: Padding(
                 padding: EdgeInsets.only(bottom: bottomPadding ?? 4),
                 child: Container(
-                  color: lightBlueColor,
+                  color: AppColors.lightBlue,
                   child: Stack(
                     alignment: Alignment.centerLeft,
                     children: [
@@ -63,7 +63,7 @@ class CustomToast {
                             width: 150,
                             height: double.infinity,
                             decoration: BoxDecoration(
-                                color: mainColor.withOpacity(0.2),
+                                color: mainColor.withValues(alpha: 0.2),
                                 borderRadius:
                                     const BorderRadiusDirectional.only(
                                   topEnd: Radius.elliptical(11, 37.5),
@@ -78,14 +78,14 @@ class CustomToast {
                           children: [
                             CircleAvatar(
                               radius: 18,
-                              backgroundColor: secondaryColor ?? darkBlueColor,
+                              backgroundColor: secondaryColor ?? AppColors.darkBlue,
                               child: CircleAvatar(
                                 radius: 11,
                                 backgroundColor: mainColor,
                                 child: type != "Warning"
                                     ? Icon(
                                         icon,
-                                        color: secondaryColor ?? darkBlueColor,
+                                        color: secondaryColor ?? AppColors.darkBlue,
                                         size: 17,
                                         weight: 20,
                                       )
@@ -93,7 +93,7 @@ class CustomToast {
                                         "!",
                                         style: TextStyle(
                                           color:
-                                              secondaryColor ?? darkBlueColor,
+                                              secondaryColor ?? AppColors.darkBlue,
                                           fontSize: 14,
                                           fontWeight: FontWeight.bold,
                                         ),
@@ -126,7 +126,7 @@ class CustomToast {
                                       msg,
                                       style: TextStyle(
                                         fontFamily: "Cairo",
-                                        color: secondaryColor ?? darkBlueColor,
+                                        color: secondaryColor ?? AppColors.darkBlue,
                                         fontWeight: FontWeight.w700,
                                         fontSize: 12,
                                       ),

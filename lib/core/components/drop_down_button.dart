@@ -10,7 +10,7 @@ Widget myDropDownMenuButton({
   String fontFamily = "Cairo",
   FontWeight fontWeight = FontWeight.w600,
   double fontSize = 11.0,
-  Color textColor = blackColor,
+  Color textColor = AppColors.blackColor,
   double borderRadius = 10.0,
   double height = 40.0,
   double width = 125.0,
@@ -27,7 +27,7 @@ Widget myDropDownMenuButton({
       height: height,
       decoration: BoxDecoration(
         borderRadius: BorderRadiusDirectional.circular(borderRadius + 1),
-        color: darkRedColor,
+        color: AppColors.darkRed,
       ),
       child: Padding(
         padding: const EdgeInsets.all(1.0),
@@ -36,7 +36,7 @@ Widget myDropDownMenuButton({
           height: height - 2,
           decoration: BoxDecoration(
             borderRadius: BorderRadiusDirectional.circular(borderRadius),
-            color: whiteColor,
+            color: AppColors.white,
           ),
           child: DropdownButtonHideUnderline(
             child: DropdownButton(
@@ -45,7 +45,7 @@ Widget myDropDownMenuButton({
               onChanged: onChanged,
               borderRadius: BorderRadius.circular(borderRadius),
               style: TextStyle(
-                color: blackColor,
+                color: AppColors.blackColor,
                 fontFamily: fontFamily,
                 fontSize: fontSize,
                 fontWeight: fontWeight,
@@ -56,15 +56,15 @@ Widget myDropDownMenuButton({
                   SizedBox(
                     width: 2,
                   ),
-                  Icon(Icons.arrow_drop_down, size: 24, color: darkRedColor),
+                  Icon(Icons.arrow_drop_down, size: 24, color: AppColors.darkRed),
                 ],
               ),
               value: value,
-              dropdownColor: mainLightColor,
+              dropdownColor: AppColors.mainLight,
               hint: Text(
                 testList[0].value!.data!,
                 style: TextStyle(
-                  color: blackColor,
+                  color: AppColors.blackColor,
                   fontFamily: fontFamily,
                   fontSize: fontSize,
                   fontWeight: fontWeight,

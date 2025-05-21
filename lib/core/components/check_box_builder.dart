@@ -9,9 +9,9 @@ Widget checkBoxBuilder({
   required Function()? onTap,
   required bool isSelected,
   double boxSide = 18,
-  boxBackgroundColor = mainLightColor,
+  boxBackgroundColor = AppColors.mainLight,
   double boxBorderRadius = 5,
-  Color selectedIconColor = darkRedColor,
+  Color selectedIconColor = AppColors.darkRed,
   double spacer = 10,
 }) =>
     Row(

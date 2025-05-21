@@ -54,7 +54,7 @@ class _RectangleLoadingAnimationState extends State<RectangleLoadingAnimation>
             children: List.generate(15, (index) {
               double interval = index / 10;
               Color color =
-                  _animation.value > interval ? darkRedColor : lightRedColor;
+                  _animation.value > interval ? AppColors.darkRed : AppColors.lightRed;
               return Container(
                 margin: const EdgeInsets.all(2.0),
                 width: 8,

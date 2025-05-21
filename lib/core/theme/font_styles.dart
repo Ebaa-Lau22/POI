@@ -20,46 +20,46 @@ import 'app_colors.dart';
 // );
 
 TextStyle textFromStyle = const TextStyle(
-    color: blackColor,
+    color: AppColors.blackColor,
     fontSize: 15,
     fontWeight: FontWeight.w500,
     fontFamily: "Cairo");
 TextStyle defaultFontStyle = const TextStyle(
-    color: blackColor,
+    color: AppColors.blackColor,
     fontSize: 11,
     fontWeight: FontWeight.w500,
     fontFamily: "Cairo");
 
 TextStyle headerTableTextStyle = const TextStyle(
-    color: blackColor,
+    color: AppColors.blackColor,
     fontSize: 12,
     fontWeight: FontWeight.w800,
     fontFamily: "Cairo");
 
 TextStyle textFieldLabelStyle = const TextStyle(
-    color: blackColor,
+    color: AppColors.blackColor,
     fontSize: 15,
     fontWeight: FontWeight.w500,
     fontFamily: "Cairo");
 // TextStyle textFromStyle = const TextStyle(
-//     color: blackColor,
+//     color: AppColors.blackColor,
 //     fontSize: 15,
 //     fontWeight: FontWeight.w500,
 //     fontFamily: "Fredoka");
 // TextStyle defaultFontStyle = const TextStyle(
-//     color: blackColor,
+//     color: AppColors.blackColor,
 //     fontSize: 11,
 //     fontWeight: FontWeight.w500,
 //     fontFamily: "Cairo");
 
 // TextStyle headerTableTextStyle = const TextStyle(
-//     color: blackColor,
+//     color: AppColors.blackColor,
 //     fontSize: 12,
 //     fontWeight: FontWeight.w800,
 //     fontFamily: "Cairo");
 
 // TextStyle textFieldLabelStyle = const TextStyle(
-//     color: blackColor,
+//     color: AppColors.blackColor,
 //     fontSize: 14,
 //     fontWeight: FontWeight.w500,
 //     fontFamily: "Cairo");

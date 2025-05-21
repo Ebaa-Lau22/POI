@@ -18,14 +18,14 @@ class PostListWidget extends StatelessWidget {
             leading: Text(posts[index].id.toString()),
             title: Text(
               posts[index].title,
-              style: const TextStyle(
+              style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
-                  color: darkBlueColor),
+                  color: AppColors.darkBlue),
             ),
             subtitle: Text(
               posts[index].body,
-              style: const TextStyle(color: mainDarkColor, fontSize: 16),
+              style: TextStyle(color: AppColors.mainDark, fontSize: 16),
             ),
             contentPadding: const EdgeInsets.symmetric(horizontal: 10),
           );

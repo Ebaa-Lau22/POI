@@ -64,7 +64,7 @@ class CustomTextFiled extends StatelessWidget {
               decoration: InputDecoration(
                 constraints: BoxConstraints(minHeight: minConstraints ?? 45),
                 filled: true,
-                fillColor: mainLightColor,
+                fillColor: AppColors.mainLight,
                 contentPadding:
                     EdgeInsets.symmetric(horizontal: contentPadding ?? 7),
                 border: border,
@@ -142,7 +142,7 @@ class CustomTextFiledWithValidate extends StatelessWidget {
               decoration: InputDecoration(
                 // isDense: true,
                 filled: true,
-                fillColor: mainLightColor,
+                fillColor: AppColors.mainLight,
                 contentPadding:
                     EdgeInsets.symmetric(horizontal: contentPadding ?? 7),
                 border: border,

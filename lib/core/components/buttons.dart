@@ -10,7 +10,7 @@ Widget myButton({
   FontWeight fontWeight = FontWeight.bold,
   double fontSize = 11.0,
   Color textColor = Colors.black,
-  Color borderColor = darkRedColor,
+  Color borderColor = AppColors.darkRed,
   double borderRadius = 10.0,
   double height = 40.0,
   double width = 125.0,
@@ -63,7 +63,7 @@ Widget myButton({
 //   String fontFamily = "Cairo",
 //   FontWeight fontWeight = FontWeight.w600,
 //   double fontSize = 11.0,
-//   Color textColor = blackColor,
+//   Color textColor = AppColors.blackColor,
 //   double borderRadius = 10.0,
 //   double height = 40.0,
 //   double width = 125.0,
@@ -97,7 +97,7 @@ Widget myButton({
 //               onChanged: onChanged,
 //               borderRadius: BorderRadius.circular(borderRadius),
 //               style: TextStyle(
-//                 color: blackColor,
+//                 color: AppColors.blackColor,
 //                 fontFamily: fontFamily,
 //                 fontSize: fontSize,
 //                 fontWeight: fontWeight,
@@ -116,7 +116,7 @@ Widget myButton({
 //               hint: Text(
 //                 testList[0].value!.data!,
 //                 style: TextStyle(
-//                   color: blackColor,
+//                   color: AppColors.blackColor,
 //                   fontFamily: fontFamily,
 //                   fontSize: fontSize,
 //                   fontWeight: fontWeight,

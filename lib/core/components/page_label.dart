@@ -8,7 +8,7 @@ Widget pageLabelBuilder({
   String fontFamily = "Cairo",
   FontWeight fontWeight = FontWeight.w800,
   double fontSize = 24.0,
-  Color textColor = blackColor,
+  Color textColor = AppColors.blackColor,
 }) {
   return Text(
     label,

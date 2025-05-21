@@ -15,10 +15,10 @@ class PostsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           "Posts",
           style: TextStyle(
-            color: whiteColor,
+            color: AppColors.white,
             fontSize: 18,
             fontWeight: FontWeight.bold,
           ),
@@ -55,11 +55,11 @@ class PostsScreen extends StatelessWidget {
   Widget _buildFloatingBtn() {
     return FloatingActionButton(
       onPressed: () {},
-      backgroundColor: lightRedColor,
-      child: const Icon(
+      backgroundColor: AppColors.lightRed,
+      child: Icon(
         Icons.add,
         size: 24,
-        color: whiteColor,
+        color: AppColors.white,
       ),
     );
   }

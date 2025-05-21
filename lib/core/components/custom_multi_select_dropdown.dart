@@ -62,7 +62,7 @@ class _CustomMultiSelectDropdownState extends State<CustomMultiSelectDropdown> {
                   height: 7.h,
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(10)),
-                    color: mainLightColor,
+                    color: AppColors.mainLight,
                   ),
                   padding: const EdgeInsets.all(10),
                   child: Row(
@@ -84,7 +84,7 @@ class _CustomMultiSelectDropdownState extends State<CustomMultiSelectDropdown> {
           if (isOpened)
             Container(
               decoration: BoxDecoration(
-                border: Border.all(color: mainLightColor, width: 0.5),
+                border: Border.all(color: AppColors.mainLight, width: 0.5),
                 borderRadius: BorderRadius.circular(5),
               ),
               margin: const EdgeInsets.only(top: 5),
@@ -142,7 +142,7 @@ class _CustomMultiSelectDropdownState extends State<CustomMultiSelectDropdown> {
                                 (states) {
                                   if (!states
                                       .contains(MaterialState.selected)) {
-                                    return const BorderSide(color: mainLightColor);
+                                    return const BorderSide(color: AppColors.mainLight);
                                   }
                                   return BorderSide(color: AppColors.lightRed);
                                 },
@@ -170,7 +170,7 @@ class _CustomMultiSelectDropdownState extends State<CustomMultiSelectDropdown> {
                           Expanded(
                             child: Container(
                               decoration: const BoxDecoration(
-                                  color: mainLightColor,
+                                  color: AppColors.mainLight,
                                   borderRadius: BorderRadius.only(
                                       bottomRight: Radius.circular(5))),
                               width: 7,

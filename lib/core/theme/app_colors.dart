@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 
 abstract class AppColors {
-  static Color lightRed = const Color(0xffB44E4E);
-  static Color darkRed = const Color(0xff8C3A3A);
-  static Color lightBlue = const Color(0xff728CAC);
-  static Color darkBlue = const Color(0xff304F73);
-  static Color mainDark = const Color(0xff2D3748);
-  static Color mainLight = const Color(0xffE9EDF4);
-  static Color medium = const Color(0xff9A9A9A);
-  static Color light = const Color(0xffCDCDCD);
-  static Color white = const Color(0xffffffff);
+  static const Color lightRed = Color(0xffB44E4E);
+  static const Color darkRed = Color(0xff8C3A3A);
+  static const Color lightBlue = Color(0xff728CAC);
+  static const Color darkBlue = Color(0xff304F73);
+  static const Color mainDark = Color(0xff2D3748);
+  static const Color mainLight = Color(0xffE9EDF4);
+  static const Color blackColor = Color.fromRGBO(12, 16, 27, 1.0);
+  static const Color medium = Color(0xff9A9A9A);
+  static const Color light = Color(0xffCDCDCD);
+  static const Color white = Color(0xffffffff);
 }
 
 class ThemedColors {
@@ -26,14 +27,6 @@ class ThemedColors {
   }
 }
 
-const Color whiteColor = Colors.white;
-const Color blackColor = Color.fromRGBO(12, 16, 27, 1.0);
-const Color mainDarkColor = Color(0xff2D3748);
-const Color darkRedColor = Color(0xff8C3A3A);
-const Color lightRedColor = Color(0xffB44E4E);
-const Color mainLightColor = Color(0xffE9EDF4);
-const Color darkBlueColor = Color(0xff304F73);
-const Color lightBlueColor = Color(0xff7095FF);
 
 const Color errorColor = Color.fromRGBO(218, 27, 27, 1.0);
 const Color brightRedColor = Color.fromRGBO(240, 67, 73, 1.0);
