@@ -19,4 +19,25 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get yourVideo => 'البث الخاص بك';
+
+  @override
+  String get welcome => 'أهلاً بك';
+
+  @override
+  String get email => 'البريد الإلكتروني';
+
+  @override
+  String get enterValidEmail => 'يرجى إدخال بريد إلكتروني صحيح';
+
+  @override
+  String get password => 'كلمة المرور';
+
+  @override
+  String get passwordValidation => 'ينبغي أن تتضمن كلمة المرور أحرفًا وأرقامًا، وألا يقل طولها عن 6 رموز';
+
+  @override
+  String get forgetPassword => 'هل نسيت كلمة المرور الخاصة بك ؟';
+
+  @override
+  String get signin => 'تسجيل الدخول';
 }

@@ -6,5 +6,12 @@
   },
   "startCall": "Start Call",
   "waitingForRemoteVideo": "Waiting for Remote Video",
-  "yourVideo": "Your Video Preview"
+  "yourVideo": "Your Video Preview",
+  "welcome":"Welcome",
+  "email":"Email",
+  "enterValidEmail":"Enter valid email",
+  "password":"Password",
+  "passwordValidation":"Password must contain both letters and numbers and be at least 6 characters long",
+  "forgetPassword":"Forget your password?",
+  "signin":"Sign in"
 }

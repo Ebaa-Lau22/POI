@@ -118,6 +118,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Your Video Preview'**
   String get yourVideo;
+
+  /// No description provided for @welcome.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome'**
+  String get welcome;
+
+  /// No description provided for @email.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get email;
+
+  /// No description provided for @enterValidEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter valid email'**
+  String get enterValidEmail;
+
+  /// No description provided for @password.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get password;
+
+  /// No description provided for @passwordValidation.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must contain both letters and numbers and be at least 6 characters long'**
+  String get passwordValidation;
+
+  /// No description provided for @forgetPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Forget your password?'**
+  String get forgetPassword;
+
+  /// No description provided for @signin.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in'**
+  String get signin;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

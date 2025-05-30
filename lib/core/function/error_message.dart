@@ -3,7 +3,7 @@ import 'package:poi/core/error/failures.dart';
 String mapFailureToMessage(Failure failure) {
   switch (failure.runtimeType) {
     case ServerFailure _:
-      return 'حدث خطأ ما إثناء جلب المعلومات';
+      return 'حدث خطأ ما أثناء جلب المعلومات';
     case EmptyCacheFailure _:
       return 'EMPTY_CACHE_FAILURE_MESSAGE';
     case OfflineFailure _:
