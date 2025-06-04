@@ -6,5 +6,10 @@
   },
   "startCall": "Start Call",
   "waitingForRemoteVideo": "Waiting for Remote Video",
-  "yourVideo": "Your Video Preview"
+  "yourVideo": "Your Video Preview",
+  "random": "Random",
+  "excellent": "Excellent",
+  "good": "Good",
+  "poor": "Poor",
+  "unknown": "No Connection"
 }

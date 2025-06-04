@@ -19,4 +19,19 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get yourVideo => 'البث الخاص بك';
+
+  @override
+  String get random => 'عشوائي';
+
+  @override
+  String get excellent => 'ممتازة';
+
+  @override
+  String get good => 'جيدة';
+
+  @override
+  String get poor => 'ضعيفة';
+
+  @override
+  String get unknown => 'لا اتصال';
 }

@@ -118,6 +118,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Your Video Preview'**
   String get yourVideo;
+
+  /// No description provided for @random.
+  ///
+  /// In en, this message translates to:
+  /// **'Random'**
+  String get random;
+
+  /// No description provided for @excellent.
+  ///
+  /// In en, this message translates to:
+  /// **'Excellent'**
+  String get excellent;
+
+  /// No description provided for @good.
+  ///
+  /// In en, this message translates to:
+  /// **'Good'**
+  String get good;
+
+  /// No description provided for @poor.
+  ///
+  /// In en, this message translates to:
+  /// **'Poor'**
+  String get poor;
+
+  /// No description provided for @unknown.
+  ///
+  /// In en, this message translates to:
+  /// **'No Connection'**
+  String get unknown;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

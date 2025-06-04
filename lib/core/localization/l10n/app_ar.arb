@@ -3,5 +3,10 @@
   "helloWorld": "مرحباً بالعالم",
   "startCall": "ابدأالاتصال",
   "waitingForRemoteVideo": "بانتظار الفيديو عن بعد",
-  "yourVideo": "البث الخاص بك"
+  "yourVideo": "البث الخاص بك",
+  "random": "عشوائي",
+  "excellent": "ممتازة",
+  "good": "جيدة",
+  "poor": "ضعيفة",
+  "unknown": "لا اتصال"
 }

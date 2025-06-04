@@ -6,14 +6,20 @@ class CallInitialState extends CallStates {}
 
 class CallConnectingState extends CallStates {}
 
-class CallConnectedState extends CallStates {
-  final LocalVideoTrack? localTrack;
-  CallConnectedState({required this.localTrack});
-}
-
 class CallRemoteTrackReceivedState extends CallStates {
   final RemoteVideoTrack remoteTrack;
   CallRemoteTrackReceivedState({required this.remoteTrack});
+}
+
+class CallLocalTrackUpdatedState extends CallStates {
+  final LocalVideoTrack? localTrack;
+  final ConnectionQuality quality;
+  CallLocalTrackUpdatedState({required this.localTrack, required this.quality});
+}
+
+class LocalConnectionQualityUpdatedState extends CallStates {
+  final ConnectionQuality quality;
+  LocalConnectionQualityUpdatedState({required this.quality});
 }
 
 class CallDisconnectedState extends CallStates {
@@ -27,3 +33,8 @@ class CallErrorState extends CallStates {
 }
 
 class ChangeThemeState extends CallStates {}
+
+class DebateToggleLocalMicState extends CallStates {}
+
+class DebateToggleLocalCameraState extends CallStates {}
+

@@ -19,4 +19,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get yourVideo => 'Your Video Preview';
+
+  @override
+  String get random => 'Random';
+
+  @override
+  String get excellent => 'Excellent';
+
+  @override
+  String get good => 'Good';
+
+  @override
+  String get poor => 'Poor';
+
+  @override
+  String get unknown => 'No Connection';
 }
