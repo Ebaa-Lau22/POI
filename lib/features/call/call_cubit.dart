@@ -1,10 +1,6 @@
 import 'dart:async';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:livekit_client/livekit_client.dart';
-import 'package:poi/core/storage/preferences_database.dart';
-import 'package:poi/core/theme/app_colors.dart';
-import 'package:poi/di/injection_container.dart' as di;
 
 part 'call_state.dart';
 

@@ -9,5 +9,8 @@ class AppImageAsset {
   static const String defaultUserImage = "$rootImages/default_user.jpg";
   static const String login_image = "$rootImages/login_image.png";
   static const String emptyImage = "$rootImages/empty.png";
-  // =============================== Lottie ========================== //
+
+// =============================== SVG ========================== //
+  static const String WelcomeImage = "$rootImages/Welcome.svg";
+
 }

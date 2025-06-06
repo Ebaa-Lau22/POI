@@ -106,9 +106,11 @@ ThemeData get lightTheme => ThemeData(
     ),
   ),
   textTheme: lightTextTheme,
+  primaryColor: AppColors.darkRed
 );
 
 ThemeData get darkTheme => ThemeData(
+  primaryColor: AppColors.darkRed,
   scaffoldBackgroundColor: AppColors.mainDark,
   appBarTheme: AppBarTheme(
     systemOverlayStyle: SystemUiOverlayStyle(

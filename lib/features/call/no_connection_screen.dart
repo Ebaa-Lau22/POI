@@ -22,12 +22,12 @@ class NoConnectionScreen extends StatelessWidget {
           const SizedBox(height: 16),
           Text(
             'Disconnected',
-            style: TextStyle(fontSize: 24, color: Colors.white),
+            style: TextStyle(fontSize: 14, color: Colors.white),
           ),
           const SizedBox(height: 8),
           Text(
             reason,
-            style: TextStyle(color: Colors.white70),
+            style: TextStyle(color: Colors.white70, fontSize: 12),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 24),

@@ -2,6 +2,11 @@ import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:poi/core/app_cubit/app_cubit.dart';
+import 'package:poi/features/Authentication/data/datasources/auth_remote_data_source.dart';
+import 'package:poi/features/Authentication/data/repositories/auth_repository_imp.dart';
+import 'package:poi/features/Authentication/domain/repositories/auth_repository.dart';
+import 'package:poi/features/Authentication/domain/usecases/login_usecase.dart';
+import 'package:poi/features/Authentication/presentation/bloc/auth_cubit.dart';
 import 'package:poi/features/cached_data/data/datasources/cache_local_data_source.dart';
 import 'package:poi/features/cached_data/data/repositories/cache_repository_impl.dart';
 import 'package:poi/features/cached_data/domain/repositories/cache_repository.dart';
@@ -44,7 +49,7 @@ Future<void> init() async {
     cacheThemeUseCase: sl(),
     cacheLocaleUseCase: sl(),
   ));
-
+  sl.registerFactory(() => AuthCubit(loginUseCase: sl()));
 
   //! Use Cases
   sl.registerLazySingleton(() => GetAllPostsUseCase(repository: sl()));
@@ -55,6 +60,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => CacheLocaleUseCase(repository: sl()));
   sl.registerLazySingleton(() => GetCachedLocaleUseCase(repository: sl()));
   sl.registerLazySingleton(() => GetCachedThemeUseCase(repository: sl()));
+  sl.registerLazySingleton(() => LoginUseCase(authRepository: sl()));
 
 
   //! Repositories
@@ -65,10 +71,15 @@ Future<void> init() async {
   sl.registerLazySingleton<CacheRepository>(() => CacheRepositoryImpl(
     dataSource: sl(),
   ));
+  sl.registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl(
+    remoteDataSource: sl(),
+    networkInfo: sl()
+  ));
 
   //! Data Sources
   sl.registerLazySingleton<PostRemoteDataSource>(() => PostRemoteDataSourceImpl(client: sl()));
   sl.registerLazySingleton<CacheLocalDataSource>(() => CacheLocalDataSourceImpl(db: sl()));
+  sl.registerLazySingleton<AuthRemoteDataSource>(() => AuthRemoteDataSourceImpl(client: sl()));
 
   //! Core
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));

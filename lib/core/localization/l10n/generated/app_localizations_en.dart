@@ -21,6 +21,27 @@ class AppLocalizationsEn extends AppLocalizations {
   String get yourVideo => 'Your Video Preview';
 
   @override
+  String get welcome => 'Welcome';
+
+  @override
+  String get email => 'Email';
+
+  @override
+  String get enterValidEmail => 'Enter valid email';
+
+  @override
+  String get password => 'Password';
+
+  @override
+  String get passwordValidationMessage => 'Password must contain both letters and numbers and be at least 6 characters long';
+
+  @override
+  String get forgetPassword => 'Forget your password?';
+
+  @override
+  String get signin => 'Sign in';
+
+  @override
   String get random => 'Random';
 
   @override

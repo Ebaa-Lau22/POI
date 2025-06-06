@@ -25,8 +25,8 @@ class VideoCallScreen extends StatelessWidget {
     String title = "POI";
     return BlocBuilder<AppCubit, AppStates>(
       builder: (context, state) {
-        final token =
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTg3ODE4MTIsImlzcyI6IkFQSTlVNVJXbVpOM2UzOCIsIm5iZiI6MTc0ODc4MTkxMiwic3ViIjoibWF4IiwidmlkZW8iOnsiY2FuUHVibGlzaCI6dHJ1ZSwiY2FuUHVibGlzaERhdGEiOnRydWUsImNhblN1YnNjcmliZSI6dHJ1ZSwicm9vbSI6ImRlYmF0ZSIsInJvb21Kb2luIjp0cnVlfX0.HF9UW69CD-hkDgjDqQA9ig3VqPIwAYVocbMC81FMpDg";
+        final url = "https://e6dd-93-190-138-199.ngrok-free.app";
+        final token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJJYmFhIiwianRpIjoiSWJhYSIsImV4cCI6MTc0OTA3MDAzMCwibmJmIjoxNzQ5MDU1NjMwLCJpYXQiOjE3NDkwNTU2MzAsImlzcyI6ImRldmtleSIsInZpZGVvIjp7InJvb21Kb2luIjp0cnVlLCJyb29tIjoidGhlcm9vbSJ9fQ.SxIZ2QYCIRi4oD_WrYy3RtJRhYmXIX34-5YgjBFILvE";
         final appCubit = context.read<AppCubit>();
         final color = ThemedColors(appCubit.isLightTheme);
         final textStyle = Theme.of(context).textTheme;
@@ -46,7 +46,7 @@ class VideoCallScreen extends StatelessWidget {
             } else if (state is CallConnectingState) {
               return const Center(child: CircularProgressIndicator());
             } else if (state is CallErrorState) {
-              navigateAndFinish(
+              /*navigateAndFinish(
                 context,
                 NoConnectionScreen(
                   reason: state.message,
@@ -56,7 +56,8 @@ class VideoCallScreen extends StatelessWidget {
                         token: token,
                       ),
                 ),
-              );
+              );*/
+              //showDialog(context: context, builder: ()=> LostC)
             }
 
             return Scaffold(
@@ -102,7 +103,7 @@ class VideoCallScreen extends StatelessWidget {
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
-                        horizontal: 50.0,
+                        horizontal: 60.0,
                         vertical: 40.0,
                       ),
                       child: Column(
@@ -160,7 +161,10 @@ class VideoCallScreen extends StatelessWidget {
                                   color: color.primary,
                                   child:
                                       remoteVideo != null
-                                          ? VideoTrackRenderer(remoteVideo)
+                                          ? VideoTrackRenderer(
+                                        remoteVideo,
+                                        fit: RTCVideoViewObjectFit.RTCVideoViewObjectFitCover,
+                                      )
                                           : Center(
                                             child: Text(
                                               context.loc.waitingForRemoteVideo,
@@ -179,8 +183,7 @@ class VideoCallScreen extends StatelessWidget {
                                       ? null
                                       : () {
                                         cubit.connectToRoom(
-                                          url:
-                                              'wss://flutterpoi-ar6hq9rt.livekit.cloud',
+                                          url: url,
                                           token: token,
                                         );
                                       },
