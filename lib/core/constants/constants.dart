@@ -15,6 +15,8 @@ const String LOGIN_SUCCESS_MESSAGE = 'تم تسجيل الدخول بنجاح';
 
 RegExp EmailRegExp = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w]{2,4}$');
 
+double widgetBorderRadius = 20;
+
 Locale get englishLocale => const Locale('en');
 
 Locale get arabicLocale => const Locale('ar');

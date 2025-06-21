@@ -190,6 +190,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No Connection'**
   String get unknown;
+
+  /// No description provided for @next.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get next;
+
+  /// No description provided for @assign_debate_sides.
+  ///
+  /// In en, this message translates to:
+  /// **'Assign Debate Sides'**
+  String get assign_debate_sides;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

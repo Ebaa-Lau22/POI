@@ -81,6 +81,11 @@ TextTheme get darkTextTheme => TextTheme(
 
 ThemeData get lightTheme => ThemeData(
   scaffoldBackgroundColor: AppColors.mainLight,
+  primaryColor: AppColors.darkRed,
+  primaryColorDark: AppColors.lightRed,
+  primaryColorLight: AppColors.darkRed,
+  canvasColor: AppColors.darkRed,
+  indicatorColor: AppColors.darkRed,
   appBarTheme: AppBarTheme(
     systemOverlayStyle: SystemUiOverlayStyle(
       statusBarColor: AppColors.mainLight,
@@ -106,12 +111,15 @@ ThemeData get lightTheme => ThemeData(
     ),
   ),
   textTheme: lightTextTheme,
-  primaryColor: AppColors.darkRed
 );
 
 ThemeData get darkTheme => ThemeData(
-  primaryColor: AppColors.darkRed,
   scaffoldBackgroundColor: AppColors.mainDark,
+  primaryColor: AppColors.lightRed,
+  primaryColorDark: AppColors.darkRed,
+  primaryColorLight: AppColors.lightRed,
+  canvasColor: AppColors.lightRed,
+  indicatorColor: AppColors.lightRed,
   appBarTheme: AppBarTheme(
     systemOverlayStyle: SystemUiOverlayStyle(
       statusBarColor: AppColors.mainDark,

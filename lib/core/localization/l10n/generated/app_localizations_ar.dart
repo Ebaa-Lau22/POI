@@ -55,4 +55,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get unknown => 'لا اتصال';
+
+  @override
+  String get next => 'التالي';
+
+  @override
+  String get assign_debate_sides => 'توزيع أدوار الفرق';
 }

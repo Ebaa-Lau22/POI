@@ -15,5 +15,7 @@
   "excellent": "ممتازة",
   "good": "جيدة",
   "poor": "ضعيفة",
-  "unknown": "لا اتصال"
+  "unknown": "لا اتصال",
+  "next": "التالي",
+  "assign_debate_sides": "توزيع أدوار الفرق"
 }

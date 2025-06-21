@@ -16,6 +16,7 @@ import 'package:poi/features/cached_data/domain/usecases/get_cached_locale_useca
 import 'package:poi/features/cached_data/domain/usecases/get_cached_theme_usecase.dart';
 import 'package:poi/features/call/call_cubit.dart';
 import 'package:poi/features/call/connection_cubit.dart';
+import 'package:poi/features/debate_setup/presentation/bloc/team_assignment_cubit.dart';
 import 'package:poi/permission_cubit.dart';
 import '../core/storage/preferences_database.dart';
 import '../core/network/network_info.dart';
@@ -27,7 +28,6 @@ import '../features/posts/domain/usecases/delete_post.dart';
 import '../features/posts/domain/usecases/get_all_posts.dart';
 import '../features/posts/domain/usecases/update_post.dart';
 import '../features/posts/presentation/bloc/posts_cubit.dart';
-import '../features/team_assignment/presentation/bloc/team_assignment_cubit.dart';
 
 final sl = GetIt.instance;
 
@@ -43,7 +43,7 @@ Future<void> init() async {
   //! Cubits
   sl.registerFactory(() => CallCubit());
   sl.registerFactory(() => PermissionCubit());
-  sl.registerFactory(() => TeamAssignmentCubit());
+  sl.registerFactory(() => DebateSetupCubit());
   sl.registerFactory(() => ConnectionCubit());
   sl.registerFactory(() => AppCubit(
     cacheThemeUseCase: sl(),

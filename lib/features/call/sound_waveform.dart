@@ -85,7 +85,7 @@ class _SoundWaveformWidgetState extends State<SoundWaveformWidget>
           mainAxisSize: MainAxisSize.min,
           children: List.generate(
             count,
-            (i) => AnimatedContainer(
+                (i) => AnimatedContainer(
               duration: Duration(
                   milliseconds: widget.durationInMilliseconds ~/ count),
               margin: i == (samples.length - 1)
@@ -94,8 +94,8 @@ class _SoundWaveformWidgetState extends State<SoundWaveformWidget>
               height: samples[i] < minHeight
                   ? minHeight
                   : samples[i] > maxHeight
-                      ? maxHeight
-                      : samples[i],
+                  ? maxHeight
+                  : samples[i],
               width: widget.width,
               decoration: BoxDecoration(
                 color: Colors.white,

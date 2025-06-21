@@ -55,4 +55,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get unknown => 'No Connection';
+
+  @override
+  String get next => 'Next';
+
+  @override
+  String get assign_debate_sides => 'Assign Debate Sides';
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:poi/core/constants/constants.dart';
 import 'package:poi/core/theme/app_colors.dart';
+import 'package:sizer/sizer.dart';
 
 class DebateTeam {
   final String player1;
@@ -37,7 +39,7 @@ class TeamCard extends StatelessWidget {
             color: sideColor,
             width: 5
         ),
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(widgetBorderRadius),
       ),
       child: Stack(
         children: [
@@ -63,12 +65,12 @@ class TeamCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: EdgeInsets.all(3.w),
                   child: Text(
                     '${team.player1} & ${team.player2}',
                     style: TextStyle(
                       fontSize: 16,
-                      color: textStyles.displayLarge!.color,
+                      color: textStyles.displayLarge?.color,
                     ),
                     textAlign: TextAlign.center,
                     maxLines: 2,

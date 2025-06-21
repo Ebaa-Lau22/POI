@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:encrypt/encrypt.dart' as encrypt;
+import 'package:flutter/foundation.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
@@ -141,4 +142,14 @@ class PreferencesDatabase {
       print('Error reading "preferences" table: $e');
     }
   }
+}
+Future<String> getDocumentsPath() async {
+  if (kIsWeb) {
+    // Simulate a logical path on Web
+    print("Simulating documents directory for Web");
+    return '/web_documents'; // or any other virtual path your app can recognize
+  }
+
+  final directory = await getApplicationDocumentsDirectory();
+  return directory.path;
 }

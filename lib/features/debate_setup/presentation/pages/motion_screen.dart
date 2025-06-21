@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:poi/core/app_cubit/app_cubit.dart';
+import 'package:poi/core/components/navigators.dart';
+import 'package:poi/core/constants/constants.dart';
 import 'package:poi/core/localization/l10n/context_localiztion.dart';
-import 'package:poi/features/team_assignment/presentation/bloc/team_assignment_cubit.dart';
-import 'package:poi/features/team_assignment/presentation/bloc/team_assignment_states.dart';
-import 'package:poi/features/team_assignment/presentation/widgets/team_card.dart';
-
+import 'package:poi/features/debate_setup/presentation/bloc/team_assignment_cubit.dart';
+import 'package:poi/features/debate_setup/presentation/bloc/team_assignment_states.dart';
+import 'package:poi/features/debate_setup/presentation/widgets/team_card.dart';
+import 'package:sizer/sizer.dart';
 import '../../../../core/app_cubit/app_states.dart';
 import '../../../../core/theme/app_colors.dart';
 
-class TeamAssignmentScreen extends StatelessWidget {
-  const TeamAssignmentScreen({super.key});
+class MotionScreen extends StatelessWidget {
+  const MotionScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +21,9 @@ class TeamAssignmentScreen extends StatelessWidget {
           final appCubit = context.read<AppCubit>();
           final color = ThemedColors(appCubit.isLightTheme);
           final textStyle = Theme.of(context).textTheme;
-          return BlocBuilder<TeamAssignmentCubit, TeamAssignmentStates>(
+          return BlocBuilder<DebateSetupCubit, DebateSetupStates>(
             builder: (context, state) {
-              final cubit = context.read<TeamAssignmentCubit>();
+              final cubit = context.read<DebateSetupCubit>();
               return Scaffold(
                 appBar: AppBar(
                   title: Text('Assign Debate Sides'),
@@ -61,11 +63,14 @@ class TeamAssignmentScreen extends StatelessWidget {
                           crossAxisSpacing: 16,
                           children: List.generate(cubit.currentTeams.length, (index) {
                             DebateTeam team = DebateTeam(player1: "player${index*10}", player2: "player${index*10+1}", assignedSide: cubit.currentTeams[index]);
-                            return TeamCard(
-                              team: team,
-                              availableSides: cubit.allSides,
-                              color: color,
-                              textStyles: textStyle,
+                            return ClipRRect(
+                              borderRadius: BorderRadius.circular(widgetBorderRadius),
+                              child: TeamCard(
+                                team: team,
+                                availableSides: cubit.allSides,
+                                color: color,
+                                textStyles: textStyle,
+                              ),
                             );
                           }),
                         ),
@@ -78,12 +83,21 @@ class TeamAssignmentScreen extends StatelessWidget {
                           children: [
                             Expanded(
                               child: ElevatedButton(
-
                                 onPressed: () {
                                   cubit.randomizeSides();
                                 },
-                                style: ElevatedButton.styleFrom(backgroundColor: color.red, ),
-                                child: Text(context.loc.random, style: TextStyle(color: AppColors.white),),
+                                style: ElevatedButton.styleFrom(backgroundColor: color.secondary.withOpacity(0.2), ),
+                                child: Text(context.loc.random, style: TextStyle(color: color.red),),
+                              ),
+                            ),
+                            SizedBox(width: 15.w,),
+                            Expanded(
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  navigateTo(context, MotionScreen());
+                                },
+                                style: ElevatedButton.styleFrom(backgroundColor: color.red),
+                                child: Text(context.loc.random, style: TextStyle(color: AppColors.lighterColor),),
                               ),
                             ),
                           ],

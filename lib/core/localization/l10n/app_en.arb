@@ -18,5 +18,7 @@
   "excellent": "Excellent",
   "good": "Good",
   "poor": "Poor",
-  "unknown": "No Connection"
+  "unknown": "No Connection",
+  "next": "Next",
+  "assign_debate_sides": "Assign Debate Sides"
 }

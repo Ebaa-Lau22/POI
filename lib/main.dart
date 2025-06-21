@@ -7,8 +7,9 @@ import 'package:poi/features/Authentication/presentation/pages/Login_page.dart';
 import 'package:poi/features/cached_data/domain/usecases/get_cached_locale_usecase.dart';
 import 'package:poi/features/cached_data/domain/usecases/get_cached_theme_usecase.dart';
 import 'package:poi/features/call/call_cubit.dart';
-import 'package:poi/features/team_assignment/presentation/bloc/team_assignment_cubit.dart';
-import 'package:poi/features/team_assignment/presentation/pages/team_assignment_screen.dart';
+import 'package:poi/features/call/call_screen.dart';
+import 'package:poi/features/debate_setup/presentation/bloc/team_assignment_cubit.dart';
+import 'package:poi/features/debate_setup/presentation/pages/team_assignment_screen.dart';
 import 'package:poi/permission_cubit.dart';
 import 'package:poi/splash_screen.dart';
 import 'package:sizer/sizer.dart';
@@ -23,6 +24,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await di.init();
   bool isLightTheme = true;
+  String locale = "en";
   GetCachedThemeUseCase getCachedThemeUseCase = di.sl();
   final themeOrFailure = await getCachedThemeUseCase();
   String theme = "Light";
@@ -36,7 +38,6 @@ void main() async {
   );
   GetCachedLocaleUseCase getCachedLocaleUseCase = di.sl();
   final localeOrFailure = await getCachedLocaleUseCase();
-  String locale = "en";
   localeOrFailure.fold(
     (failure) {
       locale = "en";
@@ -57,44 +58,47 @@ class MyApp extends StatelessWidget {
   String locale;
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create:
-              (_) =>
-                  di.sl<AppCubit>()
-                    ..changeTheme(isLightTheme)
-                    ..changeLocale(locale),
-        ),
-        BlocProvider(create: (_) => di.sl<PostsCubit>()..getAllPosts()),
-        BlocProvider(create: (_) => di.sl<CallCubit>()),
-        BlocProvider(create: (_) => di.sl<PermissionCubit>()),
-        BlocProvider(create: (_) => di.sl<TeamAssignmentCubit>()),
-        BlocProvider(create: (_) => di.sl<ConnectionCubit>()),
-        BlocProvider(create: (_) => di.sl<AuthCubit>()),
+    return Sizer(
+        builder: (context, orientation, deviceType) {
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create:
+                    (_) =>
+                di.sl<AppCubit>()
+                  ..changeTheme(isLightTheme)
+                  ..changeLocale(locale),
+              ),
+              BlocProvider(create: (_) => di.sl<PostsCubit>()..getAllPosts()),
+              BlocProvider(create: (_) => di.sl<CallCubit>()),
+              BlocProvider(create: (_) => di.sl<PermissionCubit>()),
+              BlocProvider(create: (_) => di.sl<DebateSetupCubit>()),
+              BlocProvider(create: (_) => di.sl<ConnectionCubit>()),
+              BlocProvider(create: (_) => di.sl<AuthCubit>()),
 
-      ],
-      child: BlocConsumer<AppCubit, AppStates>(
-        listener: (context, state) {},
-        builder: (context, state) {
-          final cubit = context.read<AppCubit>();
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            theme: cubit.isLightTheme ? lightTheme : darkTheme,
-            title: 'Posts App',
-            localizationsDelegates: const [
-              AppLocalizations.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
             ],
-            supportedLocales: AppLocalizations.supportedLocales,
-            locale: Locale(cubit.locale),
-            home: LoginPage(),
+            child: BlocConsumer<AppCubit, AppStates>(
+              listener: (context, state) {},
+              builder: (context, state) {
+                final cubit = context.read<AppCubit>();
+                return MaterialApp(
+                  debugShowCheckedModeBanner: false,
+                  theme: cubit.isLightTheme ? lightTheme : darkTheme,
+                  title: 'Posts App',
+                  localizationsDelegates: const [
+                    AppLocalizations.delegate,
+                    GlobalMaterialLocalizations.delegate,
+                    GlobalWidgetsLocalizations.delegate,
+                    GlobalCupertinoLocalizations.delegate,
+                  ],
+                  supportedLocales: AppLocalizations.supportedLocales,
+                  locale: Locale(cubit.locale),
+                  home: TeamAssignmentScreen(),
+                );
+              },
+            ),
           );
-        },
-      ),
-    );
+        });
   }
 }
 
