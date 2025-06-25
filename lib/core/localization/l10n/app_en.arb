@@ -20,5 +20,14 @@
   "poor": "Poor",
   "unknown": "No Connection",
   "next": "Next",
-  "assign_debate_sides": "Assign Debate Sides"
+  "apply": "Apply",
+  "submit": "Submit",
+  "assign_debate_sides": "Assign Debate Sides",
+  "select_debate_motion": "Select Debate Motion",
+  "search_motion": "Search Motion",
+  "motion": "The Motion",
+  "select_new_motion": "Select New Motion",
+  "select_topics": "Select the motion topics (2 maximum)",
+  "filter_motion" : "Filter Motions",
+  "cancel": "Cancel"
 }

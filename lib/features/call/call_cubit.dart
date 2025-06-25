@@ -16,8 +16,10 @@ class CallCubit extends Cubit<CallStates> {
   EventsListener<RoomEvent>? _roomEvents;
   Timer? _connectionQualityTimer;
   ConnectionQuality connectionQuality = ConnectionQuality.unknown;
-  List<ParticipantTrack> userMediaTracks = [];
   List<RemoteParticipant> participants = [];
+  List<bool> participantsHasAudio = [];
+  List<bool> participantsHasVideo = [];
+  List<bool> participantsIsSpeaking = [];
 
   LocalParticipant? localParticipant;
   EventsListener<ParticipantEvent>? _localParticipantEvents;
@@ -88,7 +90,6 @@ class CallCubit extends Cubit<CallStates> {
 
   void _registerRoomListeners() {
     if (_roomEvents == null || _room == null) return;
-
     _roomEvents!
       ..on<LocalTrackPublishedEvent>((event) {
         print('Event: LocalTrackPublishedEvent');
@@ -154,25 +155,35 @@ class CallCubit extends Cubit<CallStates> {
         emit(CallLocalTrackUpdatedState());
       }*/
       emit(CallLocalTrackUpdatedState());
+
       localVideoTrack = _getLocalVideoTrack();
       localAudioTrack = _getLocalAudioTrack();
       isLocalSpeaking = _getParticipantIsSpeaking(_room!.localParticipant);
+      List<RemoteParticipant> tmpParticipants = [];
+      List<bool> tmpHasAudio = [];
+      List<bool> tmpHasVideo = [];
+      List<bool> tmpIsSpeaking = [];
       for (var participant in _room!.remoteParticipants.values) {
-        userMediaTracks.add(ParticipantTrack(participant: participant));
-        participants.add(participant);
-        RemoteAudioTrack? audio;
-        RemoteVideoTrack? video;
-        if (userMediaTracks[0].participant.videoTrackPublications.firstOrNull != null) {
-          video = userMediaTracks[0].participant.videoTrackPublications.firstOrNull!.track as RemoteVideoTrack?;
-          print("video: ${video != null}");
-        }
-        if (userMediaTracks[0].participant.audioTrackPublications.firstOrNull != null) {
-          audio = userMediaTracks[0].participant.audioTrackPublications.firstOrNull!.track as RemoteAudioTrack?;
-          print("audio: ${audio != null}");
-        }
+        tmpParticipants.add(participant);
+        tmpHasAudio.add(_getIfRemoteParticipantMicOn(participant));
+        tmpHasVideo.add(_getIfRemoteParticipantCameraOn(participant));
+        participant.createListener().on<SpeakingChangedEvent>((event){
+          tmpIsSpeaking.add(event.speaking);
+        });
       }
+      participants = tmpParticipants;
+      participantsHasAudio = tmpHasAudio;
+      participantsHasVideo = tmpHasVideo;
+      participantsIsSpeaking = tmpIsSpeaking;
       emit(CallRemoteTrackReceivedState());
     }
+  }
+
+  String getParticipantFirstName(Participant? participant) {
+
+    if (participant == null) return "Ebaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+    String name = participant.name;
+    return name.isNotEmpty ? participant.name.split(" ")[0] : "User";
   }
 
   LocalVideoTrack? _getLocalVideoTrack() {
@@ -186,6 +197,16 @@ class CallCubit extends Cubit<CallStates> {
   bool _getParticipantIsSpeaking(Participant? participant) {
     double level = participant?.audioLevel ?? 0;
     return level > 3.0;
+  }
+
+  bool _getIfRemoteParticipantMicOn(RemoteParticipant participant){
+    final audioPublication = participant.getTrackPublicationBySource(TrackSource.microphone);
+    return audioPublication != null && audioPublication.track != null && audioPublication.track?.muted == false;
+  }
+
+  bool _getIfRemoteParticipantCameraOn(RemoteParticipant participant){
+    final videoPublication = participant.getTrackPublicationBySource(TrackSource.camera);
+    return videoPublication != null && videoPublication.track != null && videoPublication.track?.muted == false;
   }
 
   RemoteVideoTrack? getRemoteVideoTrackForParticipant(RemoteParticipant? participant) {

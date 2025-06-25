@@ -197,11 +197,65 @@ abstract class AppLocalizations {
   /// **'Next'**
   String get next;
 
+  /// No description provided for @apply.
+  ///
+  /// In en, this message translates to:
+  /// **'Apply'**
+  String get apply;
+
+  /// No description provided for @submit.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit'**
+  String get submit;
+
   /// No description provided for @assign_debate_sides.
   ///
   /// In en, this message translates to:
   /// **'Assign Debate Sides'**
   String get assign_debate_sides;
+
+  /// No description provided for @select_debate_motion.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Debate Motion'**
+  String get select_debate_motion;
+
+  /// No description provided for @search_motion.
+  ///
+  /// In en, this message translates to:
+  /// **'Search Motion'**
+  String get search_motion;
+
+  /// No description provided for @motion.
+  ///
+  /// In en, this message translates to:
+  /// **'The Motion'**
+  String get motion;
+
+  /// No description provided for @select_new_motion.
+  ///
+  /// In en, this message translates to:
+  /// **'Select New Motion'**
+  String get select_new_motion;
+
+  /// No description provided for @select_topics.
+  ///
+  /// In en, this message translates to:
+  /// **'Select the motion topics (2 maximum)'**
+  String get select_topics;
+
+  /// No description provided for @filter_motion.
+  ///
+  /// In en, this message translates to:
+  /// **'Filter Motions'**
+  String get filter_motion;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

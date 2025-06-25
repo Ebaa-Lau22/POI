@@ -4,8 +4,8 @@ import 'package:poi/core/app_cubit/app_cubit.dart';
 import 'package:poi/core/components/navigators.dart';
 import 'package:poi/core/constants/constants.dart';
 import 'package:poi/core/localization/l10n/context_localiztion.dart';
-import 'package:poi/features/debate_setup/presentation/bloc/team_assignment_cubit.dart';
-import 'package:poi/features/debate_setup/presentation/bloc/team_assignment_states.dart';
+import 'package:poi/features/debate_setup/presentation/bloc/debate_setup_cubit.dart';
+import 'package:poi/features/debate_setup/presentation/bloc/debate_setup_states.dart';
 import 'package:poi/features/debate_setup/presentation/widgets/team_card.dart';
 import 'package:sizer/sizer.dart';
 
@@ -92,7 +92,7 @@ class TeamAssignmentScreen extends StatelessWidget {
                                 onPressed: () {
                                   cubit.randomizeSides();
                                 },
-                                style: ElevatedButton.styleFrom(backgroundColor: color.secondary.withOpacity(0.8)),
+                                style: ElevatedButton.styleFrom(backgroundColor: color.secondary),
                                 child: Text(
                                     context.loc.random,
                                     style: TextStyle(

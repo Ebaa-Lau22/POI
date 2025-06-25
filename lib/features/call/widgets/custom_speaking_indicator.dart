@@ -15,13 +15,13 @@ class CustomSpeakingIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      duration: const Duration(milliseconds: 270),
+      duration: const Duration(milliseconds: 150),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: Colors.transparent,
         border: Border.all(
           color: isSpeaking ? activeColor : Colors.transparent,
-          width: 2.8,
+          width: 3.3,
         ),
       ),
       child: Container(

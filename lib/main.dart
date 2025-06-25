@@ -8,7 +8,7 @@ import 'package:poi/features/cached_data/domain/usecases/get_cached_locale_useca
 import 'package:poi/features/cached_data/domain/usecases/get_cached_theme_usecase.dart';
 import 'package:poi/features/call/call_cubit.dart';
 import 'package:poi/features/call/call_screen.dart';
-import 'package:poi/features/debate_setup/presentation/bloc/team_assignment_cubit.dart';
+import 'package:poi/features/debate_setup/presentation/bloc/debate_setup_cubit.dart';
 import 'package:poi/features/debate_setup/presentation/pages/team_assignment_screen.dart';
 import 'package:poi/permission_cubit.dart';
 import 'package:poi/splash_screen.dart';
@@ -59,46 +59,40 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Sizer(
-        builder: (context, orientation, deviceType) {
-          return MultiBlocProvider(
-            providers: [
-              BlocProvider(
-                create:
-                    (_) =>
-                di.sl<AppCubit>()
-                  ..changeTheme(isLightTheme)
-                  ..changeLocale(locale),
-              ),
-              BlocProvider(create: (_) => di.sl<PostsCubit>()..getAllPosts()),
-              BlocProvider(create: (_) => di.sl<CallCubit>()),
-              BlocProvider(create: (_) => di.sl<PermissionCubit>()),
-              BlocProvider(create: (_) => di.sl<DebateSetupCubit>()),
-              BlocProvider(create: (_) => di.sl<ConnectionCubit>()),
-              BlocProvider(create: (_) => di.sl<AuthCubit>()),
-
-            ],
-            child: BlocConsumer<AppCubit, AppStates>(
-              listener: (context, state) {},
-              builder: (context, state) {
-                final cubit = context.read<AppCubit>();
-                return MaterialApp(
-                  debugShowCheckedModeBanner: false,
-                  theme: cubit.isLightTheme ? lightTheme : darkTheme,
-                  title: 'Posts App',
-                  localizationsDelegates: const [
-                    AppLocalizations.delegate,
-                    GlobalMaterialLocalizations.delegate,
-                    GlobalWidgetsLocalizations.delegate,
-                    GlobalCupertinoLocalizations.delegate,
-                  ],
-                  supportedLocales: AppLocalizations.supportedLocales,
-                  locale: Locale(cubit.locale),
-                  home: TeamAssignmentScreen(),
-                );
-              },
-            ),
-          );
-        });
+      builder: (context, orientation, deviceType) {
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider(create: (_) => di.sl<AppCubit>()..changeTheme(isLightTheme)..changeLocale(locale),),
+            BlocProvider(create: (_) => di.sl<PostsCubit>()..getAllPosts()),
+            BlocProvider(create: (_) => di.sl<CallCubit>()),
+            BlocProvider(create: (_) => di.sl<PermissionCubit>()),
+            BlocProvider(create: (_) => di.sl<DebateSetupCubit>()..getAllTopics()..getAllMotions()),
+            BlocProvider(create: (_) => di.sl<ConnectionCubit>()),
+            BlocProvider(create: (_) => di.sl<AuthCubit>()),
+          ],
+          child: BlocConsumer<AppCubit, AppStates>(
+            listener: (context, state) {},
+            builder: (context, state) {
+              final cubit = context.read<AppCubit>();
+              return MaterialApp(
+                debugShowCheckedModeBanner: false,
+                theme: cubit.isLightTheme ? lightTheme : darkTheme,
+                title: 'Posts App',
+                localizationsDelegates: const [
+                  AppLocalizations.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                ],
+                supportedLocales: AppLocalizations.supportedLocales,
+                locale: Locale(cubit.locale),
+                home: SplashScreen(),
+              );
+            },
+          ),
+        );
+      },
+    );
   }
 }
 

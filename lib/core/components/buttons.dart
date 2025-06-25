@@ -16,7 +16,7 @@ Widget myButton({
   double width = 125.0,
   double horizontalPadding = 8.0,
   double verticalPadding = 4.0,
-  double elevation = 5,
+  double elevation = 0,
   bool hasBorder = true,
 }) =>
     SizedBox(
@@ -24,8 +24,7 @@ Widget myButton({
       width: width,
       child: Material(
         color: Colors.transparent,
-        // elevation: elevation,
-        // borderRadius: BorderRadiusDirectional.circular(borderRadius),
+        borderRadius: BorderRadiusDirectional.circular(borderRadius),
         child: MaterialButton(
           elevation: 0,
           shape: RoundedRectangleBorder(

@@ -1,29 +1,18 @@
 import 'dart:async';
-import 'dart:io' as Thread;
-
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_webrtc/flutter_webrtc.dart';
-import 'package:livekit_client/livekit_client.dart';
 import 'package:poi/core/app_cubit/app_cubit.dart';
 import 'package:poi/core/components/loading_widget.dart';
-import 'package:poi/core/components/navigators.dart';
 import 'package:poi/core/constants/constants.dart';
 import 'package:poi/core/localization/l10n/context_localiztion.dart';
 import 'package:poi/core/theme/app_colors.dart';
-import 'package:poi/features/call/connection_cubit.dart';
-import 'package:poi/features/call/connection_states.dart';
-import 'package:poi/features/call/no_connection_screen.dart';
-import 'package:poi/features/call/widgets/custom_mute_indicator.dart';
-import 'package:poi/features/call/widgets/custom_speaking_indicator.dart';
 import 'package:poi/features/call/widgets/no_animation_scroll.dart';
 import 'package:poi/features/call/widgets/video_cards.dart';
-
+import 'package:sizer/sizer.dart';
 import '../../core/app_cubit/app_states.dart';
 import '../../core/components/connection_quality_indicator.dart';
 import '../../core/components/custom_toggle_button.dart';
-import '../../widgets/sound_waveform.dart';
 import 'call_cubit.dart';
 
 class VideoCallScreen extends StatelessWidget {
@@ -37,8 +26,8 @@ class VideoCallScreen extends StatelessWidget {
     final bool isTablet = width>450;
     return BlocBuilder<AppCubit, AppStates>(
       builder: (context, state) {
-        //final url = "https://1173-185-165-240-189.ngrok-free.app";
-        //final token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJFYmFhIiwianRpIjoiRWJhYSIsImV4cCI6MTc0OTM5NTEwNCwibmJmIjoxNzQ5MzgwNzA0LCJpYXQiOjE3NDkzODA3MDQsImlzcyI6ImRldmtleSIsInZpZGVvIjp7InJvb21Kb2luIjp0cnVlLCJyb29tIjoidGhlcm9vbSJ9fQ.XeY-i990LsYgMwMyOZLTjDmOBf2fCse_KqC5TnPcGjs";
+        //final url = "https://d2f2-185-165-242-52.ngrok-free.app";
+        //final token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJFYmFhIiwianRpIjoiRWJhYSIsImV4cCI6MTc1MDcwODQwNiwibmJmIjoxNzUwNjk0MDA2LCJpYXQiOjE3NTA2OTQwMDYsImlzcyI6ImRldmtleSIsInZpZGVvIjp7InJvb21Kb2luIjp0cnVlLCJyb29tIjoidGhlcm9vbSJ9fQ.qu2t8gcGM_IGiW_WJ0cru84IcUDRdXs5raZ3zfqMSuY";
         final url = "wss://flutterpoi-ar6hq9rt.livekit.cloud";
         final token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NjAyNDc5NTYsImlzcyI6IkFQSTlVNVJXbVpOM2UzOCIsIm5iZiI6MTc1MDMzNzk1Nywic3ViIjoiRGFuIiwidmlkZW8iOnsiY2FuUHVibGlzaCI6dHJ1ZSwiY2FuUHVibGlzaERhdGEiOnRydWUsImNhblN1YnNjcmliZSI6dHJ1ZSwicm9vbSI6ImRlYmF0ZSIsInJvb21Kb2luIjp0cnVlfX0.PnadOPZOq7qAJ9dFlsjilSKMDqd9wpnKGfSNNZdt_8Y";
         final appCubit = context.read<AppCubit>();
@@ -110,7 +99,7 @@ class VideoCallScreen extends StatelessWidget {
                       ),
                       Expanded(
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 10.0),
+                          padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 2.h),
                           child: Column(
                             children: [
                               Expanded(
@@ -120,9 +109,10 @@ class VideoCallScreen extends StatelessWidget {
                                       builder: (context, state) {
                                         final cubit = context.read<CallCubit>();
                                         final participants = cubit.participants;
-                                        final totalItems = 1 + participants.length + 10; // 1 for local + remotes
+                                        final totalItems = 1 + participants.length; // 1 for local + remotes
                                         final itemsPerPage = 6;
                                         final pageCount = (totalItems / itemsPerPage).ceil();
+                                        final mainAxis = isTablet ? constraints.maxHeight/2 - 3 : constraints.maxHeight/3 - 5.01;
                                         return PageView.builder(
                                           controller: _controller,
                                           scrollDirection: Axis.vertical,
@@ -141,10 +131,10 @@ class VideoCallScreen extends StatelessWidget {
                                                     physics: NeverScrollableScrollPhysics(),
                                                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                                                       crossAxisCount: isTablet ? 3 : 2, // 2 per row
-                                                      mainAxisSpacing: 5,
-                                                      crossAxisSpacing: 5,
+                                                      mainAxisSpacing: 3.w,
+                                                      crossAxisSpacing: 3.w,
                                                       childAspectRatio: 1 / 1,
-                                                      mainAxisExtent: isTablet ? constraints.maxHeight/2 - 3 : constraints.maxHeight/3 - 5.01,
+                                                      mainAxisExtent: mainAxis,
                                                     ),
                                                     itemCount: items.length,
                                                     itemBuilder: (context, index) {
@@ -162,10 +152,10 @@ class VideoCallScreen extends StatelessWidget {
                                                           child: LocalVideoCard(
                                                             bgColor: color.darkerOrLighter,
                                                             textTheme: textTheme,
+                                                            mainAxis: mainAxis,
                                                           ),
                                                         );
                                                       } else {
-                                                        //final participant = participants[actualIndex - 1];
                                                         return Container(
                                                           decoration: BoxDecoration(
                                                             color: color.darkerOrLighter,
@@ -175,9 +165,11 @@ class VideoCallScreen extends StatelessWidget {
                                                               width: 3,
                                                             ),
                                                           ),
-                                                          child: LocalVideoCard(
+                                                          child: RemoteVideoCard(
+                                                            participantIndex: actualIndex - 1,
                                                             bgColor: color.darkerOrLighter,
                                                             textTheme: textTheme,
+                                                            mainAxis: mainAxis,
                                                           ),
                                                         );
                                                       }

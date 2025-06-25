@@ -17,5 +17,14 @@
   "poor": "ضعيفة",
   "unknown": "لا اتصال",
   "next": "التالي",
-  "assign_debate_sides": "توزيع أدوار الفرق"
+  "apply": "تنفيذ",
+  "submit": "تأكيد",
+  "assign_debate_sides": "توزيع أدوار الفرق",
+  "select_debate_motion": "قم باختيار الجملة الجدلية",
+  "search_motion": "ابحث عن جملة جدلية",
+  "motion": "الجملة الجدلية",
+  "select_new_motion": "اختيار جملة جدلية جديدة",
+  "select_topics": "اختر المواضيع التي تنطوي تحتها الجملة (2 كحد أقصى)",
+  "filter_motion" : "فلتر الجمل الجدلية",
+  "cancel": "إلغاء"
 }

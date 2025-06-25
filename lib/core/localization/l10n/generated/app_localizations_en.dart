@@ -60,5 +60,32 @@ class AppLocalizationsEn extends AppLocalizations {
   String get next => 'Next';
 
   @override
+  String get apply => 'Apply';
+
+  @override
+  String get submit => 'Submit';
+
+  @override
   String get assign_debate_sides => 'Assign Debate Sides';
+
+  @override
+  String get select_debate_motion => 'Select Debate Motion';
+
+  @override
+  String get search_motion => 'Search Motion';
+
+  @override
+  String get motion => 'The Motion';
+
+  @override
+  String get select_new_motion => 'Select New Motion';
+
+  @override
+  String get select_topics => 'Select the motion topics (2 maximum)';
+
+  @override
+  String get filter_motion => 'Filter Motions';
+
+  @override
+  String get cancel => 'Cancel';
 }

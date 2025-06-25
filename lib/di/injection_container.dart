@@ -16,7 +16,13 @@ import 'package:poi/features/cached_data/domain/usecases/get_cached_locale_useca
 import 'package:poi/features/cached_data/domain/usecases/get_cached_theme_usecase.dart';
 import 'package:poi/features/call/call_cubit.dart';
 import 'package:poi/features/call/connection_cubit.dart';
-import 'package:poi/features/debate_setup/presentation/bloc/team_assignment_cubit.dart';
+import 'package:poi/features/debate_setup/data/datasources/debate_setup_remote_datasource.dart';
+import 'package:poi/features/debate_setup/data/repositories/debate_setup_repository_imp.dart';
+import 'package:poi/features/debate_setup/domain/repositories/debate_setup_repository.dart';
+import 'package:poi/features/debate_setup/domain/usecases/add_motion_usecase.dart';
+import 'package:poi/features/debate_setup/domain/usecases/get_all_motions_usecase.dart';
+import 'package:poi/features/debate_setup/domain/usecases/get_all_topics_usecase.dart';
+import 'package:poi/features/debate_setup/presentation/bloc/debate_setup_cubit.dart';
 import 'package:poi/permission_cubit.dart';
 import '../core/storage/preferences_database.dart';
 import '../core/network/network_info.dart';
@@ -43,7 +49,10 @@ Future<void> init() async {
   //! Cubits
   sl.registerFactory(() => CallCubit());
   sl.registerFactory(() => PermissionCubit());
-  sl.registerFactory(() => DebateSetupCubit());
+  sl.registerFactory(() => DebateSetupCubit(
+    getAllMotionsUsecase: sl(),
+    getAllTopicsUsecase: sl(),
+  ));
   sl.registerFactory(() => ConnectionCubit());
   sl.registerFactory(() => AppCubit(
     cacheThemeUseCase: sl(),
@@ -52,15 +61,21 @@ Future<void> init() async {
   sl.registerFactory(() => AuthCubit(loginUseCase: sl()));
 
   //! Use Cases
-  sl.registerLazySingleton(() => GetAllPostsUseCase(repository: sl()));
-  sl.registerLazySingleton(() => AddPostUseCase(repository: sl()));
-  sl.registerLazySingleton(() => DeletePostUseCase(repository: sl()));
-  sl.registerLazySingleton(() => UpdatePostUseCase(repository: sl()));
-  sl.registerLazySingleton(() => CacheThemeUseCase(repository: sl()));
-  sl.registerLazySingleton(() => CacheLocaleUseCase(repository: sl()));
-  sl.registerLazySingleton(() => GetCachedLocaleUseCase(repository: sl()));
-  sl.registerLazySingleton(() => GetCachedThemeUseCase(repository: sl()));
-  sl.registerLazySingleton(() => LoginUseCase(authRepository: sl()));
+    sl.registerLazySingleton(() => GetAllPostsUseCase(repository: sl()));
+    sl.registerLazySingleton(() => AddPostUseCase(repository: sl()));
+    sl.registerLazySingleton(() => DeletePostUseCase(repository: sl()));
+    sl.registerLazySingleton(() => UpdatePostUseCase(repository: sl()));
+    //Cache
+      sl.registerLazySingleton(() => CacheThemeUseCase(repository: sl()));
+      sl.registerLazySingleton(() => CacheLocaleUseCase(repository: sl()));
+      sl.registerLazySingleton(() => GetCachedLocaleUseCase(repository: sl()));
+      sl.registerLazySingleton(() => GetCachedThemeUseCase(repository: sl()));
+    //Login
+      sl.registerLazySingleton(() => LoginUseCase(authRepository: sl()));
+    //Motions
+      sl.registerLazySingleton(() => GetAllMotionsUsecase(debateRepo: sl()));
+      sl.registerLazySingleton(() => GetAllTopicsUsecase(debateRepo: sl()));
+      sl.registerLazySingleton(() => AddMotionUsecase(debateRepo: sl()));
 
 
   //! Repositories
@@ -70,16 +85,21 @@ Future<void> init() async {
   ));
   sl.registerLazySingleton<CacheRepository>(() => CacheRepositoryImpl(
     dataSource: sl(),
-  ));
+  )); //Cache
   sl.registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl(
     remoteDataSource: sl(),
     networkInfo: sl()
-  ));
+  )); //Auth
+  sl.registerLazySingleton<DebateSetupRepository>(() => DebateSetupRepositoryImpl(
+    networkInfo: sl(),
+    remoteDatasource: sl(),
+  )); //Setup
 
   //! Data Sources
   sl.registerLazySingleton<PostRemoteDataSource>(() => PostRemoteDataSourceImpl(client: sl()));
-  sl.registerLazySingleton<CacheLocalDataSource>(() => CacheLocalDataSourceImpl(db: sl()));
-  sl.registerLazySingleton<AuthRemoteDataSource>(() => AuthRemoteDataSourceImpl(client: sl()));
+  sl.registerLazySingleton<CacheLocalDataSource>(() => CacheLocalDataSourceImpl(db: sl())); //Cache
+  sl.registerLazySingleton<AuthRemoteDataSource>(() => AuthRemoteDataSourceImpl(client: sl())); //Auth
+  sl.registerLazySingleton<DebateSetupRemoteDatasource>(() => DebateSetupRemoteDatasourceImpl(client: sl())); //Setup
 
   //! Core
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));

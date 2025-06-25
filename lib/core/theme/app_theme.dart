@@ -30,12 +30,17 @@ TextTheme get lightTextTheme => TextTheme(
         color: AppColors.mainDark,
       ),
       bodyLarge: TextStyle(
-        fontSize: 15,
+        fontSize: 13,
+        fontWeight: FontWeight.normal,
+        color: AppColors.mainDark,
+      ),
+      bodyMedium: TextStyle(
+        fontSize: 12,
         fontWeight: FontWeight.normal,
         color: AppColors.mainDark,
       ),
       bodySmall: TextStyle(
-        fontSize: 12,
+        fontSize: 10,
         fontWeight: FontWeight.w500,
         color: AppColors.mainDark,
       ),
@@ -84,8 +89,13 @@ ThemeData get lightTheme => ThemeData(
   primaryColor: AppColors.darkRed,
   primaryColorDark: AppColors.lightRed,
   primaryColorLight: AppColors.darkRed,
-  canvasColor: AppColors.darkRed,
+  canvasColor: AppColors.mainLight,
   indicatorColor: AppColors.darkRed,
+  textSelectionTheme: const TextSelectionThemeData(
+    cursorColor: AppColors.darkRed,
+    selectionColor: AppColors.darkRed,
+    selectionHandleColor: AppColors.darkRed,
+  ),
   appBarTheme: AppBarTheme(
     systemOverlayStyle: SystemUiOverlayStyle(
       statusBarColor: AppColors.mainLight,
@@ -94,21 +104,45 @@ ThemeData get lightTheme => ThemeData(
     toolbarHeight: kToolbarHeight + 10,
     backgroundColor: AppColors.mainLight,
     elevation: 0,
+    surfaceTintColor: Colors.transparent,
+    scrolledUnderElevation: 0,
     titleTextStyle: const TextStyle(
-      color: Colors.black,
+      color: AppColors.blackColor,
       fontWeight: FontWeight.bold,
       fontSize: 24,
     ),
     iconTheme: const IconThemeData(
-      color: Colors.black,
+      color: AppColors.blackColor,
       size: 25,
       //opticalSize: Checkbox.width,
     ),
     actionsIconTheme: const IconThemeData(
-      color: Colors.black,
+      color: AppColors.blackColor,
       size: 25,
       //opticalSize: Checkbox.width,
     ),
+  ),
+  iconTheme: const IconThemeData(
+    color: AppColors.mainDark,
+  ),
+  progressIndicatorTheme: ProgressIndicatorThemeData(
+    color: AppColors.darkRed, // CircularProgressIndicator color
+    linearTrackColor: AppColors.darkRed.withValues(alpha: 0.4),
+  ),
+  inputDecorationTheme: InputDecorationTheme(
+    focusedBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: AppColors.mainDark),
+    ),
+    labelStyle: TextStyle(color: AppColors.mainDark),
+  ),
+  checkboxTheme: CheckboxThemeData(
+    fillColor: MaterialStateProperty.all(AppColors.darkRed),
+  ),
+  switchTheme: SwitchThemeData(
+    thumbColor: MaterialStateProperty.all(AppColors.mainDark),
+  ),
+  radioTheme: RadioThemeData(
+    fillColor: MaterialStateProperty.all(AppColors.mainDark),
   ),
   textTheme: lightTextTheme,
 );
@@ -118,8 +152,13 @@ ThemeData get darkTheme => ThemeData(
   primaryColor: AppColors.lightRed,
   primaryColorDark: AppColors.darkRed,
   primaryColorLight: AppColors.lightRed,
-  canvasColor: AppColors.lightRed,
+  canvasColor: AppColors.mainDark,
   indicatorColor: AppColors.lightRed,
+  textSelectionTheme: const TextSelectionThemeData(
+    cursorColor: AppColors.lightRed,             // blinking cursor color
+    selectionColor: AppColors.lightRed,    // highlight color
+    selectionHandleColor: AppColors.lightRed,    // color of the selection handles (the little pointers)
+  ),
   appBarTheme: AppBarTheme(
     systemOverlayStyle: SystemUiOverlayStyle(
       statusBarColor: AppColors.mainDark,
@@ -128,14 +167,38 @@ ThemeData get darkTheme => ThemeData(
     toolbarHeight: kToolbarHeight + 10,
     color: AppColors.mainDark,
     elevation: 0,
+    surfaceTintColor: Colors.transparent,
+    scrolledUnderElevation: 0,
     titleTextStyle: const TextStyle(
-      color: Colors.white,
+      color: AppColors.mainLight,
       fontWeight: FontWeight.bold,
       fontSize: 24,
     ),
     actionsIconTheme: const IconThemeData(
-      color: Colors.white,
+      color: AppColors.mainLight,
     ),
+    iconTheme: const IconThemeData(
+      color: AppColors.mainLight,
+    ),
+  ),
+  progressIndicatorTheme: ProgressIndicatorThemeData(
+    color: AppColors.lightRed, // CircularProgressIndicator color
+    linearTrackColor: AppColors.lightRed.withValues(alpha: 0.4),
+  ),
+  inputDecorationTheme: InputDecorationTheme(
+    focusedBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: AppColors.mainLight),
+    ),
+    labelStyle: TextStyle(color: AppColors.mainLight),
+  ),
+  checkboxTheme: CheckboxThemeData(
+    fillColor: MaterialStateProperty.all(AppColors.lightRed),
+  ),
+  switchTheme: SwitchThemeData(
+    thumbColor: MaterialStateProperty.all(AppColors.mainLight),
+  ),
+  radioTheme: RadioThemeData(
+    fillColor: MaterialStateProperty.all(AppColors.mainLight),
   ),
   textTheme: darkTextTheme,
 );

@@ -60,5 +60,32 @@ class AppLocalizationsAr extends AppLocalizations {
   String get next => 'التالي';
 
   @override
+  String get apply => 'تنفيذ';
+
+  @override
+  String get submit => 'تأكيد';
+
+  @override
   String get assign_debate_sides => 'توزيع أدوار الفرق';
+
+  @override
+  String get select_debate_motion => 'قم باختيار الجملة الجدلية';
+
+  @override
+  String get search_motion => 'ابحث عن جملة جدلية';
+
+  @override
+  String get motion => 'الجملة الجدلية';
+
+  @override
+  String get select_new_motion => 'اختيار جملة جدلية جديدة';
+
+  @override
+  String get select_topics => 'اختر المواضيع التي تنطوي تحتها الجملة (2 كحد أقصى)';
+
+  @override
+  String get filter_motion => 'فلتر الجمل الجدلية';
+
+  @override
+  String get cancel => 'إلغاء';
 }
