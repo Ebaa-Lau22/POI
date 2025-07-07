@@ -1,14 +1,17 @@
+import 'package:poi/core/constants/constants.dart';
 import 'package:poi/core/error/failures.dart';
 
 String mapFailureToMessage(Failure failure) {
-  switch (failure.runtimeType) {
-    case ServerFailure _:
-      return 'حدث خطأ ما أثناء جلب المعلومات';
-    case EmptyCacheFailure _:
-      return 'EMPTY_CACHE_FAILURE_MESSAGE';
-    case OfflineFailure _:
-      return 'خطأ في الاتصال بالانترنت ';
-    default:
-      return "خطأ غير متوقع أعد المحاولة لا حقاً";
+  print("Failure is: ${failure.runtimeType}");
+  if (failure is WrongDataFailure) {
+    return incorrect_Data_Failure_Message;
+  } else if (failure is EmptyCacheFailure) {
+    return EMPTY_CACHE_FAILURE_MESSAGE;
+  } else if (failure is ServerFailure) {
+    return SERVER_FAILURE_MESSAGE;
+  } else if (failure is OfflineFailure) {
+    return OFFLINE_FAILURE_MESSAGE;
+  } else {
+    return UNEXPECTED_FAILURE_MESSAGE;
   }
 }

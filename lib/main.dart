@@ -62,11 +62,23 @@ class MyApp extends StatelessWidget {
       builder: (context, orientation, deviceType) {
         return MultiBlocProvider(
           providers: [
-            BlocProvider(create: (_) => di.sl<AppCubit>()..changeTheme(isLightTheme)..changeLocale(locale),),
+            BlocProvider(
+              create:
+                  (_) =>
+                      di.sl<AppCubit>()
+                        ..changeTheme(isLightTheme)
+                        ..changeLocale(locale),
+            ),
             BlocProvider(create: (_) => di.sl<PostsCubit>()..getAllPosts()),
             BlocProvider(create: (_) => di.sl<CallCubit>()),
             BlocProvider(create: (_) => di.sl<PermissionCubit>()),
-            BlocProvider(create: (_) => di.sl<DebateSetupCubit>()..getAllTopics()..getAllMotions()),
+            BlocProvider(
+              create:
+                  (_) =>
+                      di.sl<DebateSetupCubit>()
+                        ..getAllTopics()
+                        ..getAllMotions(),
+            ),
             BlocProvider(create: (_) => di.sl<ConnectionCubit>()),
             BlocProvider(create: (_) => di.sl<AuthCubit>()),
           ],
@@ -86,7 +98,7 @@ class MyApp extends StatelessWidget {
                 ],
                 supportedLocales: AppLocalizations.supportedLocales,
                 locale: Locale(cubit.locale),
-                home: SplashScreen(),
+                home: LoginPage(),
               );
             },
           ),

@@ -88,4 +88,67 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get cancel => 'إلغاء';
+
+  @override
+  String get forgetYourPassword => 'هل نسيت كلمة المرور الخاصة بك ؟';
+
+  @override
+  String get enterEmailToGetCode => 'يرجى إدخال بريدك الإلكتروني لإرسال رمز التحقق الخاص بإعادة تعيين كلمة المرور.';
+
+  @override
+  String get yourEmail => 'بريدك الإلكتروني';
+
+  @override
+  String get sendResetCode => 'إرسال رمز التحقق';
+
+  @override
+  String get enterCode => 'أدخل رمز التحقق';
+
+  @override
+  String get enterCodeDescripe => 'يرجى إدخال رمز التحقق المكون من 6 أرقام الذي تم إرساله إلى بريدك الإلكتروني.';
+
+  @override
+  String get verificationCode => 'رمز التحقق';
+
+  @override
+  String get confirmCode => 'تأكيد الرمز';
+
+  @override
+  String get notRecieveCode => 'لم يصلك الرمز؟ أعد الإرسال';
+
+  @override
+  String get enterCodeValidation => 'يرجى إدخال الرمز';
+
+  @override
+  String get codeValidation => 'يجب أن يتكون الرمز من 6 أرقام';
+
+  @override
+  String get codeResent => 'تمت إعادة إرسال رمز التحقق';
+
+  @override
+  String get resetPassword => 'إعادة تعيين كلمة المرور';
+
+  @override
+  String get confirmPassword => 'تأكيد كلمة المرور';
+
+  @override
+  String get passNotMatch => 'كلمتا المرور غير متطابقتين';
+
+  @override
+  String get updatePassword => 'تحديث كلمة المرور';
+
+  @override
+  String get serverFailureMessage => 'يرجى المحاولة مرة أخرى لاحقًا.';
+
+  @override
+  String get emptyCacheFailureMessage => 'لا توجد بيانات.';
+
+  @override
+  String get offlineFailureMessage => 'يرجى التحقق من اتصال الإنترنت.';
+
+  @override
+  String get unexpectedFailureMessage => 'حدث خطأ غير متوقع.';
+
+  @override
+  String get incorrectDataFailureMessage => 'المعلومات المدخلة غير صحيحة. يرجى المحاولة مرة أخرى.';
 }

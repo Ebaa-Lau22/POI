@@ -47,22 +47,22 @@ TextStyle textFieldLabelStyle = const TextStyle(
 );
 
 //====================
-TextStyle textloginpage = const TextStyle(
-  color: AppColors.mainDark,
-  fontSize: 25,
-  fontFamily: "Ubuntu",
-);
+// TextStyle textloginpage = const TextStyle(
+//   color: AppColors.mainDark,
+//   fontSize: 25,
+//   fontFamily: "Ubuntu",
+// );
 
-TextStyle labeltextformfield = const TextStyle(
-  color: AppColors.mainDark,
-  fontSize: 12,
-  fontFamily: "Sansation",
-);
+// TextStyle labeltextformfield = const TextStyle(
+//   color: AppColors.mainDark,
+//   fontSize: 12,
+//   fontFamily: "Sansation",
+// );
 
-TextStyle textButton = const TextStyle(
-  color: Color.fromRGBO(225, 230, 242, 1),
-  fontFamily: "Sansation",
-);
+// TextStyle textButton = const TextStyle(
+//   color: Color.fromRGBO(225, 230, 242, 1),
+//   fontFamily: "Sansation",
+// );
 
 // TextStyle textFromStyle = const TextStyle(
 //     color: AppColors.blackColor,

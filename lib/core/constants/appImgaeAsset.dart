@@ -10,7 +10,10 @@ class AppImageAsset {
   static const String login_image = "$rootImages/login_image.png";
   static const String emptyImage = "$rootImages/empty.png";
 
-// =============================== SVG ========================== //
+  // =============================== SVG ========================== //
   static const String WelcomeImage = "$rootImages/Welcome.svg";
-
+  static const String forgetPasswordImage = "$rootImages/forget_password.svg";
+  static const String resetPasswordImage = "$rootImages/Reset password 1.svg";
+  static const String NoConnectionImage = "$rootImages/No connection.svg";
+  static const String NoDataImage = "$rootImages/No data.svg";
 }

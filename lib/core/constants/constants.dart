@@ -8,13 +8,19 @@ const String SERVER_FAILURE_MESSAGE = 'يرجى المحاولة مرة أخرى
 const String EMPTY_CACHE_FAILURE_MESSAGE = 'لا توجد بيانات';
 const String OFFLINE_FAILURE_MESSAGE = 'يرجى التحقق من اتصالك بالإنترنت';
 const String UNEXPECTED_FAILURE_MESSAGE = 'خطأ غير متوقع';
+const String incorrect_Data_Failure_Message =
+    'The provided information is not correct.Please try again.';
 const String ADD_POST_SUCCESS_MESSAGE = 'Post added successfully';
 const String Update_POST_SUCCESS_MESSAGE = 'Post updated successfully';
 const String Delete_POST_SUCCESS_MESSAGE = 'Post deleted successfully';
-const String LOGIN_SUCCESS_MESSAGE = 'تم تسجيل الدخول بنجاح';
+const String LOGIN_SUCCESS_MESSAGE = 'Login successful';
+const String SEND_CODE_SUCCESS_MESSAGE = 'Verification code sent successfully';
+const String VERIFY_CODE_SUCCESS_MESSAGE = 'Code verified successfully';
+const String RESET_PASSWORD_SUCCESS_MESSAGE = 'Password reset successfully';
 
 RegExp EmailRegExp = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w]{2,4}$');
 
+RegExp PasswordRegExp = RegExp(r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$');
 const double widgetBorderRadius = 20;
 
 Locale get englishLocale => const Locale('en');

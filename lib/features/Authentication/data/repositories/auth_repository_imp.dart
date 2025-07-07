@@ -3,7 +3,7 @@ import 'package:poi/core/error/exceptions.dart';
 import 'package:poi/core/error/failures.dart';
 import 'package:poi/core/network/network_info.dart';
 import 'package:poi/features/Authentication/data/datasources/auth_remote_data_source.dart';
-import 'package:poi/features/Authentication/data/models/login_model.dart';
+import 'package:poi/features/Authentication/data/models/auth_model.dart';
 import 'package:poi/features/Authentication/domain/entities/auth.dart';
 import 'package:poi/features/Authentication/domain/repositories/auth_repository.dart';
 
@@ -18,24 +18,64 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<Either<Failure, Unit>> login(LoginEntity loginEntity) async {
-    final LoginModel loginModel = LoginModel(email: loginEntity.email, password: loginEntity.password);
+    final LoginModel loginModel = LoginModel(
+      email: loginEntity.email,
+      password: loginEntity.password,
+    );
     return await _getMessage(() {
       return remoteDataSource.login(loginModel);
     });
   }
 
+  @override
+  Future<Either<Failure, Unit>> sendCode(SendCodeEntity sendCodeEntity) async {
+    final SendCodeModel sendCodeModel = SendCodeModel(
+      email: sendCodeEntity.email,
+    );
+    return await _getMessage(() {
+      return remoteDataSource.sendCode(sendCodeModel);
+    });
+  }
+
+  @override
+  Future<Either<Failure, Unit>> verifyCode(
+    VerificationCodeEntity verifyCodeEntity,
+  ) async {
+    final VerifyCodeModel verifyCodeModel = VerifyCodeModel(
+      code: verifyCodeEntity.code,
+    );
+    return await _getMessage(() {
+      return remoteDataSource.verifyCode(verifyCodeModel);
+    });
+  }
+
+  @override
+  Future<Either<Failure, Unit>> resetPassword(
+    ResetPasswordEntity resetPassEntity,
+  ) async {
+    final ResetPasswordModel resetPasswordModel = ResetPasswordModel(
+      newPass: resetPassEntity.newPass,
+      confirmPass: resetPassEntity.confirmPass,
+    );
+    return await _getMessage(() {
+      return remoteDataSource.resetPassword(resetPasswordModel);
+    });
+  }
+
   Future<Either<Failure, Unit>> _getMessage(
-      Future<Unit> Function() deleteOrUpdateOrAddPost) async {
+    Future<Unit> Function() action,
+  ) async {
     if (await networkInfo.isConnected) {
       try {
-        deleteOrUpdateOrAddPost();
+        await action();
         return const Right(unit);
+      } on WrongDataException {
+        return Left(WrongDataFailure());
       } on ServerException {
         return Left(ServerFailure());
       }
     } else {
       return Left(OfflineFailure());
     }
-
   }
 }

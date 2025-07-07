@@ -2,85 +2,100 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'app_colors.dart';
 
-
 TextTheme get lightTextTheme => TextTheme(
-      displayLarge: TextStyle(
-        fontSize: 38,
-        fontWeight: FontWeight.bold,
-        color: AppColors.mainDark,
-      ),
-      displayMedium: TextStyle(
-        fontSize: 28,
-        fontWeight: FontWeight.bold,
-        color: AppColors.mainDark,
-      ),
-      displaySmall: TextStyle(
-        fontSize: 20,
-        fontWeight: FontWeight.bold,
-        color: AppColors.mainDark,
-      ),
-      titleLarge: TextStyle(
-        fontSize: 16,
-        fontWeight: FontWeight.w500,
-        color: AppColors.mainDark,
-      ),
-      labelLarge: TextStyle(
-        fontSize: 16,
-        fontWeight: FontWeight.w400,
-        color: AppColors.mainDark,
-      ),
-      bodyLarge: TextStyle(
-        fontSize: 13,
-        fontWeight: FontWeight.normal,
-        color: AppColors.mainDark,
-      ),
-      bodyMedium: TextStyle(
-        fontSize: 12,
-        fontWeight: FontWeight.normal,
-        color: AppColors.mainDark,
-      ),
-      bodySmall: TextStyle(
-        fontSize: 10,
-        fontWeight: FontWeight.w500,
-        color: AppColors.mainDark,
-      ),
-    );
+  displayLarge: TextStyle(
+    fontSize: 38,
+    fontWeight: FontWeight.bold,
+    color: AppColors.mainDark,
+  ), //textloginpage
+  displayMedium: TextStyle(
+    fontSize: 28,
+    // fontWeight: FontWeight.bold,
+    color: AppColors.mainDark,
+    fontFamily: "Sansation",
+  ),
+  //textForgetPasswordTitle...textTitle
+  displaySmall: TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.bold,
+    color: AppColors.mainDark,
+    fontFamily: "Sansation",
+  ),
+  titleLarge: TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w500,
+    color: AppColors.mainDark,
+    fontFamily: "Sansation",
+  ),
+  labelLarge: TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w400,
+    color: AppColors.mainDark,
+    fontFamily: "Sansation",
+  ),
+  //textIntro...textResentCode..textButton labeltextformfield
+  bodyLarge: TextStyle(
+    fontSize: 15,
+    fontWeight: FontWeight.normal,
+    color: AppColors.mainDark,
+    fontFamily: "Sansation",
+  ),
+  bodyMedium: TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.normal,
+    color: AppColors.mainDark,
+    fontFamily: "Sansation",
+  ),
+  bodySmall: TextStyle(
+    fontSize: 10,
+    fontWeight: FontWeight.w500,
+    color: AppColors.mainDark,
+    fontFamily: "Sansation",
+  ),
+);
 
 TextTheme get darkTextTheme => TextTheme(
   displayLarge: TextStyle(
     fontSize: 38,
     fontWeight: FontWeight.bold,
     color: AppColors.white,
+    fontFamily: "Sansation",
   ),
   displayMedium: TextStyle(
     fontSize: 28,
     fontWeight: FontWeight.bold,
     color: AppColors.white,
+    fontFamily: "Sansation",
   ),
   displaySmall: TextStyle(
     fontSize: 20,
     fontWeight: FontWeight.bold,
     color: AppColors.white,
+    fontFamily: "Sansation",
   ),
   titleLarge: TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.w500,
     color: AppColors.white,
+    fontFamily: "Sansation",
   ),
   labelLarge: TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.w400,
     color: AppColors.white,
+    fontFamily: "Sansation",
   ),
   bodyLarge: TextStyle(
     fontSize: 15,
     fontWeight: FontWeight.normal,
     color: AppColors.white,
+    fontFamily: "Sansation",
   ),
   bodySmall: TextStyle(
     fontSize: 12,
     fontWeight: FontWeight.w500,
     color: AppColors.white,
+    fontFamily: "Sansation",
   ),
 );
 
@@ -122,9 +137,7 @@ ThemeData get lightTheme => ThemeData(
       //opticalSize: Checkbox.width,
     ),
   ),
-  iconTheme: const IconThemeData(
-    color: AppColors.mainDark,
-  ),
+  iconTheme: const IconThemeData(color: AppColors.mainDark),
   progressIndicatorTheme: ProgressIndicatorThemeData(
     color: AppColors.darkRed, // CircularProgressIndicator color
     linearTrackColor: AppColors.darkRed.withValues(alpha: 0.4),
@@ -155,9 +168,11 @@ ThemeData get darkTheme => ThemeData(
   canvasColor: AppColors.mainDark,
   indicatorColor: AppColors.lightRed,
   textSelectionTheme: const TextSelectionThemeData(
-    cursorColor: AppColors.lightRed,             // blinking cursor color
-    selectionColor: AppColors.lightRed,    // highlight color
-    selectionHandleColor: AppColors.lightRed,    // color of the selection handles (the little pointers)
+    cursorColor: AppColors.lightRed, // blinking cursor color
+    selectionColor: AppColors.lightRed, // highlight color
+    selectionHandleColor:
+        AppColors
+            .lightRed, // color of the selection handles (the little pointers)
   ),
   appBarTheme: AppBarTheme(
     systemOverlayStyle: SystemUiOverlayStyle(
@@ -174,12 +189,8 @@ ThemeData get darkTheme => ThemeData(
       fontWeight: FontWeight.bold,
       fontSize: 24,
     ),
-    actionsIconTheme: const IconThemeData(
-      color: AppColors.mainLight,
-    ),
-    iconTheme: const IconThemeData(
-      color: AppColors.mainLight,
-    ),
+    actionsIconTheme: const IconThemeData(color: AppColors.mainLight),
+    iconTheme: const IconThemeData(color: AppColors.mainLight),
   ),
   progressIndicatorTheme: ProgressIndicatorThemeData(
     color: AppColors.lightRed, // CircularProgressIndicator color
@@ -202,4 +213,3 @@ ThemeData get darkTheme => ThemeData(
   ),
   textTheme: darkTextTheme,
 );
-

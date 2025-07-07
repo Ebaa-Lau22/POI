@@ -256,6 +256,132 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Cancel'**
   String get cancel;
+
+  /// No description provided for @forgetYourPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Forgot your password?'**
+  String get forgetYourPassword;
+
+  /// No description provided for @enterEmailToGetCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your email address to receive a verification code for password reset.'**
+  String get enterEmailToGetCode;
+
+  /// No description provided for @yourEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Your email'**
+  String get yourEmail;
+
+  /// No description provided for @sendResetCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Send Verification Code'**
+  String get sendResetCode;
+
+  /// No description provided for @enterCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the verification code'**
+  String get enterCode;
+
+  /// No description provided for @enterCodeDescripe.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter the 6-digit code sent to your email.'**
+  String get enterCodeDescripe;
+
+  /// No description provided for @verificationCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Verification Code'**
+  String get verificationCode;
+
+  /// No description provided for @confirmCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Code'**
+  String get confirmCode;
+
+  /// No description provided for @notRecieveCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Didn\'t receive the code? Resend'**
+  String get notRecieveCode;
+
+  /// No description provided for @enterCodeValidation.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter the code'**
+  String get enterCodeValidation;
+
+  /// No description provided for @codeValidation.
+  ///
+  /// In en, this message translates to:
+  /// **'The code must be 6 digits'**
+  String get codeValidation;
+
+  /// No description provided for @codeResent.
+  ///
+  /// In en, this message translates to:
+  /// **'Verification code has been resent'**
+  String get codeResent;
+
+  /// No description provided for @resetPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset Password'**
+  String get resetPassword;
+
+  /// No description provided for @confirmPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Password'**
+  String get confirmPassword;
+
+  /// No description provided for @passNotMatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Passwords do not match'**
+  String get passNotMatch;
+
+  /// No description provided for @updatePassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Password'**
+  String get updatePassword;
+
+  /// No description provided for @serverFailureMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Please try again later .'**
+  String get serverFailureMessage;
+
+  /// No description provided for @emptyCacheFailureMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'No Data'**
+  String get emptyCacheFailureMessage;
+
+  /// No description provided for @offlineFailureMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Please Check your Internet Connection'**
+  String get offlineFailureMessage;
+
+  /// No description provided for @unexpectedFailureMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Unexpected Failure'**
+  String get unexpectedFailureMessage;
+
+  /// No description provided for @incorrectDataFailureMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'The provided information is not correct. Please try again.'**
+  String get incorrectDataFailureMessage;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
