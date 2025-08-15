@@ -84,4 +84,12 @@ flutter:
         - asset: assets/fonts/Sansation-Regular.ttf
     - family: Ubuntu
       fonts:
-        - asset: assets/fonts/Ubuntu-Regular.ttf        
+        - asset: assets/fonts/Ubuntu-Regular.ttf
+    - family: Merriweather
+      fonts:
+        - asset: assets/fonts/merriweather.regular.ttf
+        - asset: assets/fonts/merriweather.light.ttf
+    - family: Lato
+      fonts:
+        - asset: assets/fonts/lato.regular.ttf
+        - asset: assets/fonts/lato.light.ttf        

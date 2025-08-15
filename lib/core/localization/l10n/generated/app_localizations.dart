@@ -146,7 +146,7 @@ abstract class AppLocalizations {
   /// No description provided for @passwordValidationMessage.
   ///
   /// In en, this message translates to:
-  /// **'Password must contain both letters and numbers and be at least 6 characters long'**
+  /// **'Password must contain both letters and numbers and be at least 8 characters long'**
   String get passwordValidationMessage;
 
   /// No description provided for @forgetPassword.
@@ -382,6 +382,96 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The provided information is not correct. Please try again.'**
   String get incorrectDataFailureMessage;
+
+  /// No description provided for @debates.
+  ///
+  /// In en, this message translates to:
+  /// **'Debates'**
+  String get debates;
+
+  /// No description provided for @upcoming.
+  ///
+  /// In en, this message translates to:
+  /// **'Upcoming'**
+  String get upcoming;
+
+  /// No description provided for @confirmed.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirmed'**
+  String get confirmed;
+
+  /// No description provided for @active.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get active;
+
+  /// No description provided for @archived.
+  ///
+  /// In en, this message translates to:
+  /// **'Archived'**
+  String get archived;
+
+  /// No description provided for @userType.
+  ///
+  /// In en, this message translates to:
+  /// **'User Type'**
+  String get userType;
+
+  /// No description provided for @mobileNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Mobile Number'**
+  String get mobileNumber;
+
+  /// No description provided for @governorate.
+  ///
+  /// In en, this message translates to:
+  /// **'Governorate'**
+  String get governorate;
+
+  /// No description provided for @birthDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Birth Date'**
+  String get birthDate;
+
+  /// No description provided for @educationDegree.
+  ///
+  /// In en, this message translates to:
+  /// **'Education Degree'**
+  String get educationDegree;
+
+  /// No description provided for @faculty.
+  ///
+  /// In en, this message translates to:
+  /// **'Faculty'**
+  String get faculty;
+
+  /// No description provided for @university.
+  ///
+  /// In en, this message translates to:
+  /// **'University'**
+  String get university;
+
+  /// No description provided for @confirmLogout.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Logout'**
+  String get confirmLogout;
+
+  /// No description provided for @confirmLogoutText.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to log out?'**
+  String get confirmLogoutText;
+
+  /// No description provided for @logOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Log out'**
+  String get logOut;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

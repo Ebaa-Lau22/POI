@@ -26,6 +26,11 @@ import 'package:poi/features/debate_setup/domain/usecases/add_motion_usecase.dar
 import 'package:poi/features/debate_setup/domain/usecases/get_all_motions_usecase.dart';
 import 'package:poi/features/debate_setup/domain/usecases/get_all_topics_usecase.dart';
 import 'package:poi/features/debate_setup/presentation/bloc/debate_setup_cubit.dart';
+import 'package:poi/features/profiles/data/datasources/profile_remote_data_source.dart';
+import 'package:poi/features/profiles/data/repositories/profile_repository_impl.dart';
+import 'package:poi/features/profiles/domain/repositories/profile_repository.dart';
+import 'package:poi/features/profiles/domain/usecases/get_profile_usecase.dart';
+import 'package:poi/features/profiles/presentation/bloc/profile_cubit.dart';
 import 'package:poi/permission_cubit.dart';
 import '../core/storage/preferences_database.dart';
 import '../core/network/network_info.dart';
@@ -70,6 +75,7 @@ Future<void> init() async {
       resetPasswordUseCase: sl(),
     ),
   );
+  sl.registerFactory(() => ProfileCubit(getProfileUseCase: sl()));
 
   //! Use Cases
   sl.registerLazySingleton(() => GetAllPostsUseCase(repository: sl()));
@@ -91,6 +97,8 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GetAllMotionsUsecase(debateRepo: sl()));
   sl.registerLazySingleton(() => GetAllTopicsUsecase(debateRepo: sl()));
   sl.registerLazySingleton(() => AddMotionUsecase(debateRepo: sl()));
+  //Profile
+  sl.registerLazySingleton(() => GetProfileUseCase(repository: sl()));
 
   //! Repositories
   sl.registerLazySingleton<PostsRepository>(
@@ -105,6 +113,9 @@ Future<void> init() async {
   sl.registerLazySingleton<DebateSetupRepository>(
     () => DebateSetupRepositoryImpl(networkInfo: sl(), remoteDatasource: sl()),
   ); //Setup
+  sl.registerLazySingleton<ProfileRepository>(
+    () => ProfileRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()),
+  );
 
   //! Data Sources
   sl.registerLazySingleton<PostRemoteDataSource>(
@@ -119,6 +130,9 @@ Future<void> init() async {
   sl.registerLazySingleton<DebateSetupRemoteDatasource>(
     () => DebateSetupRemoteDatasourceImpl(client: sl()),
   ); //Setup
+  sl.registerLazySingleton<ProfileRemoteDataSource>(
+    () => ProfileRemoteDataSourceImpl(client: sl()),
+  );
 
   //! Core
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));

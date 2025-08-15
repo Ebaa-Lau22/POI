@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:poi/features/Authentication/data/models/login_response_model.dart';
+
 import '../../domain/entities/auth.dart';
 
 abstract class AuthStates {}
@@ -8,8 +10,8 @@ class AuthInitialState extends AuthStates {}
 class AuthLoadingState extends AuthStates {}
 
 class AuthLoginSuccessState extends AuthStates {
-  final String successMessage;
-  AuthLoginSuccessState({required this.successMessage});
+  LoginResponseModel response;
+  AuthLoginSuccessState({required this.response});
 }
 
 class AuthLoginErrorState extends AuthStates {

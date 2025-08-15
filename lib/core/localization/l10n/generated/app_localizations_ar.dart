@@ -105,7 +105,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get enterCode => 'أدخل رمز التحقق';
 
   @override
-  String get enterCodeDescripe => 'يرجى إدخال رمز التحقق المكون من 6 أرقام الذي تم إرساله إلى بريدك الإلكتروني.';
+  String get enterCodeDescripe => 'يرجى إدخال رمز التحقق المكون من 8 أرقام الذي تم إرساله إلى بريدك الإلكتروني.';
 
   @override
   String get verificationCode => 'رمز التحقق';
@@ -138,7 +138,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get updatePassword => 'تحديث كلمة المرور';
 
   @override
-  String get serverFailureMessage => 'يرجى المحاولة مرة أخرى لاحقًا.';
+  String get serverFailureMessage => 'يرجى المحاولة لاحقاً مرة أخرى';
 
   @override
   String get emptyCacheFailureMessage => 'لا توجد بيانات.';
@@ -151,4 +151,49 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get incorrectDataFailureMessage => 'المعلومات المدخلة غير صحيحة. يرجى المحاولة مرة أخرى.';
+
+  @override
+  String get debates => 'المناظرات';
+
+  @override
+  String get upcoming => 'القادمة';
+
+  @override
+  String get confirmed => 'المثبتة';
+
+  @override
+  String get active => 'الفعالة';
+
+  @override
+  String get archived => 'المؤرشفة';
+
+  @override
+  String get userType => 'نوع المستخدم';
+
+  @override
+  String get mobileNumber => 'رقم الموبايل';
+
+  @override
+  String get governorate => 'المحافظة';
+
+  @override
+  String get birthDate => 'تاريخ الميلاد';
+
+  @override
+  String get educationDegree => 'الدرجة العلمية';
+
+  @override
+  String get faculty => 'الكلية';
+
+  @override
+  String get university => 'الجامعة';
+
+  @override
+  String get confirmLogout => 'تأكيد تسجيل الخروج';
+
+  @override
+  String get confirmLogoutText => 'هل أنت متأكد أنك تريد تسجيل الخروج؟';
+
+  @override
+  String get logOut => 'تسجيل الخروج';
 }

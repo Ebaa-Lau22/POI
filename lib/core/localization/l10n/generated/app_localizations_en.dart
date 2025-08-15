@@ -33,7 +33,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get password => 'Password';
 
   @override
-  String get passwordValidationMessage => 'Password must contain both letters and numbers and be at least 6 characters long';
+  String get passwordValidationMessage => 'Password must contain both letters and numbers and be at least 8 characters long';
 
   @override
   String get forgetPassword => 'Forget your password?';
@@ -151,4 +151,49 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get incorrectDataFailureMessage => 'The provided information is not correct. Please try again.';
+
+  @override
+  String get debates => 'Debates';
+
+  @override
+  String get upcoming => 'Upcoming';
+
+  @override
+  String get confirmed => 'Confirmed';
+
+  @override
+  String get active => 'Active';
+
+  @override
+  String get archived => 'Archived';
+
+  @override
+  String get userType => 'User Type';
+
+  @override
+  String get mobileNumber => 'Mobile Number';
+
+  @override
+  String get governorate => 'Governorate';
+
+  @override
+  String get birthDate => 'Birth Date';
+
+  @override
+  String get educationDegree => 'Education Degree';
+
+  @override
+  String get faculty => 'Faculty';
+
+  @override
+  String get university => 'University';
+
+  @override
+  String get confirmLogout => 'Confirm Logout';
+
+  @override
+  String get confirmLogoutText => 'Are you sure you want to log out?';
+
+  @override
+  String get logOut => 'Log out';
 }

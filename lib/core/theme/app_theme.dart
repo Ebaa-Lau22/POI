@@ -17,7 +17,7 @@ TextTheme get lightTextTheme => TextTheme(
   //textForgetPasswordTitle...textTitle
   displaySmall: TextStyle(
     fontSize: 20,
-    fontWeight: FontWeight.bold,
+
     color: AppColors.mainDark,
     fontFamily: "Sansation",
   ),

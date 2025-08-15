@@ -4,6 +4,7 @@ import 'package:poi/core/error/failures.dart';
 import 'package:poi/core/network/network_info.dart';
 import 'package:poi/features/Authentication/data/datasources/auth_remote_data_source.dart';
 import 'package:poi/features/Authentication/data/models/auth_model.dart';
+import 'package:poi/features/Authentication/data/models/login_response_model.dart';
 import 'package:poi/features/Authentication/domain/entities/auth.dart';
 import 'package:poi/features/Authentication/domain/repositories/auth_repository.dart';
 
@@ -17,14 +18,14 @@ class AuthRepositoryImpl implements AuthRepository {
   });
 
   @override
-  Future<Either<Failure, Unit>> login(LoginEntity loginEntity) async {
+  Future<Either<Failure, LoginResponseModel>> login(LoginEntity loginEntity) async {
     final LoginModel loginModel = LoginModel(
       email: loginEntity.email,
       password: loginEntity.password,
     );
-    return await _getMessage(() {
-      return remoteDataSource.login(loginModel);
-    });
+    return await _getMessage2(() {
+    return remoteDataSource.login(loginModel); // Future<LoginResponseModel>
+  });
   }
 
   @override
@@ -78,4 +79,23 @@ class AuthRepositoryImpl implements AuthRepository {
       return Left(OfflineFailure());
     }
   }
+Future<Either<Failure, T>> _getMessage2<T>(
+  Future<T> Function() action,
+) async {
+  if (await networkInfo.isConnected) {
+    try {
+      final result = await action();
+      return Right(result);
+    } on WrongDataException {
+      return Left(WrongDataFailure());
+    } on ServerException {
+      return Left(ServerFailure());
+    }catch (_) {
+      return Left(ServerFailure()); 
+    }
+  } else {
+    return Left(OfflineFailure());
+  }
+}
+
 }

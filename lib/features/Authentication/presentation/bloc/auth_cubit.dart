@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:poi/core/constants/constants.dart';
 import 'package:poi/core/error/failures.dart';
 import 'package:poi/core/function/error_message.dart';
+import 'package:poi/features/Authentication/data/models/login_response_model.dart';
 import 'package:poi/features/Authentication/domain/entities/auth.dart';
 import 'package:poi/features/Authentication/domain/usecases/login_usecase.dart';
 import 'package:poi/features/Authentication/domain/usecases/resetPassword_usecase.dart';
@@ -23,16 +24,16 @@ class AuthCubit extends Cubit<AuthStates> {
   final LoginUseCase loginUseCase;
   void login({required LoginEntity login_entity}) async {
     emit(AuthLoadingState());
-    final unitOrFailure = await loginUseCase(loginEntity: login_entity);
-    print(unitOrFailure);
-    emit(
-      _failureOrSuccessMessage(
-        unitOrFailure,
-        LOGIN_SUCCESS_MESSAGE,
-        (error) => AuthLoginErrorState(errorMessage: error),
-        (message) => AuthLoginSuccessState(successMessage: message),
-      ),
-    );
+    final login = await loginUseCase(loginEntity: login_entity);
+    print(login);
+emit(
+  _failureOrSuccessMessage2(
+    login,
+    LOGIN_SUCCESS_MESSAGE,
+    (error) => AuthLoginErrorState(errorMessage: error),
+    (message) => AuthLoginSuccessState(response: message),
+  ),
+);
   }
 
   final SendCodeUseCase sendCodeUseCase;
@@ -82,7 +83,17 @@ class AuthCubit extends Cubit<AuthStates> {
       ),
     );
   }
-
+AuthStates _failureOrSuccessMessage2<E>(
+  Either<Failure, E> either,
+  String successMessage,
+  AuthStates Function(String) onError,
+  AuthStates Function(E) onSuccess,
+) {
+  return either.fold(
+    (failure) => onError(mapFailureToMessage(failure)),
+    (data) => onSuccess(data),
+  );
+}
   AuthStates _failureOrSuccessMessage(
     Either<Failure, Unit> either,
     String message,

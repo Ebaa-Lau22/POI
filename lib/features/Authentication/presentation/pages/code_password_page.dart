@@ -17,7 +17,6 @@
 // class _CodePasswordPageState extends State<CodePasswordPage> {
 //   final _formKey = GlobalKey<FormState>();
 //   final _codeController = TextEditingController();
-//   //String? email = await PreferencesDatabase().getEncryptedValue<String>('USER_EMAIL');
 
 //   @override
 //   void dispose() {

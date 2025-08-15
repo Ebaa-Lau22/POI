@@ -6,23 +6,26 @@ import 'package:poi/core/constants/appLink.dart';
 import 'package:poi/core/error/exceptions.dart';
 import 'package:poi/core/storage/preferences_database.dart';
 import 'package:poi/features/Authentication/data/models/auth_model.dart';
+import 'package:poi/features/Authentication/data/models/login_response_model.dart';
 
 abstract class AuthRemoteDataSource {
-  Future<Unit> login(LoginModel loginModel);
+  Future<LoginResponseModel> login(LoginModel loginModel);
   Future<Unit> sendCode(SendCodeModel sendCodeModel);
   Future<Unit> verifyCode(VerifyCodeModel verifyCodeModel);
   Future<Unit> resetPassword(ResetPasswordModel resetPasswordModel);
 }
 
-String baseUrl = "http://192.168.1.33:8000/api";
+String baseUrl = "https://b490a975cc17.ngrok-free.app/api";
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   final http.Client client;
 
   AuthRemoteDataSourceImpl({required this.client});
 
+  LoginResponseModel? loginResponse;
+
   @override
-  Future<Unit> login(LoginModel loginModel) async {
+  Future<LoginResponseModel> login(LoginModel loginModel) async {
     final body = {"email": loginModel.email, "password": loginModel.password};
 
     final response = await client.post(
@@ -33,15 +36,9 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     print('Status Code: ${response.statusCode}');
     print('Body: ${response.body}');
     if (response.statusCode == 200) {
-      // final token = jsonDecode(response.body)['data']['token'];
-      // final guard = jsonDecode(response.body)['data']['guard'];
-
-      // print('Token: $token, Guard: $guard');
-
-      // final prefs = PreferencesDatabase();
-      // await prefs.setEncryptedValue("Token", token);
-      // await prefs.setEncryptedValue("Guard", guard);
-      return Future.value(unit);
+      final jsonData = jsonDecode(response.body);
+      final loginResponse = LoginResponseModel.fromJson(jsonData);
+      return loginResponse;
     } else if (response.statusCode == 401) {
       print("THROWING WrongDataException!");
       throw WrongDataException();

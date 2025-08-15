@@ -38,15 +38,15 @@ class PreferencesDatabase {
       },
     );
   }
+
   // set encoded dynamic value in the database
   Future<void> setValue(String key, dynamic value) async {
     final stringValue = json.encode(value);
     final db = await database;
-    await db.insert(
-      'preferences',
-      {'key': key, 'value': stringValue},
-      conflictAlgorithm: ConflictAlgorithm.replace,
-    );
+    await db.insert('preferences', {
+      'key': key,
+      'value': stringValue,
+    }, conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
   // get decoded dynamic value from the database
@@ -71,44 +71,41 @@ class PreferencesDatabase {
 
   Future<void> removeValue(String key) async {
     final db = await database;
-    await db.delete(
-      'preferences',
-      where: 'key = ?',
-      whereArgs: [key],
-    );
+    await db.delete('preferences', where: 'key = ?', whereArgs: [key]);
   }
 
   // Encrypted Storage
-  String _encrypt(String plainText) {
-    final key = encrypt.Key.fromUtf8(_secretKey);
-    final iv = encrypt.IV.fromLength(16);
-    final encrypter = encrypt.Encrypter(encrypt.AES(key));
-    return encrypter.encrypt(plainText, iv: iv).base64;
-  }
+ static final _fixedIV = encrypt.IV.fromUtf8('A1B2C3D4E5F6G7H8'); 
 
-  String _decrypt(String base64Text) {
-    final key = encrypt.Key.fromUtf8(_secretKey);
-    final iv = encrypt.IV.fromLength(16);
-    final encrypter = encrypt.Encrypter(encrypt.AES(key));
-    return encrypter.decrypt64(base64Text, iv: iv);
-  }
+String _encrypt(String plainText) {
+  final key = encrypt.Key.fromUtf8(_secretKey.substring(0, 32));
+  final encrypter = encrypt.Encrypter(encrypt.AES(key));
+  return encrypter.encrypt(plainText, iv: _fixedIV).base64;
+}
 
+String _decrypt(String base64Text) {
+  final key = encrypt.Key.fromUtf8(_secretKey.substring(0, 32));
+  final encrypter = encrypt.Encrypter(encrypt.AES(key));
+  return encrypter.decrypt64(base64Text, iv: _fixedIV);
+}
   Future<void> setEncryptedValue(String key, dynamic value) async {
     final encoded = json.encode(value);
     final encrypted = _encrypt(encoded);
     await setValue(key, encrypted);
   }
 
-  Future<T?> getEncryptedValue<T>(String key) async {
-    final encrypted = await getValue<String>(key);
-    if (encrypted == null) return null;
-    try {
-      final decrypted = _decrypt(encrypted);
-      return json.decode(decrypted) as T;
-    } catch (_) {
-      return null;
-    }
+Future<T?> getEncryptedValue<T>(String key) async {
+  final encrypted = await getValue<String>(key);
+  if (encrypted == null) return null;
+  try {
+    final decrypted = _decrypt(encrypted);
+    print('Decrypted $key => $decrypted'); 
+    return json.decode(decrypted) as T;
+  } catch (e) {
+    print('Error decoding value for $key: $e');
+    return null;
   }
+}
 
   // 4. Encrypted Token
   Future<void> setToken(String token) async {
@@ -143,6 +140,7 @@ class PreferencesDatabase {
     }
   }
 }
+
 Future<String> getDocumentsPath() async {
   if (kIsWeb) {
     // Simulate a logical path on Web

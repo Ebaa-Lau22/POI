@@ -18,6 +18,7 @@ import 'core/localization/l10n/generated/app_localizations.dart';
 import 'core/theme/app_theme.dart';
 import 'features/call/connection_cubit.dart';
 import 'features/posts/presentation/bloc/posts_cubit.dart';
+import 'features/profiles/presentation/bloc/profile_cubit.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {
@@ -81,6 +82,7 @@ class MyApp extends StatelessWidget {
             ),
             BlocProvider(create: (_) => di.sl<ConnectionCubit>()),
             BlocProvider(create: (_) => di.sl<AuthCubit>()),
+            BlocProvider(create: (_) => di.sl<ProfileCubit>()),
           ],
           child: BlocConsumer<AppCubit, AppStates>(
             listener: (context, state) {},
@@ -89,7 +91,7 @@ class MyApp extends StatelessWidget {
               return MaterialApp(
                 debugShowCheckedModeBanner: false,
                 theme: cubit.isLightTheme ? lightTheme : darkTheme,
-                title: 'Posts App',
+                title: 'POI App',
                 localizationsDelegates: const [
                   AppLocalizations.delegate,
                   GlobalMaterialLocalizations.delegate,
