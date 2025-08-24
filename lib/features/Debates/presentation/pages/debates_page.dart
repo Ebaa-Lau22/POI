@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:poi/core/app_cubit/app_cubit.dart';
 import 'package:poi/core/app_cubit/app_states.dart';
 import 'package:poi/core/theme/app_colors.dart';
+import 'package:poi/features/Debates/presentation/pages/announced_debates_page.dart';
 import 'package:sizer/sizer.dart';
 
 class DebatesPage extends StatelessWidget {
@@ -20,10 +21,7 @@ class DebatesPage extends StatelessWidget {
           length: tabs.length,
           child: Scaffold(
             appBar: AppBar(
-              title: Text(
-                'Debates',
-                style: TextStyle(fontSize: 18.sp), 
-              ),
+              title: Text('Debates', style: TextStyle(fontSize: 18.sp)),
               elevation: 0,
             ),
             body: Column(
@@ -32,22 +30,22 @@ class DebatesPage extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 3.w),
                   child: Container(
-                    height: 6.h, // responsive height
+                    height: 6.h,
                     decoration: BoxDecoration(
-                      color: AppColors.mainDark.withOpacity(0.1),
+                      color: color.secondary,
                       borderRadius: BorderRadius.circular(30),
                     ),
                     child: TabBar(
-                      labelColor: Colors.white,
+                      labelColor: color.secondary,
                       labelStyle: TextStyle(
                         fontSize: 11.sp,
                         fontWeight: FontWeight.w600,
                       ),
-                      unselectedLabelColor: AppColors.lightBlue,
+                      unselectedLabelColor: color.primary,
                       dividerHeight: 0,
                       indicatorSize: TabBarIndicatorSize.tab,
                       indicator: BoxDecoration(
-                        color: AppColors.lighterDarkColor.withOpacity(0.4),
+                        color: AppColors.darkBlue.withOpacity(0.9),
                         borderRadius: BorderRadius.circular(30),
                       ),
                       tabs: tabs.map((tab) => Tab(text: tab)).toList(),
@@ -58,7 +56,7 @@ class DebatesPage extends StatelessWidget {
                 Expanded(
                   child: TabBarView(
                     children: [
-                      UpcomingPage(),
+                      AnnouncedDebatesPage(),
                       ConfirmedPage(),
                       ActiveDebatesPage(),
                       PastDebatesPage(),
@@ -70,223 +68,6 @@ class DebatesPage extends StatelessWidget {
           ),
         );
       },
-    );
-  }
-}
-
-class UpcomingPage extends StatelessWidget {
-  final List<Map<String, String>> items = [
-    {
-      'image':
-          'https://static.vecteezy.com/system/resources/thumbnails/006/406/394/small/debate-line-icon-on-white-vector.jpg',
-      'date': 'July 1, 2025',
-    },
-    {
-      'image':
-          'https://static.vecteezy.com/system/resources/thumbnails/006/406/394/small/debate-line-icon-on-white-vector.jpg',
-      'date': 'July 5, 2025',
-    },
-    {
-      'image':
-          'https://static.vecteezy.com/system/resources/thumbnails/006/406/394/small/debate-line-icon-on-white-vector.jpg',
-      'date': 'July 8, 2025',
-    },
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: ListView.builder(
-        padding: const EdgeInsets.only(
-          right: 16,
-          left: 16,
-          top: 16,
-          bottom: 10,
-        ),
-        itemCount: items.length,
-        itemBuilder: (context, index) {
-          final item = items[index];
-
-          return Container(
-            height: 100,
-            margin: const EdgeInsets.only(bottom: 16),
-            padding: const EdgeInsets.only(
-              right: 10,
-              left: 10,
-              top: 5,
-              bottom: 5,
-            ),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.15),
-                  blurRadius: 16,
-                  spreadRadius: 1,
-                  offset: const Offset(0, 6),
-                ),
-              ],
-            ),
-            child: Row(
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(14),
-                  child: Image.network(
-                    item['image']!,
-                    width: 100,
-                    height: 100,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                const SizedBox(width: 5),
-                Expanded(
-                  child: Row(
-                    children: [
-                      const SizedBox(height: 10),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          const Icon(
-                            Icons.calendar_month,
-                            size: 18,
-                            color: Colors.grey,
-                          ),
-                          const SizedBox(width: 6),
-                          Text(
-                            item['date']!,
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w500,
-                              fontFamily: 'Ubuntu',
-                            ),
-                          ),
-                          const SizedBox(width: 30),
-
-                          Align(
-                            alignment: Alignment.center,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  colors: [
-                                    AppColors.darkBlue,
-                                    AppColors.darkRed,
-                                  ],
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                ),
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              child: Material(
-                                color: Colors.transparent,
-                                borderRadius: BorderRadius.circular(12),
-                                child: InkWell(
-                                  borderRadius: BorderRadius.circular(12),
-                                  onTap: () {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(content: Text('joined!')),
-                                    );
-                                  },
-                                  child: const Padding(
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: 40,
-                                      vertical: 10,
-                                    ),
-                                    child: Text(
-                                      'Join',
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w600,
-                                        fontFamily: 'Ubuntu',
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  //    Column(
-                  //     mainAxisAlignment: MainAxisAlignment.center,
-                  //     children: [
-                  //       const SizedBox(height: 10),
-                  //       Row(
-                  //         mainAxisAlignment: MainAxisAlignment.start,
-                  //         children: [
-                  //           const Icon(
-                  //             Icons.calendar_month,
-                  //             size: 18,
-                  //             color: Colors.grey,
-                  //           ),
-                  //           const SizedBox(width: 6),
-                  //           Text(
-                  //             item['date']!,
-                  //             style: TextStyle(
-                  //               fontSize: 16,
-                  //               color: Colors.black,
-                  //               fontWeight: FontWeight.w500,
-                  //               fontFamily: 'Ubuntu',
-                  //             ),
-                  //           ),
-
-                  //         ],
-                  //       ),
-
-                  //       const SizedBox(height: 10), // يدفع الزر إلى الأسفل
-
-                  //       Align(
-                  //         alignment: Alignment.center,
-                  //         child: Container(
-                  //           decoration: BoxDecoration(
-                  //             gradient: LinearGradient(
-                  //               colors: [AppColors.secondary, AppColors.primary],
-                  //               begin: Alignment.topLeft,
-                  //               end: Alignment.bottomRight,
-                  //             ),
-                  //             borderRadius: BorderRadius.circular(12),
-                  //           ),
-                  //           child: Material(
-                  //             color: Colors.transparent,
-                  //             borderRadius: BorderRadius.circular(12),
-                  //             child: InkWell(
-                  //               borderRadius: BorderRadius.circular(12),
-                  //               onTap: () {
-                  //                 ScaffoldMessenger.of(context).showSnackBar(
-                  //                   SnackBar(content: Text('joined!')),
-                  //                 );
-                  //               },
-                  //               child: const Padding(
-                  //                 padding: EdgeInsets.symmetric(
-                  //                   horizontal: 100,
-                  //                   vertical: 12,
-                  //                 ),
-                  //                 child: Text(
-                  //                   'Join',
-                  //                   style: TextStyle(
-                  //                     fontSize: 14,
-                  //                     color: Colors.white,
-                  //                     fontWeight: FontWeight.w600,
-                  //                     fontFamily: 'Ubuntu',
-                  //                   ),
-                  //                 ),
-                  //               ),
-                  //             ),
-                  //           ),
-                  //         ),
-                  //       ),
-                  //     ],
-                  //   ),
-                ),
-              ],
-            ),
-          );
-        },
-      ),
     );
   }
 }
@@ -558,7 +339,7 @@ class ActiveDebatesPage extends StatelessWidget {
                             }),
                           ),
                         ),
-                        const SizedBox(height: 10), 
+                        const SizedBox(height: 10),
 
                         Align(
                           // alignment: Alignment.center,

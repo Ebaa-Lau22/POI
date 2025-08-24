@@ -259,6 +259,7 @@ import 'package:poi/core/theme/app_colors.dart';
 import 'package:poi/features/Authentication/domain/entities/auth.dart';
 import 'package:poi/features/Authentication/presentation/bloc/auth_cubit.dart';
 import 'package:poi/features/Authentication/presentation/bloc/auth_states.dart';
+import 'package:poi/features/Debates/presentation/pages/debates_page.dart';
 import 'package:poi/features/call/call_screen.dart';
 import 'package:poi/features/profiles/profile_page.dart';
 import 'package:sizer/sizer.dart';
@@ -420,7 +421,7 @@ class _LoginPageState extends State<LoginPage> {
 
                           print("Token: $savedToken , guard: $savedGuard");
 
-                          navigateAndFinish(context, ProfilePage());
+                          navigateAndFinish(context, DebatesPage());
                         }
                         if (state is AuthLoginErrorState) {
                           ScaffoldMessenger.of(context).showSnackBar(

@@ -1,5 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:poi/core/app_entities/profile_entity.dart';
 import 'package:poi/core/app_models/profile_model.dart';
 
 abstract class ProfileStates {}

@@ -4,7 +4,6 @@ import 'package:intl/intl.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:poi/core/app_cubit/app_cubit.dart';
 import 'package:poi/core/app_cubit/app_states.dart';
-import 'package:poi/core/components/details_Dialog.dart';
 import 'package:poi/core/components/navigators.dart';
 import 'package:poi/core/localization/l10n/context_localiztion.dart';
 import 'package:poi/core/theme/app_colors.dart';

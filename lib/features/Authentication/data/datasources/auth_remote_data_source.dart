@@ -15,7 +15,7 @@ abstract class AuthRemoteDataSource {
   Future<Unit> resetPassword(ResetPasswordModel resetPasswordModel);
 }
 
-String baseUrl = "https://b490a975cc17.ngrok-free.app/api";
+String baseUrl = "http://31.97.46.191/api";
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   final http.Client client;

@@ -10,6 +10,11 @@ import 'package:poi/features/Authentication/domain/usecases/resetPassword_usecas
 import 'package:poi/features/Authentication/domain/usecases/sendCode_usecase.dart';
 import 'package:poi/features/Authentication/domain/usecases/verifyCode_usecase.dart';
 import 'package:poi/features/Authentication/presentation/bloc/auth_cubit.dart';
+import 'package:poi/features/Debates/data/datasources/debates_remote_data_source.dart';
+import 'package:poi/features/Debates/data/repositories/debates_repository_impl.dart';
+import 'package:poi/features/Debates/domain/repositories/debates_repository.dart';
+import 'package:poi/features/Debates/domain/usecases/get_debates_usecase.dart';
+import 'package:poi/features/Debates/presentation/bloc/debates_cubit.dart';
 import 'package:poi/features/cached_data/data/datasources/cache_local_data_source.dart';
 import 'package:poi/features/cached_data/data/repositories/cache_repository_impl.dart';
 import 'package:poi/features/cached_data/domain/repositories/cache_repository.dart';
@@ -76,6 +81,7 @@ Future<void> init() async {
     ),
   );
   sl.registerFactory(() => ProfileCubit(getProfileUseCase: sl()));
+  sl.registerFactory(() => DebatesCubit(getDebatesUseCase: sl()));
 
   //! Use Cases
   sl.registerLazySingleton(() => GetAllPostsUseCase(repository: sl()));
@@ -99,6 +105,8 @@ Future<void> init() async {
   sl.registerLazySingleton(() => AddMotionUsecase(debateRepo: sl()));
   //Profile
   sl.registerLazySingleton(() => GetProfileUseCase(repository: sl()));
+  //Debates
+  sl.registerLazySingleton(() => GetDebatesUseCase(repository: sl()));
 
   //! Repositories
   sl.registerLazySingleton<PostsRepository>(
@@ -116,6 +124,9 @@ Future<void> init() async {
   sl.registerLazySingleton<ProfileRepository>(
     () => ProfileRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()),
   );
+  sl.registerLazySingleton<DebatesRepository>(
+    () => DebatesRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()),
+  );
 
   //! Data Sources
   sl.registerLazySingleton<PostRemoteDataSource>(
@@ -132,6 +143,9 @@ Future<void> init() async {
   ); //Setup
   sl.registerLazySingleton<ProfileRemoteDataSource>(
     () => ProfileRemoteDataSourceImpl(client: sl()),
+  );
+  sl.registerLazySingleton<DebatesRemoteDataSource>(
+    () => DebatesRemoteDataSourceImpl(client: sl()),
   );
 
   //! Core

@@ -4,6 +4,7 @@ import 'package:poi/core/app_cubit/app_states.dart';
 import 'package:poi/di/injection_container.dart' as di;
 import 'package:poi/features/Authentication/presentation/bloc/auth_cubit.dart';
 import 'package:poi/features/Authentication/presentation/pages/Login_page.dart';
+import 'package:poi/features/Debates/presentation/bloc/debates_cubit.dart';
 import 'package:poi/features/cached_data/domain/usecases/get_cached_locale_usecase.dart';
 import 'package:poi/features/cached_data/domain/usecases/get_cached_theme_usecase.dart';
 import 'package:poi/features/call/call_cubit.dart';
@@ -83,6 +84,7 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (_) => di.sl<ConnectionCubit>()),
             BlocProvider(create: (_) => di.sl<AuthCubit>()),
             BlocProvider(create: (_) => di.sl<ProfileCubit>()),
+            BlocProvider(create: (_) => di.sl<DebatesCubit>()),
           ],
           child: BlocConsumer<AppCubit, AppStates>(
             listener: (context, state) {},
