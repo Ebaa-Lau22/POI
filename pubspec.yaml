@@ -1,7 +1,7 @@
 name: poi
 description: "A Debate Application."
 
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1
 
@@ -43,7 +43,6 @@ dependencies:
   number_pagination: ^1.1.6
   persistent_bottom_nav_bar: ^6.2.1
 
-
   flutter_localizations:
     sdk: flutter
   intl: any
@@ -53,6 +52,9 @@ dependencies:
   firebase_core: ^4.0.0
   firebase_messaging: ^16.0.0
   flutter_local_notifications: ^19.4.1
+  dio: ^5.9.0
+  talker_flutter: ^4.9.1
+  talker_dio_logger: ^4.9.1
 
 dev_dependencies:
   flutter_test:
@@ -97,4 +99,4 @@ flutter:
     - family: Lato
       fonts:
         - asset: assets/fonts/lato.regular.ttf
-        - asset: assets/fonts/lato.light.ttf        
+        - asset: assets/fonts/lato.light.ttf

@@ -2,6 +2,11 @@ import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:poi/core/app_cubit/app_cubit.dart';
+import 'package:poi/core/constants/constants.dart';
+import 'package:poi/core/dio/api_service.dart';
+import 'package:poi/core/dio/api_service_impl.dart';
+import 'package:poi/core/dio/core_token_interceptor.dart';
+import 'package:poi/core/dio/dio_provider.dart';
 import 'package:poi/features/Authentication/data/datasources/auth_remote_data_source.dart';
 import 'package:poi/features/Authentication/data/repositories/auth_repository_imp.dart';
 import 'package:poi/features/Authentication/domain/repositories/auth_repository.dart';
@@ -15,6 +20,7 @@ import 'package:poi/features/Debates/data/repositories/debates_repository_impl.d
 import 'package:poi/features/Debates/domain/repositories/debates_repository.dart';
 import 'package:poi/features/Debates/domain/usecases/get_debates_usecase.dart';
 import 'package:poi/features/Debates/presentation/bloc/debates_cubit.dart';
+import 'package:poi/features/Search/di/search_injection_container.dart';
 import 'package:poi/features/cached_data/data/datasources/cache_local_data_source.dart';
 import 'package:poi/features/cached_data/data/repositories/cache_repository_impl.dart';
 import 'package:poi/features/cached_data/domain/repositories/cache_repository.dart';
@@ -143,19 +149,28 @@ Future<void> init() async {
     () => DebateSetupRemoteDatasourceImpl(client: sl()),
   ); //Setup
   sl.registerLazySingleton<ProfileRemoteDataSource>(
-    () => ProfileRemoteDataSourceImpl(client: sl()),
+    () => ProfileRemoteDataSourceImpl(apiServices: sl()),
   );
   sl.registerLazySingleton<DebatesRemoteDataSource>(
-    () => DebatesRemoteDataSourceImpl(client: sl()),
+    () => DebatesRemoteDataSourceImpl(apiServices: sl()),
   );
 
   //! Core
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
   sl.registerLazySingleton(() => PreferencesDatabase());
+  sl.registerSingleton<ApiServices>(
+    ApiServicesImp(
+      DioProvider.provide(
+        baseUrl: poiBaseUrl,
+        interceptors: [CoreTokenInterceptor()],
+      ),
+    ),
+  );
 
   //! External
   sl.registerFactory(() => http.Client());
   sl.registerFactory(() => InternetConnectionChecker());
 
   initNotificationsInjectionContainer();
+  initSearchInjectionContainer();
 }

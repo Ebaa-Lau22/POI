@@ -105,7 +105,6 @@ class Screen3 extends StatelessWidget {
   }
 }
 
-
 // import 'package:flutter/material.dart';
 // import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:poi/core/app_cubit/app_cubit.dart';

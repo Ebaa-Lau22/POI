@@ -230,30 +230,30 @@ class _AnnouncedDebatesPageState extends State<AnnouncedDebatesPage> {
                       ),
                     ),
                     // Pagination
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: NumberPagination(
-                        selectedButtonColor: AppColors.lightBlue,
-                        unSelectedButtonColor: color.secondary,
-                        betweenNumberButtonSpacing: 5,
-                        fontFamily: 'Lato',
-                        selectedNumberFontWeight: FontWeight.w800,
-                        selectedNumberColor: AppColors.white,
-                        unSelectedNumberColor: color.primary,
-                        buttonRadius: 5,
-                        numberButtonSize: Size(40, 40),
-                        controlButtonSize: Size(35, 35),
-                        onPageChanged: (int pageNumber) {
-                          setState(() {
-                            selectedPageNumber = pageNumber;
-                          });
-                          DebatesCubit.get(context).changePage(pageNumber);
-                        },
-                        visiblePagesCount: 3,
-                        totalPages: 10,
-                        currentPage: selectedPageNumber,
-                      ),
-                    ),
+                    // Padding(
+                    //   padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    //   child: NumberPagination(
+                    //     selectedButtonColor: AppColors.lightBlue,
+                    //     unSelectedButtonColor: color.secondary,
+                    //     betweenNumberButtonSpacing: 5,
+                    //     fontFamily: 'Lato',
+                    //     selectedNumberFontWeight: FontWeight.w800,
+                    //     selectedNumberColor: AppColors.white,
+                    //     unSelectedNumberColor: color.primary,
+                    //     buttonRadius: 5,
+                    //     numberButtonSize: Size(40, 40),
+                    //     controlButtonSize: Size(35, 35),
+                    //     onPageChanged: (int pageNumber) {
+                    //       setState(() {
+                    //         selectedPageNumber = pageNumber;
+                    //       });
+                    //       DebatesCubit.get(context).changePage(pageNumber);
+                    //     },
+                    //     visiblePagesCount: 3,
+                    //     totalPages: 10,
+                    //     currentPage: selectedPageNumber,
+                    //   ),
+                    // ),
                   ],
                 );
               }

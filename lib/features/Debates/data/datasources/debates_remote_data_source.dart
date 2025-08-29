@@ -1,49 +1,27 @@
 import 'dart:async';
-import 'dart:convert';
 
-import 'package:http/http.dart' as http;
-import 'package:poi/core/storage/preferences_database.dart';
+import 'package:poi/core/dio/api_service.dart';
+import 'package:poi/features/Debates/data/datasources/debates_end_points.dart';
+import 'package:poi/features/Debates/data/enums/debates_status.dart';
 import 'package:poi/features/Debates/data/models/debates_model.dart';
 
 abstract class DebatesRemoteDataSource {
-  Future<DebatesModel> getAnnouncedDebates({required int currentPage});
+  Future<DebatesModel> getAnnouncedDebates({required DebatesStatus status});
 }
 
 class DebatesRemoteDataSourceImpl implements DebatesRemoteDataSource {
-  final http.Client client;
+  final ApiServices apiServices;
 
-  DebatesRemoteDataSourceImpl({required this.client});
-    int currentPage = 1;
-  bool hasMore = true;
-  bool isLoading = false;
-  List<Datum> debatesList = [];
-
-  String baseUrl = "http://31.97.46.191/api";
-  final prefs = PreferencesDatabase();
+  DebatesRemoteDataSourceImpl({required this.apiServices});
 
   @override
-  Future<DebatesModel> getAnnouncedDebates({required int currentPage}) async {
-    final savedToken = await prefs.getToken();
-    if (savedToken == null) {
-      throw Exception("No token found in secure storage.");
-    }
-    final response = await client.get(
-      Uri.parse("${baseUrl}/debates?page=${currentPage}&status[]=announced"),
-      
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer $savedToken",
-      },
-
+  Future<DebatesModel> getAnnouncedDebates({
+    required DebatesStatus status,
+  }) async {
+    final response = await apiServices.get(
+      DebatesEndPoints.getDebates,
+      queryParams: {'status[]': status.serverName},
     );
-    if (response.statusCode == 200) {
-      final jsonData = jsonDecode(response.body);
-      final debatesResponse = DebatesModel.fromJson(jsonData);
-      print(debatesResponse);
-      return debatesResponse;
-    } else {
-      throw Exception("Failed to load Debates: ${response.statusCode}");
-    }
+    return DebatesModel.fromJson(response);
   }
-
 }

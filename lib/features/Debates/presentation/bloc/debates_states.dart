@@ -8,9 +8,7 @@ class DebatesLoadingState extends DebatesStates {}
 
 class DebatesGetDebatesSuccessState extends DebatesStates {
   DebatesModel debatesData;
-  DebatesGetDebatesSuccessState({
-    required this.debatesData,
-  });
+  DebatesGetDebatesSuccessState({required this.debatesData});
 }
 
 class DebatesGetDebatesErrorState extends DebatesStates {

@@ -21,80 +21,69 @@ class LiveKitTheme {
   final accentColor = LKColors.lkBlue;
 
   ThemeData buildThemeData(BuildContext ctx) => ThemeData(
-        appBarTheme: AppBarTheme(
-          backgroundColor: cardColor,
+    appBarTheme: AppBarTheme(backgroundColor: cardColor),
+    cardColor: cardColor,
+    scaffoldBackgroundColor: bgColor,
+    canvasColor: bgColor,
+    iconTheme: IconThemeData(color: textColor),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ButtonStyle(
+        textStyle: WidgetStateProperty.all<TextStyle>(
+          GoogleFonts.montserrat(fontSize: 15),
         ),
-        cardColor: cardColor,
-        scaffoldBackgroundColor: bgColor,
-        canvasColor: bgColor,
-        iconTheme: IconThemeData(
-          color: textColor,
+        padding: WidgetStateProperty.all<EdgeInsets>(
+          const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
         ),
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ButtonStyle(
-            textStyle:
-                WidgetStateProperty.all<TextStyle>(GoogleFonts.montserrat(
-              fontSize: 15,
-            )),
-            padding: WidgetStateProperty.all<EdgeInsets>(
-                const EdgeInsets.symmetric(vertical: 20, horizontal: 25)),
-            shape: WidgetStateProperty.all<OutlinedBorder>(
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
-            foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
-            // backgroundColor: WidgetStateProperty.all<Color>(accentColor),
-            backgroundColor: WidgetStateProperty.resolveWith((states) {
-              if (states.contains(WidgetState.disabled)) {
-                return accentColor.withValues(alpha: 0.5);
-              }
-              return accentColor;
-            }),
-          ),
+        shape: WidgetStateProperty.all<OutlinedBorder>(
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         ),
-        checkboxTheme: CheckboxThemeData(
-          checkColor: WidgetStateProperty.all(Colors.white),
-          fillColor: WidgetStateProperty.all(accentColor),
-        ),
-        switchTheme: SwitchThemeData(
-          trackColor: WidgetStateProperty.resolveWith((states) {
-            if (states.contains(WidgetState.selected)) {
-              return accentColor;
-            }
-            return accentColor.withValues(alpha: 0.3);
-          }),
-          thumbColor: WidgetStateProperty.resolveWith((states) {
-            if (states.contains(WidgetState.selected)) {
-              return Colors.white;
-            }
-            return Colors.white.withValues(alpha: 0.3);
-          }),
-        ),
-        dialogTheme: DialogTheme(
-          backgroundColor: cardColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
-        ),
-        textTheme: GoogleFonts.montserratTextTheme(
-          Theme.of(ctx).textTheme,
-        ).apply(
-          displayColor: textColor,
-          bodyColor: textColor,
-          decorationColor: textColor,
-        ),
-        hintColor: Colors.red,
-        inputDecorationTheme: InputDecorationTheme(
-          labelStyle: const TextStyle(
-            color: LKColors.lkBlue,
-          ),
-          hintStyle: TextStyle(
-            color: LKColors.lkBlue.withValues(alpha: 5),
-          ),
-          enabledBorder: InputBorder.none,
-          focusedBorder: InputBorder.none,
-        ),
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.white,
-          surface: bgColor,
-        ),
-      );
+        foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
+        // backgroundColor: WidgetStateProperty.all<Color>(accentColor),
+        backgroundColor: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.disabled)) {
+            return accentColor.withValues(alpha: 0.5);
+          }
+          return accentColor;
+        }),
+      ),
+    ),
+    checkboxTheme: CheckboxThemeData(
+      checkColor: WidgetStateProperty.all(Colors.white),
+      fillColor: WidgetStateProperty.all(accentColor),
+    ),
+    switchTheme: SwitchThemeData(
+      trackColor: WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.selected)) {
+          return accentColor;
+        }
+        return accentColor.withValues(alpha: 0.3);
+      }),
+      thumbColor: WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.selected)) {
+          return Colors.white;
+        }
+        return Colors.white.withValues(alpha: 0.3);
+      }),
+    ),
+    dialogTheme: DialogThemeData(
+      backgroundColor: cardColor,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+    ),
+    textTheme: GoogleFonts.montserratTextTheme(Theme.of(ctx).textTheme).apply(
+      displayColor: textColor,
+      bodyColor: textColor,
+      decorationColor: textColor,
+    ),
+    hintColor: Colors.red,
+    inputDecorationTheme: InputDecorationTheme(
+      labelStyle: const TextStyle(color: LKColors.lkBlue),
+      hintStyle: TextStyle(color: LKColors.lkBlue.withValues(alpha: 5)),
+      enabledBorder: InputBorder.none,
+      focusedBorder: InputBorder.none,
+    ),
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: Colors.white,
+      surface: bgColor,
+    ),
+  );
 }

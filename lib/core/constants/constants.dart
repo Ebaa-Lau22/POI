@@ -26,3 +26,5 @@ const double widgetBorderRadius = 20;
 Locale get englishLocale => const Locale('en');
 
 Locale get arabicLocale => const Locale('ar');
+
+const String poiBaseUrl = "http://31.97.46.191/api/";
