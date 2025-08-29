@@ -11,6 +11,7 @@ import 'package:poi/features/call/call_cubit.dart';
 import 'package:poi/features/call/call_screen.dart';
 import 'package:poi/features/debate_setup/presentation/bloc/debate_setup_cubit.dart';
 import 'package:poi/features/debate_setup/presentation/pages/team_assignment_screen.dart';
+import 'package:poi/home_page.dart';
 import 'package:poi/permission_cubit.dart';
 import 'package:poi/splash_screen.dart';
 import 'package:sizer/sizer.dart';
@@ -102,7 +103,7 @@ class MyApp extends StatelessWidget {
                 ],
                 supportedLocales: AppLocalizations.supportedLocales,
                 locale: Locale(cubit.locale),
-                home: LoginPage(),
+                home: HomePage(),
               );
             },
           ),

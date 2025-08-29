@@ -56,7 +56,7 @@ class _AnnouncedDebatesPageState extends State<AnnouncedDebatesPage> {
                 return Column(
                   children: [
                     SizedBox(
-                      height: 550,
+                      height: 500,
                       child: ListView.builder(
                         padding: const EdgeInsets.all(16),
                         itemCount: state.debatesData.data.length,
@@ -67,7 +67,7 @@ class _AnnouncedDebatesPageState extends State<AnnouncedDebatesPage> {
                             margin: const EdgeInsets.only(bottom: 16),
                             padding: const EdgeInsets.all(10),
                             decoration: BoxDecoration(
-                              color: color.secondary,
+                              color: AppColors.lighterColor,
                               borderRadius: BorderRadius.circular(20),
                               boxShadow: [
                                 BoxShadow(
@@ -230,29 +230,26 @@ class _AnnouncedDebatesPageState extends State<AnnouncedDebatesPage> {
                       ),
                     ),
                     // Pagination
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: NumberPagination(
-                        selectedButtonColor: AppColors.lightBlue,
-                        unSelectedButtonColor: color.secondary,
-                        betweenNumberButtonSpacing: 5,
-                        fontFamily: 'Lato',
-                        selectedNumberFontWeight: FontWeight.w800,
-                        selectedNumberColor: AppColors.white,
-                        unSelectedNumberColor: color.primary,
-                        buttonRadius: 5,
-                        numberButtonSize: Size(40, 40),
-                        controlButtonSize: Size(35, 35),
-                        onPageChanged: (int pageNumber) {
-                          setState(() {
-                            selectedPageNumber = pageNumber;
-                          });
-                          DebatesCubit.get(context).changePage(pageNumber);
-                        },
-                        visiblePagesCount: 3,
-                        totalPages: 10,
-                        currentPage: selectedPageNumber,
-                      ),
+                    NumberPagination(
+                      selectedButtonColor: AppColors.lightBlue,
+                      unSelectedButtonColor: AppColors.mainLight,
+                      betweenNumberButtonSpacing: 5,
+                      fontFamily: 'Lato',
+                      selectedNumberFontWeight: FontWeight.w800,
+                      selectedNumberColor: AppColors.white,
+                      unSelectedNumberColor: AppColors.lighterDarkColor,
+                      buttonRadius: 5,
+                      numberButtonSize: Size(40, 40),
+                      controlButtonSize: Size(35, 35),
+                      onPageChanged: (int pageNumber) {
+                        setState(() {
+                          selectedPageNumber = pageNumber;
+                        });
+                        DebatesCubit.get(context).changePage(pageNumber);
+                      },
+                      visiblePagesCount: 3,
+                      totalPages: 10,
+                      currentPage: selectedPageNumber,
                     ),
                   ],
                 );

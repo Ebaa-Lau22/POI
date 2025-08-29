@@ -32,16 +32,16 @@ class DebatesPage extends StatelessWidget {
                   child: Container(
                     height: 6.h,
                     decoration: BoxDecoration(
-                      color: color.secondary,
+                      color: AppColors.lighterColor,
                       borderRadius: BorderRadius.circular(30),
                     ),
                     child: TabBar(
-                      labelColor: color.secondary,
+                      labelColor: AppColors.mainLight,
                       labelStyle: TextStyle(
                         fontSize: 11.sp,
                         fontWeight: FontWeight.w600,
                       ),
-                      unselectedLabelColor: color.primary,
+                      unselectedLabelColor: AppColors.lighterDarkColor,
                       dividerHeight: 0,
                       indicatorSize: TabBarIndicatorSize.tab,
                       indicator: BoxDecoration(

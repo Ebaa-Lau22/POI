@@ -262,6 +262,7 @@ import 'package:poi/features/Authentication/presentation/bloc/auth_states.dart';
 import 'package:poi/features/Debates/presentation/pages/debates_page.dart';
 import 'package:poi/features/call/call_screen.dart';
 import 'package:poi/features/profiles/profile_page.dart';
+import 'package:poi/home_page.dart';
 import 'package:sizer/sizer.dart';
 
 class LoginPage extends StatefulWidget {
@@ -298,7 +299,7 @@ class _LoginPageState extends State<LoginPage> {
               padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 5.h),
               child: Form(
                 key: _formKey,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
+                autovalidateMode: AutovalidateMode.disabled,
                 child: Column(
                   children: [
                     SizedBox(height: 12.h),
@@ -311,7 +312,9 @@ class _LoginPageState extends State<LoginPage> {
                     Text(
                       context.loc.welcome,
                       textAlign: TextAlign.center,
-                      style: textStyle.displayMedium?.copyWith(color: color.secondary),
+                      style: textStyle.displayMedium?.copyWith(
+                        color: color.secondary,
+                      ),
                     ),
                     SizedBox(height: 5.h),
 
@@ -421,7 +424,7 @@ class _LoginPageState extends State<LoginPage> {
 
                           print("Token: $savedToken , guard: $savedGuard");
 
-                          navigateAndFinish(context, DebatesPage());
+                          navigateAndFinish(context, HomePage());
                         }
                         if (state is AuthLoginErrorState) {
                           ScaffoldMessenger.of(context).showSnackBar(
