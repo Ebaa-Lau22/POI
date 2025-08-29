@@ -31,6 +31,7 @@ import 'package:poi/features/debate_setup/domain/usecases/add_motion_usecase.dar
 import 'package:poi/features/debate_setup/domain/usecases/get_all_motions_usecase.dart';
 import 'package:poi/features/debate_setup/domain/usecases/get_all_topics_usecase.dart';
 import 'package:poi/features/debate_setup/presentation/bloc/debate_setup_cubit.dart';
+import 'package:poi/features/notifications/di/notifications_injection_container.dart';
 import 'package:poi/features/profiles/data/datasources/profile_remote_data_source.dart';
 import 'package:poi/features/profiles/data/repositories/profile_repository_impl.dart';
 import 'package:poi/features/profiles/domain/repositories/profile_repository.dart';
@@ -155,4 +156,6 @@ Future<void> init() async {
   //! External
   sl.registerFactory(() => http.Client());
   sl.registerFactory(() => InternetConnectionChecker());
+
+  initNotificationsInjectionContainer();
 }

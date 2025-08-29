@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "592638310141",
+    "project_id": "poi-project-bf260",
+    "storage_bucket": "poi-project-bf260.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:592638310141:android:3cbe60c2e7a48987127094",
+        "android_client_info": {
+          "package_name": "com.debate.poi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDL4by0kQ3nL74W0e0xPyo09xhAURSLiDc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

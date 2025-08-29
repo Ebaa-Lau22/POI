@@ -1,19 +1,18 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:poi/core/app_cubit/app_states.dart';
 import 'package:poi/di/injection_container.dart' as di;
 import 'package:poi/features/Authentication/presentation/bloc/auth_cubit.dart';
-import 'package:poi/features/Authentication/presentation/pages/Login_page.dart';
 import 'package:poi/features/Debates/presentation/bloc/debates_cubit.dart';
 import 'package:poi/features/cached_data/domain/usecases/get_cached_locale_usecase.dart';
 import 'package:poi/features/cached_data/domain/usecases/get_cached_theme_usecase.dart';
 import 'package:poi/features/call/call_cubit.dart';
-import 'package:poi/features/call/call_screen.dart';
 import 'package:poi/features/debate_setup/presentation/bloc/debate_setup_cubit.dart';
-import 'package:poi/features/debate_setup/presentation/pages/team_assignment_screen.dart';
+import 'package:poi/features/notifications/core/push_notification_controller.dart';
+import 'package:poi/firebase_options.dart';
 import 'package:poi/home_page.dart';
 import 'package:poi/permission_cubit.dart';
-import 'package:poi/splash_screen.dart';
 import 'package:sizer/sizer.dart';
 import 'core/app_cubit/app_cubit.dart';
 import 'core/localization/l10n/generated/app_localizations.dart';
@@ -25,7 +24,10 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await di.init();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  PushNotificationController().init();
   bool isLightTheme = true;
   String locale = "en";
   GetCachedThemeUseCase getCachedThemeUseCase = di.sl();
