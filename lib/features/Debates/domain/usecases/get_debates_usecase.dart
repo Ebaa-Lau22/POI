@@ -9,7 +9,7 @@ class GetDebatesUseCase {
 
   GetDebatesUseCase({required this.repository});
 
-  Future<Either<Failure, DebatesModel>> call({
+  Future<Either<Failure, DebateModel>> call({
     required DebatesStatus status,
   }) async {
     return await repository.getAnnouncedDebates(status: status);

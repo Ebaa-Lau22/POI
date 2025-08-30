@@ -11,7 +11,9 @@ String mapFailureToMessage(Failure failure) {
     return SERVER_FAILURE_MESSAGE;
   } else if (failure is OfflineFailure) {
     return OFFLINE_FAILURE_MESSAGE;
-  } else {
+  }  else if (failure is BannedFailure) {
+    return BANNED_FAILURE_MESSAGE;
+  }else {
     return UNEXPECTED_FAILURE_MESSAGE;
   }
 }

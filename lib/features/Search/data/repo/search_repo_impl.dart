@@ -11,7 +11,7 @@ class SearchRepoImpl implements SearchRepo {
   SearchRepoImpl({required this.searchRemoteDataSource});
 
   @override
-  Future<Either<Failure, DebatesModel>> getFinishedDebates() async {
+  Future<Either<Failure, DebateModel>> getFinishedDebates() async {
     try {
       final result = await searchRemoteDataSource.getFinishedDebates();
       return Right(result);

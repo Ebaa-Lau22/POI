@@ -1,17 +1,24 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loader_overlay/loader_overlay.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:poi/core/app_cubit/app_states.dart';
+import 'package:poi/core/theme/app_colors.dart';
 import 'package:poi/di/injection_container.dart' as di;
 import 'package:poi/features/Authentication/presentation/bloc/auth_cubit.dart';
 import 'package:poi/features/Authentication/presentation/bloc/logout_cubit.dart';
 import 'package:poi/features/Authentication/presentation/pages/Login_page.dart';
 import 'package:poi/features/Debates/presentation/bloc/debates_cubit.dart';
+import 'package:poi/features/Debates/presentation/pages/feedback_page.dart';
+import 'package:poi/features/Debates/presentation/pages/rating_page.dart';
 import 'package:poi/features/Search/presentation/bloc/search_cubit.dart';
 import 'package:poi/features/cached_data/domain/usecases/get_cached_locale_usecase.dart';
 import 'package:poi/features/cached_data/domain/usecases/get_cached_theme_usecase.dart';
 import 'package:poi/features/call/call_cubit.dart';
 import 'package:poi/features/debate_setup/presentation/bloc/debate_setup_cubit.dart';
+import 'package:poi/features/debate_setup/presentation/pages/motion_screen.dart';
+import 'package:poi/features/debate_setup/presentation/pages/team_assignment_screen.dart';
 import 'package:poi/features/notifications/core/push_notification_controller.dart';
 import 'package:poi/firebase_options.dart';
 import 'package:poi/home_page.dart';
@@ -110,7 +117,19 @@ class MyApp extends StatelessWidget {
                 ],
                 supportedLocales: AppLocalizations.supportedLocales,
                 locale: Locale(cubit.locale),
-                home: LoginPage(),
+                home: GlobalLoaderOverlay(
+                  useDefaultLoading: false,
+                  overlayWidgetBuilder:
+                      (context) => Center(
+                        child: LoadingAnimationWidget.discreteCircle(
+                          color: AppColors.darkBlue,
+                          secondRingColor: AppColors.darkRed,
+                          thirdRingColor: AppColors.mainLight,
+                          size: 35,
+                        ),
+                      ),
+                  child: JudgeRatingPage(),
+                ),
               );
             },
           ),

@@ -153,6 +153,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get unexpectedFailureMessage => 'حدث خطأ غير متوقع.';
 
   @override
+  String get bannedFailureMessage => 'أنت محظور من التطبيق';
+
+  @override
   String get incorrectDataFailureMessage =>
       'المعلومات المدخلة غير صحيحة. يرجى المحاولة مرة أخرى.';
 

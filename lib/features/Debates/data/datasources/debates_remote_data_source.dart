@@ -15,7 +15,7 @@ import 'package:poi/features/Debates/data/models/get_feedback_for_debater_respon
 import 'package:poi/features/Debates/data/models/new_motion_model.dart';
 
 abstract class DebatesRemoteDataSource {
-  Future<DebatesModel> getAnnouncedDebates({required DebatesStatus status});
+  Future<DebateModel> getAnnouncedDebates({required DebatesStatus status});
   Future<BaseResponse<List<NewMotionModel>>> getMotions();
   Future<FeedbackModel> getFeedback(int debateId);
   Future<AddFeedbackResponseModel> addFeedback(AddFeedbackDto feedback);
@@ -37,14 +37,14 @@ class DebatesRemoteDataSourceImpl implements DebatesRemoteDataSource {
   DebatesRemoteDataSourceImpl({required this.apiServices});
 
   @override
-  Future<DebatesModel> getAnnouncedDebates({
+  Future<DebateModel> getAnnouncedDebates({
     required DebatesStatus status,
   }) async {
     final response = await apiServices.get(
       DebatesEndPoints.getDebates,
       queryParams: {'status[]': status.serverName},
     );
-    return DebatesModel.fromJson(response);
+    return DebateModel.fromJson(response);
   }
 
   @override

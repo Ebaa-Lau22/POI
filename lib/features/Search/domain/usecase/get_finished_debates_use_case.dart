@@ -8,7 +8,7 @@ class GetFinishedDebatesUseCase {
 
   GetFinishedDebatesUseCase({required this.searchRepo});
 
-  Future<Either<Failure, DebatesModel>> call() async {
+  Future<Either<Failure, DebateModel>> call() async {
     return searchRepo.getFinishedDebates();
   }
 }

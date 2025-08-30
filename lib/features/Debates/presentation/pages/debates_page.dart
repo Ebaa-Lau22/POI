@@ -1,20 +1,20 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:poi/core/app_cubit/app_cubit.dart';
 import 'package:poi/core/app_cubit/app_states.dart';
 import 'package:poi/core/app_cubit/state_builder.dart';
 import 'package:poi/core/theme/app_colors.dart';
-import 'package:poi/di/injection_container.dart';
-import 'package:poi/features/Authentication/presentation/bloc/logout_cubit.dart';
 import 'package:poi/features/Debates/data/enums/debates_status.dart';
 import 'package:poi/features/Debates/data/models/debates_model.dart';
 import 'package:poi/features/Debates/presentation/bloc/debates_cubit.dart';
 import 'package:poi/features/Debates/presentation/bloc/debates_states.dart';
-import 'package:poi/features/Debates/presentation/pages/announced_debates_page.dart';
+import 'package:poi/features/Debates/presentation/pages/players_confirm_debates_page.dart';
+import 'package:poi/features/Debates/presentation/pages/teams_confirm_debates_page.dart';
 import 'package:poi/features/Debates/presentation/widgets/active_debate_widget.dart';
-import 'package:poi/features/Debates/presentation/widgets/confirmed_debate_widget.dart';
+import 'package:poi/features/Debates/presentation/widgets/announced_debate_widget.dart';
 import 'package:poi/features/Debates/presentation/widgets/past_debate_widget.dart';
 import 'package:sizer/sizer.dart';
 
@@ -56,120 +56,119 @@ class _DebatesPageState extends State<DebatesPage>
 
         return DefaultTabController(
           length: DebatesStatus.values.length,
-          child: Scaffold(
-            appBar: AppBar(
-              title: Text('Debates', style: TextStyle(fontSize: 18.sp)),
-              elevation: 0,
-            ),
-            body: Column(
-              children: [
-                TextButton(
-                  onPressed: () async {
-                    sl<LogoutCubit>().logout(context);
-                  },
-                  child: Text("Press me"),
-                ),
-                SizedBox(height: 1.5.h),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 3.w),
-                  child: Container(
-                    height: 6.h,
-                    decoration: BoxDecoration(
-                      color: AppColors.lighterColor,
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    child: TabBar(
-                      labelColor: AppColors.mainLight,
-                      controller: tabController,
-                      isScrollable: true,
-                      labelStyle: TextStyle(
-                        fontSize: 11.sp,
-                        fontWeight: FontWeight.w600,
-                      ),
-                      unselectedLabelColor: AppColors.lighterDarkColor,
-                      dividerHeight: 0,
-                      padding: EdgeInsets.symmetric(horizontal: 1.w),
-                      tabAlignment: TabAlignment.center,
-                      dragStartBehavior: DragStartBehavior.down,
-                      indicatorSize: TabBarIndicatorSize.tab,
-                      indicator: BoxDecoration(
-                        color: AppColors.darkBlue.withOpacity(0.9),
+          child: RefreshIndicator(
+            onRefresh: () async {
+              context.read<DebatesCubit>().getAnnouncedDebates();
+            },
+            child: Scaffold(
+              appBar: AppBar(
+                title: Text('Debates', style: TextStyle(fontSize: 18.sp)),
+                elevation: 0,
+              ),
+              body: Column(
+                children: [
+                  SizedBox(height: 1.5.h),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 3.w),
+                    child: Container(
+                      height: 6.h,
+                      decoration: BoxDecoration(
+                        color: AppColors.lighterColor,
                         borderRadius: BorderRadius.circular(30),
                       ),
-                      tabs:
-                          DebatesStatus.values
-                              .map((tab) => Tab(text: tab.name))
-                              .toList(),
+                      child: TabBar(
+                        labelColor: AppColors.mainLight,
+                        controller: tabController,
+                        isScrollable: true,
+                        labelStyle: TextStyle(
+                          fontSize: 11.sp,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        unselectedLabelColor: AppColors.lighterDarkColor,
+                        dividerHeight: 0,
+                        padding: EdgeInsets.symmetric(horizontal: 1.w),
+                        tabAlignment: TabAlignment.center,
+                        dragStartBehavior: DragStartBehavior.down,
+                        indicatorSize: TabBarIndicatorSize.tab,
+                        indicator: BoxDecoration(
+                          color: AppColors.darkBlue.withOpacity(0.9),
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        tabs:
+                            DebatesStatus.values
+                                .map((tab) => Tab(text: tab.name))
+                                .toList(),
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(height: 1.h),
-                Expanded(
-                  child: StateBuilder<DebatesStatus>(
-                    cubit: DebatesCubit.get(context).currentStatusCubit,
+                  SizedBox(height: 1.h),
+                  Expanded(
+                    child: StateBuilder<DebatesStatus>(
+                      cubit: DebatesCubit.get(context).currentStatusCubit,
 
-                    builder: (currentStatus) {
-                      return BlocConsumer<DebatesCubit, DebatesStates>(
-                        listener: (context, state) {},
-                        builder: (context, state) {
-                          switch (state) {
-                            case DebatesLoadingState():
-                              return Center(
-                                child: LoadingAnimationWidget.discreteCircle(
-                                  color: color.blue,
-                                  secondRingColor: color.red,
-                                  thirdRingColor: color.primary,
-                                  size: 35,
-                                ),
-                              );
-                            case DebatesGetDebatesErrorState():
-                              return Center(
-                                child: Text(
-                                  state.errorMessage,
-                                  style: textStyle.bodyLarge,
-                                ),
-                              );
-                            case DebatesGetDebatesSuccessState():
-                              if (state.debatesData.data.isEmpty) {
+                      builder: (currentStatus) {
+                        return BlocConsumer<DebatesCubit, DebatesStates>(
+                          listener: (context, state) {},
+                          builder: (context, state) {
+                            switch (state) {
+                              case DebatesLoadingState():
+                                return Center(
+                                  child: LoadingAnimationWidget.discreteCircle(
+                                    color: color.blue,
+                                    secondRingColor: color.red,
+                                    thirdRingColor: color.primary,
+                                    size: 35,
+                                  ),
+                                );
+                              case DebatesGetDebatesErrorState():
                                 return Center(
                                   child: Text(
-                                    "No debates found",
+                                    state.errorMessage,
                                     style: textStyle.bodyLarge,
                                   ),
                                 );
-                              }
-                              return Stack(
-                                children: [
-                                  ListView.builder(
-                                    padding: const EdgeInsets.all(16),
-                                    itemCount: state.debatesData.data.length,
-                                    itemBuilder: (context, index) {
-                                      return _buildTabContent(
-                                        state.debatesData.data[index],
-                                        context,
-                                        index,
-                                        currentStatus,
-                                      );
-                                    },
+                              case DebatesGetDebatesSuccessState():
+                                if (state.debates.isEmpty) {
+                                  return Center(
+                                    child: Text(
+                                      "No debates found",
+                                      style: textStyle.bodyLarge,
+                                    ),
+                                  );
+                                }
+                                return Stack(
+                                  children: [
+                                    ListView.builder(
+                                      padding: const EdgeInsets.all(16),
+                                      itemCount: state.debates.length,
+                                      itemBuilder: (context, index) {
+                                        return _buildTabContent(
+                                          state.debates[index],
+                                          context,
+                                          index,
+                                          currentStatus,
+                                        );
+                                      },
+                                    ),
+                                  ],
+                                );
+                              default:
+                                return Center(
+                                  child: LoadingAnimationWidget.discreteCircle(
+                                    color: color.blue,
+                                    secondRingColor: color.red,
+                                    thirdRingColor: color.primary,
+                                    size: 35,
                                   ),
-                                ],
-                              );
-                            default:
-                              return Center(
-                                child: LoadingAnimationWidget.discreteCircle(
-                                  color: color.blue,
-                                  secondRingColor: color.red,
-                                  thirdRingColor: color.primary,
-                                  size: 35,
-                                ),
-                              );
-                          }
-                        },
-                      );
-                    },
+                                );
+                            }
+                          },
+                        );
+                      },
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         );
@@ -179,7 +178,7 @@ class _DebatesPageState extends State<DebatesPage>
 
   // Todo build card for each debate status
   Widget _buildTabContent(
-    Datum debate,
+    DebateData debate,
     BuildContext context,
     int index,
     DebatesStatus status,
@@ -187,8 +186,10 @@ class _DebatesPageState extends State<DebatesPage>
     switch (status) {
       case DebatesStatus.active:
         return ActiveDebatWidget();
-      case DebatesStatus.confirmed:
-        return ConfirmedDebateWidget();
+      case DebatesStatus.playersConfirmed:
+        return PlayersConfirmDebateWidget(debate: debate, index: index);
+      case DebatesStatus.teamsConfirmed:
+        return TeamsConfirmDebateDebateWidget(debate: debate, index: index);
       case DebatesStatus.past:
         return PastDebateWidget();
       default:

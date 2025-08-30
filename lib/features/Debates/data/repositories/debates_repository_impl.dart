@@ -24,7 +24,7 @@ class DebatesRepositoryImpl implements DebatesRepository {
   });
 
   @override
-  Future<Either<Failure, DebatesModel>> getAnnouncedDebates({
+  Future<Either<Failure, DebateModel>> getAnnouncedDebates({
     required DebatesStatus status,
   }) async {
     try {

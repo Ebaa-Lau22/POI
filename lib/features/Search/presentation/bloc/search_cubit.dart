@@ -22,7 +22,7 @@ class SearchCubit extends Cubit<SearchStates> {
     initialValue: FilterEnum.people,
   );
   List<UserData> users = [];
-  List<Datum> finishedDebates = [];
+  List<DebateData> finishedDebates = [];
   TextEditingController searchController = TextEditingController();
 
   void onFilterChanged(FilterEnum filter) {

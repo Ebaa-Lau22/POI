@@ -47,6 +47,7 @@
   "emptyCacheFailureMessage":"لا توجد بيانات.",
   "offlineFailureMessage":"يرجى التحقق من اتصال الإنترنت.",
   "unexpectedFailureMessage":"حدث خطأ غير متوقع.",
+  "bannedFailureMessage":"أنت محظور من التطبيق",
   "incorrectDataFailureMessage":"المعلومات المدخلة غير صحيحة. يرجى المحاولة مرة أخرى.",
   "debates":"المناظرات",
   "upcoming":"القادمة",

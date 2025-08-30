@@ -12,7 +12,7 @@ import 'package:poi/features/Debates/data/models/get_feedback_for_debater_respon
 import 'package:poi/features/Debates/data/models/new_motion_model.dart';
 
 abstract class DebatesRepository {
-  Future<Either<Failure, DebatesModel>> getAnnouncedDebates({
+  Future<Either<Failure, DebateModel>> getAnnouncedDebates({
     required DebatesStatus status,
   });
   Future<Either<Failure, BaseResponse<List<NewMotionModel>>>> getMotions();

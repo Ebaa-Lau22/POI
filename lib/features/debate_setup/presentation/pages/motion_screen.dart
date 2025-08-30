@@ -43,11 +43,17 @@ class MotionScreen extends StatelessWidget {
                     onPressed: () {
                       appCubit.changeTheme(!appCubit.isLightTheme);
                     },
-                    icon: Icon(appCubit.isLightTheme ? Icons.dark_mode_outlined : Icons.light_mode_outlined),
+                    icon: Icon(
+                      appCubit.isLightTheme
+                          ? Icons.dark_mode_outlined
+                          : Icons.light_mode_outlined,
+                    ),
                   ),
                   IconButton(
                     onPressed: () {
-                      appCubit.changeLocale(appCubit.locale == "en" ? "ar" : "en");
+                      appCubit.changeLocale(
+                        appCubit.locale == "en" ? "ar" : "en",
+                      );
                     },
                     icon: Icon(Icons.translate),
                   ),
@@ -77,7 +83,10 @@ class MotionScreen extends StatelessWidget {
                                           textColor: color.secondary,
                                           keyboardType: TextInputType.text,
                                           hintText: context.loc.search_motion,
-                                          prefix: Icon(Icons.search, color: color.secondary),
+                                          prefix: Icon(
+                                            Icons.search,
+                                            color: color.secondary,
+                                          ),
                                           onChanged: (query) {
                                             cubit.searchMotions(query);
                                           },
@@ -86,13 +95,21 @@ class MotionScreen extends StatelessWidget {
                                       SizedBox(width: 0.2.w),
                                       IconButton(
                                         icon: Stack(
-                                          alignment: AlignmentDirectional.topEnd,
+                                          alignment:
+                                              AlignmentDirectional.topEnd,
                                           children: [
-                                            Icon(Icons.filter_alt_outlined, size: 25, color: color.secondary,),
-                                            if(cubit.selectedTopics.isNotEmpty)
+                                            Icon(
+                                              Icons.filter_alt_outlined,
+                                              size: 25,
+                                              color: color.secondary,
+                                            ),
+                                            if (cubit.selectedTopics.isNotEmpty)
                                               Container(
                                                 decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(100),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                        100,
+                                                      ),
                                                   color: color.red,
                                                 ),
                                                 height: 7.5,
@@ -101,43 +118,79 @@ class MotionScreen extends StatelessWidget {
                                           ],
                                         ),
                                         onPressed: () async {
-                                          cubit.selectedTopicsCopy = cubit.selectedTopics.sublist(0);
+                                          cubit.selectedTopicsCopy = cubit
+                                              .selectedTopics
+                                              .sublist(0);
                                           showDialog(
                                             context: context,
                                             builder:
-                                                (_) => BlocBuilder<DebateSetupCubit, DebateSetupStates>(
-                                              builder: (context, state) {
-                                                final cubit = context.read<DebateSetupCubit>();
-                                                return FilterDialog(
-                                                  themedColor: color,
-                                                  title: context.loc.filter_motion,
-                                                  allTopics: cubit.allTopics,
-                                                  selectedTopics: cubit.selectedTopicsCopy,
-                                                  toggleTopicFunction: (topic) => cubit.toggleTopic(topic),
-                                                  appFilterFunction: () => cubit.applyFilters(),
-                                                );
-                                              },
-                                            ),
+                                                (_) => BlocBuilder<
+                                                  DebateSetupCubit,
+                                                  DebateSetupStates
+                                                >(
+                                                  builder: (context, state) {
+                                                    final cubit =
+                                                        context
+                                                            .read<
+                                                              DebateSetupCubit
+                                                            >();
+                                                    return FilterDialog(
+                                                      themedColor: color,
+                                                      title:
+                                                          context
+                                                              .loc
+                                                              .filter_motion,
+                                                      allTopics:
+                                                          cubit.allTopics,
+                                                      selectedTopics:
+                                                          cubit
+                                                              .selectedTopicsCopy,
+                                                      toggleTopicFunction:
+                                                          (topic) =>
+                                                              cubit.toggleTopic(
+                                                                topic,
+                                                              ),
+                                                      appFilterFunction:
+                                                          () =>
+                                                              cubit
+                                                                  .applyFilters(),
+                                                    );
+                                                  },
+                                                ),
                                           );
                                         },
                                       ),
                                       SizedBox(width: 0.2.w),
                                       IconButton(
-                                        icon: Icon(Icons.add_circle_outline_rounded, size: 25, color: color.blue,),
+                                        icon: Icon(
+                                          Icons.add_circle_outline_rounded,
+                                          size: 25,
+                                          color: color.blue,
+                                        ),
                                         onPressed: () async {
                                           showDialog(
                                             context: context,
                                             builder: (_) {
-                                              final TextEditingController titleController = TextEditingController();
-                                              return BlocBuilder<DebateSetupCubit, DebateSetupStates>(
+                                              final TextEditingController
+                                              titleController =
+                                                  TextEditingController();
+                                              return BlocBuilder<
+                                                DebateSetupCubit,
+                                                DebateSetupStates
+                                              >(
                                                 builder: (context, state) {
                                                   return NewMotionDialog(
                                                     themedColor: color,
                                                     title: context.loc.motion,
-                                                    titleController: titleController,
+                                                    titleController:
+                                                        titleController,
                                                     allTopics: cubit.allTopics,
-                                                    selectedTopics: cubit.newMotionSelectedTopics,
-                                                    toggleTopicFunction: cubit.addTopicToNewMotion,
+                                                    selectedTopics:
+                                                        cubit
+                                                            .newMotionSelectedTopics,
+                                                    toggleTopicFunction:
+                                                        cubit
+                                                            .addTopicToNewMotion,
                                                   );
                                                 },
                                               );
@@ -153,35 +206,60 @@ class MotionScreen extends StatelessWidget {
                                     shrinkWrap: true,
                                     itemCount: cubit.filteredMotions.length,
                                     itemBuilder: (context, index) {
-                                      final motion = cubit.filteredMotions[index];
+                                      final motion =
+                                          cubit.filteredMotions[index];
                                       return ClipRRect(
-                                        borderRadius: BorderRadius.circular(widgetBorderRadius),
+                                        borderRadius: BorderRadius.circular(
+                                          widgetBorderRadius,
+                                        ),
                                         child: Card(
-                                          margin: EdgeInsets.symmetric(vertical: 0.6.h, horizontal: 4.w),
+                                          margin: EdgeInsets.symmetric(
+                                            vertical: 0.6.h,
+                                            horizontal: 4.w,
+                                          ),
                                           shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(widgetBorderRadius),
+                                            borderRadius: BorderRadius.circular(
+                                              widgetBorderRadius,
+                                            ),
                                           ),
                                           child: ListTile(
-                                            tileColor: motion == cubit.selectedMotion
-                                                ? ThemedColors(!appCubit.isLightTheme).darkerOrLighter
-                                                : color.darkerOrLighter,
+                                            tileColor:
+                                                motion == cubit.selectedMotion
+                                                    ? ThemedColors(
+                                                      !appCubit.isLightTheme,
+                                                    ).darkerOrLighter
+                                                    : color.darkerOrLighter,
                                             title: Text(
                                               motion.title,
-                                              style: textTheme.labelLarge?.copyWith(
-                                                color: motion == cubit.selectedMotion ? color.primary : color.secondary,
-                                              ),
+                                              style: textTheme.labelLarge
+                                                  ?.copyWith(
+                                                    color:
+                                                        motion ==
+                                                                cubit
+                                                                    .selectedMotion
+                                                            ? color.primary
+                                                            : color.secondary,
+                                                  ),
                                             ),
                                             subtitle: Text(
                                               motion.topics.join(", "),
                                               textAlign: TextAlign.end,
                                               style: textTheme.bodySmall?.copyWith(
-                                                color: motion == cubit.selectedMotion
-                                                    ? ThemedColors(!appCubit.isLightTheme).blue
-                                                    : color.blue,
+                                                color:
+                                                    motion ==
+                                                            cubit.selectedMotion
+                                                        ? ThemedColors(
+                                                          !appCubit
+                                                              .isLightTheme,
+                                                        ).blue
+                                                        : color.blue,
                                               ),
                                             ),
                                             shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(widgetBorderRadius),
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                    widgetBorderRadius,
+                                                  ),
                                             ),
                                             onTap: () {
                                               cubit.selectMotion(motion);
@@ -198,7 +276,10 @@ class MotionScreen extends StatelessWidget {
                           SizedBox(
                             height: 8.h,
                             child: Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 1.h,),
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 5.w,
+                                vertical: 1.h,
+                              ),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 mainAxisSize: MainAxisSize.max,
@@ -206,26 +287,46 @@ class MotionScreen extends StatelessWidget {
                                 children: [
                                   Expanded(
                                     child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(widgetBorderRadius),
+                                      borderRadius: BorderRadius.circular(
+                                        widgetBorderRadius,
+                                      ),
                                       child: ElevatedButton(
                                         onPressed: () {
                                           cubit.randomizeMotion();
                                         },
-                                        style: ElevatedButton.styleFrom(backgroundColor: color.secondary),
-                                        child: Text(context.loc.random, style: TextStyle(color: color.primary, fontWeight: FontWeight.bold)),
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: color.secondary,
+                                        ),
+                                        child: Text(
+                                          context.loc.random,
+                                          style: TextStyle(
+                                            color: color.primary,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ),
                                   SizedBox(width: 5.w),
                                   Expanded(
                                     child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(widgetBorderRadius),
+                                      borderRadius: BorderRadius.circular(
+                                        widgetBorderRadius,
+                                      ),
                                       child: ElevatedButton(
                                         onPressed: () {
                                           //TODO: bind with backend also in new motion
                                         },
-                                        style: ElevatedButton.styleFrom(backgroundColor: color.red),
-                                        child: Text(context.loc.submit, style: TextStyle(color: AppColors.lighterColor, fontWeight: FontWeight.bold)),
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: color.red,
+                                        ),
+                                        child: Text(
+                                          context.loc.submit,
+                                          style: TextStyle(
+                                            color: AppColors.lighterColor,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ),

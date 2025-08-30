@@ -5,5 +5,5 @@ import 'package:poi/features/Search/data/models/user_model.dart';
 
 abstract class SearchRepo {
   Future<Either<Failure, UserModel>> getUsers();
-  Future<Either<Failure, DebatesModel>> getFinishedDebates();
+  Future<Either<Failure, DebateModel>> getFinishedDebates();
 }

@@ -380,20 +380,19 @@ class _LoginPageState extends State<LoginPage> {
                       },
                     ),
 
-                    SizedBox(height: 1.h),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: TextButton(
-                        onPressed: () {
-                          context.go('/forgetPassword');
-                        },
-                        child: Text(
-                          context.loc.forgetPassword,
-                          style: textStyle.bodyLarge,
-                        ),
-                      ),
-                    ),
-
+                    // SizedBox(height: 1.h),
+                    // Align(
+                    //   alignment: Alignment.centerRight,
+                    //   child: TextButton(
+                    //     onPressed: () {
+                    //       context.go('/forgetPassword');
+                    //     },
+                    //     child: Text(
+                    //       context.loc.forgetPassword,
+                    //       style: textStyle.bodyLarge,
+                    //     ),
+                    //   ),
+                    // ),
                     SizedBox(height: 4.h),
                     BlocConsumer<AuthCubit, AuthStates>(
                       listener: (context, state) async {
@@ -420,6 +419,7 @@ class _LoginPageState extends State<LoginPage> {
                           final savedGuard = await prefs.getEncryptedValue(
                             "Guard",
                           );
+                          await context.read<AuthCubit>().getAndSaveProfile();
 
                           print("Token: $savedToken , guard: $savedGuard");
 

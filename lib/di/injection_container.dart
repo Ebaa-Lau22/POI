@@ -12,6 +12,9 @@ import 'package:poi/features/Authentication/data/repositories/auth_repository_im
 import 'package:poi/features/Authentication/domain/repositories/auth_repository.dart';
 import 'package:poi/features/Authentication/domain/usecases/login_usecase.dart';
 import 'package:poi/features/Authentication/domain/usecases/logout_use_case.dart';
+import 'package:poi/features/Authentication/domain/usecases/resetPassword_usecase.dart';
+import 'package:poi/features/Authentication/domain/usecases/sendCode_usecase.dart';
+import 'package:poi/features/Authentication/domain/usecases/verifyCode_usecase.dart';
 import 'package:poi/features/Authentication/presentation/bloc/auth_cubit.dart';
 import 'package:poi/features/Authentication/presentation/bloc/logout_cubit.dart';
 import 'package:poi/features/Debates/data/datasources/debates_remote_data_source.dart';
@@ -44,10 +47,14 @@ import 'package:poi/features/debate_setup/domain/usecases/get_all_motions_usecas
 import 'package:poi/features/debate_setup/domain/usecases/get_all_topics_usecase.dart';
 import 'package:poi/features/debate_setup/presentation/bloc/debate_setup_cubit.dart';
 import 'package:poi/features/notifications/di/notifications_injection_container.dart';
+import 'package:poi/features/profiles/data/datasources/new_profile_remote_data_source.dart';
 import 'package:poi/features/profiles/data/datasources/profile_remote_data_source.dart';
+import 'package:poi/features/profiles/data/repositories/new_profile_repository_impl.dart';
 import 'package:poi/features/profiles/data/repositories/profile_repository_impl.dart';
+import 'package:poi/features/profiles/domain/repositories/new_profile_respository.dart';
 import 'package:poi/features/profiles/domain/repositories/profile_repository.dart';
 import 'package:poi/features/profiles/domain/usecases/get_profile_usecase.dart';
+import 'package:poi/features/profiles/domain/usecases/new_get_profile_use_case.dart';
 import 'package:poi/features/profiles/presentation/bloc/profile_cubit.dart';
 import 'package:poi/permission_cubit.dart';
 import '../core/storage/preferences_database.dart';
@@ -85,7 +92,7 @@ Future<void> init() async {
   sl.registerFactory(
     () => AppCubit(cacheThemeUseCase: sl(), cacheLocaleUseCase: sl()),
   );
-  sl.registerFactory(
+  sl.registerLazySingleton(
     () => AuthCubit(
       loginUseCase: sl(),
       sendCodeUseCase: sl(),
@@ -95,7 +102,13 @@ Future<void> init() async {
   );
   sl.registerFactory(() => LogoutCubit(logoutUseCase: sl()));
   sl.registerFactory(() => ProfileCubit(getProfileUseCase: sl()));
-  sl.registerFactory(() => DebatesCubit(getDebatesUseCase: sl()));
+  sl.registerFactory(
+    () => DebatesCubit(
+      getDebatesUseCase: sl(),
+      sendRequestFromJudgeUseCase: sl(),
+      sendRequestFromDebaterUseCase: sl(),
+    ),
+  );
 
   //! Use Cases
   sl.registerLazySingleton(() => GetAllPostsUseCase(repository: sl()));
@@ -110,9 +123,9 @@ Future<void> init() async {
   //Login
   sl.registerLazySingleton(() => LoginUseCase(authRepository: sl()));
   //Reset Password
-  // sl.registerLazySingleton(() => SendCodeUseCase(authRepository: sl()));
-  // sl.registerLazySingleton(() => VerifyCodeUseCase(authRepository: sl()));
-  // sl.registerLazySingleton(() => ResetPasswordUseCase(authRepository: sl()));
+  sl.registerLazySingleton(() => SendCodeUseCase(authRepository: sl()));
+  sl.registerLazySingleton(() => VerifyCodeUseCase(authRepository: sl()));
+  sl.registerLazySingleton(() => ResetPasswordUseCase(authRepository: sl()));
   //Logout
   sl.registerLazySingleton(() => LogoutUseCase(authRepository: sl()));
   //Motions
@@ -134,9 +147,13 @@ Future<void> init() async {
   sl.registerLazySingleton(
     () => GetFeedbacksByDebaterUseCase(repository: sl()),
   );
+  sl.registerLazySingleton(() => NewGetProfileUseCase(repository: sl()));
   //! Repositories
   sl.registerLazySingleton<PostsRepository>(
     () => PostRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()),
+  );
+  sl.registerLazySingleton<NewProfileRespository>(
+    () => NewProfileRepositoryImpl(remote: sl()),
   );
   sl.registerLazySingleton<CacheRepository>(
     () => CacheRepositoryImpl(dataSource: sl()),
@@ -157,6 +174,9 @@ Future<void> init() async {
   //! Data Sources
   sl.registerLazySingleton<PostRemoteDataSource>(
     () => PostRemoteDataSourceImpl(client: sl()),
+  );
+  sl.registerLazySingleton<NewProfileRemoteDataSource>(
+    () => NewProfileRemoteDataSourceImpl(sl()),
   );
   sl.registerLazySingleton<CacheLocalDataSource>(
     () => CacheLocalDataSourceImpl(db: sl()),

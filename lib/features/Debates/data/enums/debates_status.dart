@@ -1,8 +1,7 @@
 enum DebatesStatus {
   announced,
-  confirmed,
+  playersConfirmed,
   teamsConfirmed,
-  preperation,
   active,
   past,
 }
@@ -12,12 +11,10 @@ extension DebatesStatusExtension on DebatesStatus {
     switch (this) {
       case DebatesStatus.announced:
         return 'Announced';
-      case DebatesStatus.confirmed:
+      case DebatesStatus.playersConfirmed:
         return 'Confirmed';
       case DebatesStatus.teamsConfirmed:
         return 'Teams';
-      case DebatesStatus.preperation:
-        return 'Preperation';
       case DebatesStatus.active:
         return 'Active';
       case DebatesStatus.past:
@@ -29,12 +26,10 @@ extension DebatesStatusExtension on DebatesStatus {
     switch (this) {
       case DebatesStatus.announced:
         return 'announced';
-      case DebatesStatus.confirmed:
+      case DebatesStatus.playersConfirmed:
         return 'playersConfirmed';
       case DebatesStatus.teamsConfirmed:
         return 'teamsConfirmed';
-      case DebatesStatus.preperation:
-        return 'debatePreparation';
       case DebatesStatus.active:
         return 'ongoing';
       case DebatesStatus.past:

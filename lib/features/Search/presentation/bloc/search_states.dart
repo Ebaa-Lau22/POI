@@ -20,7 +20,7 @@ class SearchGetUsersErrorState extends SearchStates {
 }
 
 class SearchGetFinishedDebatesSuccessState extends SearchStates {
-  List<Datum> finishedDebatesData;
+  List<DebateData> finishedDebatesData;
   SearchGetFinishedDebatesSuccessState({required this.finishedDebatesData});
 }
 

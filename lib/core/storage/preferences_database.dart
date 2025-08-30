@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:poi/core/app_models/new_profile_model.dart';
 
 class PreferencesDatabase {
   static final PreferencesDatabase _instance = PreferencesDatabase._internal();
@@ -119,6 +120,27 @@ class PreferencesDatabase {
 
   Future<void> clearToken() async {
     await removeValue('AUTH_TOKEN');
+  }
+
+  // 5. Profile Data Storage
+  Future<void> setProfileData(ProfileData profileData) async {
+    await setEncryptedValue('PROFILE_DATA', profileData);
+  }
+
+  Future<ProfileData?> getProfileData() async {
+    final jsonObject = await getEncryptedValue<Map<String, dynamic>>(
+      'PROFILE_DATA',
+    );
+    if (jsonObject == null) return null;
+    return ProfileData.fromJson(jsonObject);
+  }
+
+  Future<void> deleteProfileData() async {
+    await removeValue('PROFILE_DATA');
+  }
+
+  Future<void> updateProfileData(ProfileData profileData) async {
+    await setProfileData(profileData);
   }
 
   Future<void> printPreferencesTable() async {

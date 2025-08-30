@@ -5,7 +5,7 @@ import 'package:poi/features/Search/data/models/user_model.dart';
 
 abstract class SearchRemoteDataSource {
   Future<UserModel> getUsers();
-  Future<DebatesModel> getFinishedDebates();
+  Future<DebateModel> getFinishedDebates();
 }
 
 class SearchRemoteDataSourceImpl implements SearchRemoteDataSource {
@@ -20,8 +20,8 @@ class SearchRemoteDataSourceImpl implements SearchRemoteDataSource {
   }
 
   @override
-  Future<DebatesModel> getFinishedDebates() async {
+  Future<DebateModel> getFinishedDebates() async {
     final response = await apiServices.get(SearchEndPoints.finishedDebates);
-    return DebatesModel.fromJson(response);
+    return DebateModel.fromJson(response);
   }
 }

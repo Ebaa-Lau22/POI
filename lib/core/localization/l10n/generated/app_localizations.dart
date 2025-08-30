@@ -380,6 +380,12 @@ abstract class AppLocalizations {
   /// **'Unexpected Failure'**
   String get unexpectedFailureMessage;
 
+  /// No description provided for @bannedFailureMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'You are banned from the application.please contact the administration'**
+  String get bannedFailureMessage;
+
   /// No description provided for @incorrectDataFailureMessage.
   ///
   /// In en, this message translates to:

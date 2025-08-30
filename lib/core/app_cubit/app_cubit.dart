@@ -1,20 +1,21 @@
 import 'package:bloc/bloc.dart';
 import 'package:poi/core/app_cubit/app_states.dart';
+import 'package:poi/core/app_models/new_profile_model.dart';
+import 'package:poi/core/storage/preferences_database.dart';
 import 'package:poi/features/cached_data/domain/usecases/cache_locale_use_case.dart';
 import 'package:poi/features/cached_data/domain/usecases/cache_theme_use_case.dart';
 import '../theme/app_colors.dart';
 
 class AppCubit extends Cubit<AppStates> {
-  AppCubit({
-    required this.cacheLocaleUseCase,
-    required this.cacheThemeUseCase,
-}) : super(AppInitialState());
+  AppCubit({required this.cacheLocaleUseCase, required this.cacheThemeUseCase})
+    : super(AppInitialState());
 
   CacheLocaleUseCase cacheLocaleUseCase;
   CacheThemeUseCase cacheThemeUseCase;
+  ProfileData? profile;
 
   bool isLightTheme = true;
-  void changeTheme(bool newTheme) async{
+  void changeTheme(bool newTheme) async {
     isLightTheme = newTheme;
     await cacheThemeUseCase(theme: isLightTheme ? "Light" : "Dark");
     ThemedColors(isLightTheme);
@@ -22,7 +23,7 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   String locale = "en";
-  void changeLocale(String newLocale) async{
+  void changeLocale(String newLocale) async {
     locale = newLocale;
     await cacheLocaleUseCase(locale: locale);
     emit(AppChangeLocaleState());
