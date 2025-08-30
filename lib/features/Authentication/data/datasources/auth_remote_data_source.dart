@@ -42,6 +42,8 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     } else if (response.statusCode == 401) {
       print("THROWING WrongDataException!");
       throw WrongDataException();
+    }else if (response.statusCode == 403){
+      throw BannedException();
     } else {
       throw ServerException();
     }

@@ -5,3 +5,5 @@ class EmptyCacheException implements Exception {}
 class OfflineException implements Exception {}
 
 class WrongDataException implements Exception {}
+
+class BannedException implements Exception {}

@@ -22,3 +22,8 @@ class WrongDataFailure extends Failure {
   @override
   List<Object?> get props => [];
 }
+
+class BannedFailure extends Failure {
+  @override
+  List<Object?> get props => [];
+}

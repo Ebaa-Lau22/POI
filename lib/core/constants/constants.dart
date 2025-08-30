@@ -8,6 +8,7 @@ const String SERVER_FAILURE_MESSAGE = 'يرجى المحاولة لاحقاً م
 const String EMPTY_CACHE_FAILURE_MESSAGE = 'لا توجد بيانات';
 const String OFFLINE_FAILURE_MESSAGE = 'يرجى التحقق من اتصالك بالإنترنت';
 const String UNEXPECTED_FAILURE_MESSAGE = 'خطأ غير متوقع';
+const String BANNED_FAILURE_MESSAGE = 'أنت محظور من التطبيق';
 const String incorrect_Data_Failure_Message =
     'The provided information is not correct.Please try again.';
 const String ADD_POST_SUCCESS_MESSAGE = 'Post added successfully';

@@ -108,7 +108,7 @@ class MyApp extends StatelessWidget {
                 ],
                 supportedLocales: AppLocalizations.supportedLocales,
                 locale: Locale(cubit.locale),
-                home: HomePage(),
+                home: LoginPage(),
               );
             },
           ),

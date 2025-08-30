@@ -50,6 +50,7 @@
   "emptyCacheFailureMessage":"No Data",
   "offlineFailureMessage":"Please Check your Internet Connection",
   "unexpectedFailureMessage":"Unexpected Failure",
+  "bannedFailureMessage":"You are banned from the application.please contact the administration",
   "incorrectDataFailureMessage":"The provided information is not correct. Please try again.",
   "debates":"Debates",
   "upcoming":"Upcoming",

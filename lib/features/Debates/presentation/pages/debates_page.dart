@@ -12,6 +12,9 @@ import 'package:poi/features/Debates/data/models/debates_model.dart';
 import 'package:poi/features/Debates/presentation/bloc/debates_cubit.dart';
 import 'package:poi/features/Debates/presentation/bloc/debates_states.dart';
 import 'package:poi/features/Debates/presentation/pages/announced_debates_page.dart';
+import 'package:poi/features/Debates/presentation/pages/players_confirm_debate_details_page.dart';
+import 'package:poi/features/Debates/presentation/pages/players_confirm_debates_page.dart';
+import 'package:poi/features/Debates/presentation/pages/teams_confirm_debates_page.dart';
 import 'package:poi/features/Debates/presentation/widgets/active_debate_widget.dart';
 import 'package:poi/features/Debates/presentation/widgets/confirmed_debate_widget.dart';
 import 'package:poi/features/Debates/presentation/widgets/past_debate_widget.dart';
@@ -180,8 +183,10 @@ class _DebatesPageState extends State<DebatesPage>
     switch (status) {
       case DebatesStatus.active:
         return ActiveDebatWidget();
-      case DebatesStatus.confirmed:
-        return ConfirmedDebateWidget();
+      case DebatesStatus.playersConfirmed:
+        return PlayersConfirmDebatesPage();
+         case DebatesStatus.teamsConfirmed:
+        return TeamsConfirmDebatesPage();
       case DebatesStatus.past:
         return PastDebateWidget();
       default:

@@ -150,6 +150,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get unexpectedFailureMessage => 'Unexpected Failure';
 
   @override
+  String get bannedFailureMessage => 'You are banned from the application.please contact the administration';
+
+  @override
   String get incorrectDataFailureMessage => 'The provided information is not correct. Please try again.';
 
   @override
