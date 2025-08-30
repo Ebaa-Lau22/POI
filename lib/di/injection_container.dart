@@ -11,14 +11,20 @@ import 'package:poi/features/Authentication/data/datasources/auth_remote_data_so
 import 'package:poi/features/Authentication/data/repositories/auth_repository_imp.dart';
 import 'package:poi/features/Authentication/domain/repositories/auth_repository.dart';
 import 'package:poi/features/Authentication/domain/usecases/login_usecase.dart';
-import 'package:poi/features/Authentication/domain/usecases/resetPassword_usecase.dart';
-import 'package:poi/features/Authentication/domain/usecases/sendCode_usecase.dart';
-import 'package:poi/features/Authentication/domain/usecases/verifyCode_usecase.dart';
+import 'package:poi/features/Authentication/domain/usecases/logout_use_case.dart';
 import 'package:poi/features/Authentication/presentation/bloc/auth_cubit.dart';
+import 'package:poi/features/Authentication/presentation/bloc/logout_cubit.dart';
 import 'package:poi/features/Debates/data/datasources/debates_remote_data_source.dart';
 import 'package:poi/features/Debates/data/repositories/debates_repository_impl.dart';
 import 'package:poi/features/Debates/domain/repositories/debates_repository.dart';
+import 'package:poi/features/Debates/domain/usecases/add_feedback_use_case.dart';
 import 'package:poi/features/Debates/domain/usecases/get_debates_usecase.dart';
+import 'package:poi/features/Debates/domain/usecases/get_feedback_use_case.dart';
+import 'package:poi/features/Debates/domain/usecases/get_feedbacks_by_debater_use_case.dart.dart';
+import 'package:poi/features/Debates/domain/usecases/get_motions_use_case.dart';
+import 'package:poi/features/Debates/domain/usecases/rate_judge_use_case.dart';
+import 'package:poi/features/Debates/domain/usecases/send_request_from_debater_use_case.dart';
+import 'package:poi/features/Debates/domain/usecases/send_request_from_judge_use_case.dart';
 import 'package:poi/features/Debates/presentation/bloc/debates_cubit.dart';
 import 'package:poi/features/Search/di/search_injection_container.dart';
 import 'package:poi/features/cached_data/data/datasources/cache_local_data_source.dart';
@@ -87,6 +93,7 @@ Future<void> init() async {
       resetPasswordUseCase: sl(),
     ),
   );
+  sl.registerFactory(() => LogoutCubit(logoutUseCase: sl()));
   sl.registerFactory(() => ProfileCubit(getProfileUseCase: sl()));
   sl.registerFactory(() => DebatesCubit(getDebatesUseCase: sl()));
 
@@ -103,9 +110,11 @@ Future<void> init() async {
   //Login
   sl.registerLazySingleton(() => LoginUseCase(authRepository: sl()));
   //Reset Password
-  sl.registerLazySingleton(() => SendCodeUseCase(authRepository: sl()));
-  sl.registerLazySingleton(() => VerifyCodeUseCase(authRepository: sl()));
-  sl.registerLazySingleton(() => ResetPasswordUseCase(authRepository: sl()));
+  // sl.registerLazySingleton(() => SendCodeUseCase(authRepository: sl()));
+  // sl.registerLazySingleton(() => VerifyCodeUseCase(authRepository: sl()));
+  // sl.registerLazySingleton(() => ResetPasswordUseCase(authRepository: sl()));
+  //Logout
+  sl.registerLazySingleton(() => LogoutUseCase(authRepository: sl()));
   //Motions
   sl.registerLazySingleton(() => GetAllMotionsUsecase(debateRepo: sl()));
   sl.registerLazySingleton(() => GetAllTopicsUsecase(debateRepo: sl()));
@@ -114,7 +123,17 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GetProfileUseCase(repository: sl()));
   //Debates
   sl.registerLazySingleton(() => GetDebatesUseCase(repository: sl()));
-
+  sl.registerLazySingleton(() => GetMotionsUseCase(repository: sl()));
+  sl.registerLazySingleton(() => GetFeedbackUseCase(repository: sl()));
+  sl.registerLazySingleton(() => AddFeedbackUseCase(repository: sl()));
+  sl.registerLazySingleton(() => RateJudgeUseCase(repository: sl()));
+  sl.registerLazySingleton(() => SendRequestFromJudgeUseCase(repository: sl()));
+  sl.registerLazySingleton(
+    () => SendRequestFromDebaterUseCase(repository: sl()),
+  );
+  sl.registerLazySingleton(
+    () => GetFeedbacksByDebaterUseCase(repository: sl()),
+  );
   //! Repositories
   sl.registerLazySingleton<PostsRepository>(
     () => PostRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()),
@@ -143,7 +162,7 @@ Future<void> init() async {
     () => CacheLocalDataSourceImpl(db: sl()),
   ); //Cache
   sl.registerLazySingleton<AuthRemoteDataSource>(
-    () => AuthRemoteDataSourceImpl(client: sl()),
+    () => AuthRemoteDataSourceImpl(apiServices: sl(), client: sl()),
   ); //Auth
   sl.registerLazySingleton<DebateSetupRemoteDatasource>(
     () => DebateSetupRemoteDatasourceImpl(client: sl()),

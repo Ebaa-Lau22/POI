@@ -5,8 +5,9 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:poi/core/app_cubit/app_cubit.dart';
 import 'package:poi/core/app_cubit/app_states.dart';
 import 'package:poi/core/app_cubit/state_builder.dart';
-import 'package:poi/core/logger/logger.dart';
 import 'package:poi/core/theme/app_colors.dart';
+import 'package:poi/di/injection_container.dart';
+import 'package:poi/features/Authentication/presentation/bloc/logout_cubit.dart';
 import 'package:poi/features/Debates/data/enums/debates_status.dart';
 import 'package:poi/features/Debates/data/models/debates_model.dart';
 import 'package:poi/features/Debates/presentation/bloc/debates_cubit.dart';
@@ -62,6 +63,12 @@ class _DebatesPageState extends State<DebatesPage>
             ),
             body: Column(
               children: [
+                TextButton(
+                  onPressed: () async {
+                    sl<LogoutCubit>().logout(context);
+                  },
+                  child: Text("Press me"),
+                ),
                 SizedBox(height: 1.5.h),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 3.w),

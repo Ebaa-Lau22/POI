@@ -18,14 +18,16 @@ class AuthRepositoryImpl implements AuthRepository {
   });
 
   @override
-  Future<Either<Failure, LoginResponseModel>> login(LoginEntity loginEntity) async {
+  Future<Either<Failure, LoginResponseModel>> login(
+    LoginEntity loginEntity,
+  ) async {
     final LoginModel loginModel = LoginModel(
       email: loginEntity.email,
       password: loginEntity.password,
     );
     return await _getMessage2(() {
-    return remoteDataSource.login(loginModel); // Future<LoginResponseModel>
-  });
+      return remoteDataSource.login(loginModel); // Future<LoginResponseModel>
+    });
   }
 
   @override
@@ -63,6 +65,13 @@ class AuthRepositoryImpl implements AuthRepository {
     });
   }
 
+  @override
+  Future<Either<Failure, Unit>> logout() async {
+    return await _getMessage(() {
+      return remoteDataSource.logout();
+    });
+  }
+
   Future<Either<Failure, Unit>> _getMessage(
     Future<Unit> Function() action,
   ) async {
@@ -79,23 +88,23 @@ class AuthRepositoryImpl implements AuthRepository {
       return Left(OfflineFailure());
     }
   }
-Future<Either<Failure, T>> _getMessage2<T>(
-  Future<T> Function() action,
-) async {
-  if (await networkInfo.isConnected) {
-    try {
-      final result = await action();
-      return Right(result);
-    } on WrongDataException {
-      return Left(WrongDataFailure());
-    } on ServerException {
-      return Left(ServerFailure());
-    }catch (_) {
-      return Left(ServerFailure()); 
-    }
-  } else {
-    return Left(OfflineFailure());
-  }
-}
 
+  Future<Either<Failure, T>> _getMessage2<T>(
+    Future<T> Function() action,
+  ) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final result = await action();
+        return Right(result);
+      } on WrongDataException {
+        return Left(WrongDataFailure());
+      } on ServerException {
+        return Left(ServerFailure());
+      } catch (_) {
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(OfflineFailure());
+    }
+  }
 }

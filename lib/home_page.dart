@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
+import 'package:poi/core/app_cubit/state_builder.dart';
+import 'package:poi/core/app_cubit/state_cubit.dart';
 import 'package:poi/core/theme/app_colors.dart';
+import 'package:poi/di/injection_container.dart';
 import 'package:poi/features/Debates/presentation/pages/debates_page.dart';
 import 'package:poi/features/Search/presentation/pages/search_page.dart';
 import 'package:poi/features/call/call_screen.dart';
@@ -64,7 +67,8 @@ class _HomePageState extends State<HomePage> {
       resizeToAvoidBottomInset: true,
       stateManagement: true,
       hideNavigationBarWhenKeyboardAppears: true,
-      //popBehaviorOnSelectedNavBarItemPress: PopActionScreensType.all,
+
+      // popBehaviorOnSelectedNavBarItemPress: PopBehavior.none,
       padding: const EdgeInsets.only(top: 8),
       backgroundColor: Color.fromRGBO(234, 237, 243, 1),
       isVisible: true,

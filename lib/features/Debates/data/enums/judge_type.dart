@@ -1,0 +1,1 @@
+enum JudgeType { panelist, chair }

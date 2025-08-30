@@ -93,7 +93,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get forgetYourPassword => 'Forgot your password?';
 
   @override
-  String get enterEmailToGetCode => 'Enter your email address to receive a verification code for password reset.';
+  String get enterEmailToGetCode =>
+      'Enter your email address to receive a verification code for password reset.';
 
   @override
   String get yourEmail => 'Your email';
@@ -105,7 +106,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get enterCode => 'Enter the verification code';
 
   @override
-  String get enterCodeDescripe => 'Please enter the 6-digit code sent to your email.';
+  String get enterCodeDescripe =>
+      'Please enter the 6-digit code sent to your email.';
 
   @override
   String get verificationCode => 'Verification Code';
@@ -150,7 +152,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get unexpectedFailureMessage => 'Unexpected Failure';
 
   @override
-  String get incorrectDataFailureMessage => 'The provided information is not correct. Please try again.';
+  String get incorrectDataFailureMessage =>
+      'The provided information is not correct. Please try again.';
 
   @override
   String get debates => 'Debates';

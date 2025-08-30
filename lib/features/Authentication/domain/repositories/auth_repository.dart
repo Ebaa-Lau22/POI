@@ -13,4 +13,5 @@ abstract class AuthRepository {
   Future<Either<Failure, Unit>> resetPassword(
     ResetPasswordEntity resetPassModel,
   );
+  Future<Either<Failure, Unit>> logout();
 }
