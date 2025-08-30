@@ -33,8 +33,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get password => 'كلمة المرور';
 
   @override
-  String get passwordValidationMessage =>
-      'ينبغي أن تتضمن كلمة المرور أحرفًا وأرقامًا، وألا يقل طولها عن 6 رموز';
+  String get passwordValidationMessage => 'الباسوورد مطلوبة';
 
   @override
   String get forgetPassword => 'هل نسيت كلمة المرور الخاصة بك ؟';
@@ -82,8 +81,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get select_new_motion => 'اختيار جملة جدلية جديدة';
 
   @override
-  String get select_topics =>
-      'اختر المواضيع التي تنطوي تحتها الجملة (2 كحد أقصى)';
+  String get select_topics => 'اختر المواضيع التي تنطوي تحتها الجملة (2 كحد أقصى)';
 
   @override
   String get filter_motion => 'فلتر الجمل الجدلية';
@@ -95,8 +93,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get forgetYourPassword => 'هل نسيت كلمة المرور الخاصة بك ؟';
 
   @override
-  String get enterEmailToGetCode =>
-      'يرجى إدخال بريدك الإلكتروني لإرسال رمز التحقق الخاص بإعادة تعيين كلمة المرور.';
+  String get enterEmailToGetCode => 'يرجى إدخال بريدك الإلكتروني لإرسال رمز التحقق الخاص بإعادة تعيين كلمة المرور.';
 
   @override
   String get yourEmail => 'بريدك الإلكتروني';
@@ -108,8 +105,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get enterCode => 'أدخل رمز التحقق';
 
   @override
-  String get enterCodeDescripe =>
-      'يرجى إدخال رمز التحقق المكون من 8 أرقام الذي تم إرساله إلى بريدك الإلكتروني.';
+  String get enterCodeDescripe => 'يرجى إدخال رمز التحقق المكون من 8 أرقام الذي تم إرساله إلى بريدك الإلكتروني.';
 
   @override
   String get verificationCode => 'رمز التحقق';
@@ -154,8 +150,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get unexpectedFailureMessage => 'حدث خطأ غير متوقع.';
 
   @override
-  String get incorrectDataFailureMessage =>
-      'المعلومات المدخلة غير صحيحة. يرجى المحاولة مرة أخرى.';
+  String get incorrectDataFailureMessage => 'المعلومات المدخلة غير صحيحة. يرجى المحاولة مرة أخرى.';
 
   @override
   String get debates => 'المناظرات';

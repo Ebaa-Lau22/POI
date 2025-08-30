@@ -144,7 +144,14 @@ class AnnouncedDebateWidget extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(14),
-            child: Image.network(
+            child:
+            //  Image.asset(
+            //   "assets/images/debate.png",
+            //   width: 100,
+            //   height: 100,
+            //   fit: BoxFit.cover,
+            // ),
+             Image.network(
               "https://static.vecteezy.com/system/resources/thumbnails/006/406/394/small/debate-line-icon-on-white-vector.jpg",
               width: 100,
               height: 100,

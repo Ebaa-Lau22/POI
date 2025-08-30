@@ -11,7 +11,7 @@
   "email":"Email",
   "enterValidEmail":"Enter valid email",
   "password":"Password",
-  "passwordValidationMessage":"Password must contain both letters and numbers and be at least 8 characters long",
+  "passwordValidationMessage":"Password is required",
   "forgetPassword":"Forget your password?",
   "signin":"Sign in",
   "random": "Random",

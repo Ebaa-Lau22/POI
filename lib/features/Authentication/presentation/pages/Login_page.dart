@@ -373,8 +373,7 @@ class _LoginPageState extends State<LoginPage> {
                       cursorHeight: 20,
                       cursorRadius: const Radius.circular(8),
                       validator: (value) {
-                        final passwordRegex = PasswordRegExp;
-                        if (value == null || !passwordRegex.hasMatch(value)) {
+                        if (value == null) {
                           return context.loc.passwordValidationMessage;
                         }
                         return null;

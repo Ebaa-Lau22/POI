@@ -80,13 +80,13 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       confineToSafeArea: true,
-      navBarHeight: 80,
+      navBarHeight: 60,
       decoration: NavBarDecoration(
         colorBehindNavBar: Colors.white,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(25),
-          topRight: Radius.circular(25),
-        ),
+        // borderRadius: BorderRadius.only(
+        //   topLeft: Radius.circular(25),
+        //   topRight: Radius.circular(25),
+        // ),
       ),
       navBarStyle:
           NavBarStyle.style12, // Choose the nav bar style with this property
