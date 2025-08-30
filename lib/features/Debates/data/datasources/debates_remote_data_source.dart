@@ -13,22 +13,20 @@ import 'package:poi/features/Debates/data/models/dto/send_request_from_judge_dto
 import 'package:poi/features/Debates/data/models/feedback_model.dart';
 import 'package:poi/features/Debates/data/models/get_feedback_for_debater_response_model.dart';
 import 'package:poi/features/Debates/data/models/new_motion_model.dart';
+import 'package:poi/features/Debates/data/models/rate_judge_response_model.dart';
 
 abstract class DebatesRemoteDataSource {
   Future<DebateModel> getAnnouncedDebates({required DebatesStatus status});
   Future<BaseResponse<List<NewMotionModel>>> getMotions();
   Future<FeedbackModel> getFeedback(int debateId);
   Future<AddFeedbackResponseModel> addFeedback(AddFeedbackDto feedback);
-  // Todo add the response model when you know it
-  Future<Unit> rateJudge(RateJudgeDto rateJudge);
-  // Todo add the response model when you know it
+  Future<RateJudgeResponseModel> rateJudge(RateJudgeDto rateJudge);
   Future<Unit> sendRequestFromJudge(
     SendRequestFromJudgeDto sendRequestFromJudge,
   );
-  // Todo add the response model when you know it
   Future<Unit> sendRequestFromDebater(int debateid);
-  // Todo add the response model when you know it
   Future<GetFeedbackByDebaterResponseModel> getFeedbackByDebater();
+  Future<DebateModel> getFinishedDebates();
 }
 
 class DebatesRemoteDataSourceImpl implements DebatesRemoteDataSource {
@@ -78,12 +76,12 @@ class DebatesRemoteDataSourceImpl implements DebatesRemoteDataSource {
   }
 
   @override
-  Future<Unit> rateJudge(RateJudgeDto rateJudge) async {
-    await apiServices.post(
+  Future<RateJudgeResponseModel> rateJudge(RateJudgeDto rateJudge) async {
+    final response = await apiServices.post(
       DebatesEndPoints.rateJudge,
       body: rateJudge.toJson(),
     );
-    return unit;
+    return RateJudgeResponseModel.fromJson(response);
   }
 
   @override
@@ -109,5 +107,11 @@ class DebatesRemoteDataSourceImpl implements DebatesRemoteDataSource {
       DebatesEndPoints.getFeedbackByDebater,
     );
     return GetFeedbackByDebaterResponseModel.fromJson(response);
+  }
+
+    @override
+  Future<DebateModel> getFinishedDebates() async {
+    final response = await apiServices.get(DebatesEndPoints.FinishedDebates);
+    return DebateModel.fromJson(response);
   }
 }

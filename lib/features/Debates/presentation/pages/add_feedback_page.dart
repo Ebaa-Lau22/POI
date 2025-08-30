@@ -3,11 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:poi/core/app_cubit/app_cubit.dart';
 import 'package:poi/core/app_cubit/app_states.dart';
 import 'package:poi/core/theme/app_colors.dart';
+import 'package:poi/features/Debates/data/models/debates_model.dart';
+import 'package:poi/features/Debates/data/models/dto/add_feedback_dto.dart';
 import 'package:poi/features/Debates/presentation/bloc/debates_cubit.dart';
 import 'package:poi/features/Debates/presentation/bloc/debates_states.dart';
 
 class FeedbackPage extends StatefulWidget {
-  const FeedbackPage({super.key});
+  final DebateData debate;
+  const FeedbackPage({super.key, required this.debate});
 
   @override
   State<FeedbackPage> createState() => _FeedbackPageState();
@@ -15,13 +18,6 @@ class FeedbackPage extends StatefulWidget {
 
 class _FeedbackPageState extends State<FeedbackPage> {
   final TextEditingController feedbackController = TextEditingController();
-
-  final List<Map<String, dynamic>> debaters = [
-    {"id": 1, "name": "Ahmad Ali"},
-    {"id": 2, "name": "Sara Khan"},
-    {"id": 3, "name": "John Doe"},
-    {"id": 4, "name": "Lina M."},
-  ];
 
   String? selectedDebaterName; // اسم للعرض
   int? selectedDebaterId; // ID للإرسال
@@ -102,22 +98,30 @@ class _FeedbackPageState extends State<FeedbackPage> {
                         isExpanded: true,
                         decoration: fieldDecoration("Choose a debater"),
                         items:
-                            debaters.map((debater) {
-                              final name = debater["name"]?.toString() ?? "";
+                            widget.debate.debaters.map((debater) {
                               return DropdownMenuItem<String>(
-                                value: name,
-                                child: Text(name),
+                                value: debater.name,
+                                child: Text(debater.name),
                               );
                             }).toList(),
                         onChanged: (value) {
                           setState(() {
                             selectedDebaterName = value;
-                            selectedDebaterId =
-                                debaters.firstWhere(
-                                      (debater) => debater["name"] == value,
-                                      orElse: () => {"id": null},
-                                    )["id"]
-                                    as int?;
+                           
+                            final selectedDebater = widget.debate.debaters
+                                .firstWhere(
+                                  (d) => d.name == value,
+                                  orElse:
+                                      () => Debater(
+                                        debaterId: 0,
+                                        name: "",
+                                        speakerPosition: null,
+                                        teamRole: null,
+                                        rank: null,
+                                        teamNumber: 0,
+                                      ),
+                                );
+                            selectedDebaterId = selectedDebater.debaterId;
                           });
                         },
                       ),
@@ -140,19 +144,13 @@ class _FeedbackPageState extends State<FeedbackPage> {
                             return;
                           }
 
-                          // هنا يمكن ربط API لإرسال الفيدباك
-                          final payload = {
-                            "debater_id": selectedDebaterId,
-                            "feedback": feedbackController.text,
-                          };
-
-                          print(payload); // مثال للطباعة قبل إرسالها
-
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text("Feedback sent successfully"),
-                            ),
+                          final dto = AddFeedbackDto(
+                            participantDebaterId: selectedDebaterId!,
+                            note: feedbackController.text,
                           );
+
+                          final cubit = context.read<DebatesCubit>();
+                          cubit.addFeedback(dto: dto, context: context);
 
                           feedbackController.clear();
                           setState(() {

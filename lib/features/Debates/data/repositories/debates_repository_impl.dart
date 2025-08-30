@@ -12,6 +12,7 @@ import 'package:poi/features/Debates/data/models/dto/send_request_from_judge_dto
 import 'package:poi/features/Debates/data/models/feedback_model.dart';
 import 'package:poi/features/Debates/data/models/get_feedback_for_debater_response_model.dart';
 import 'package:poi/features/Debates/data/models/new_motion_model.dart';
+import 'package:poi/features/Debates/data/models/rate_judge_response_model.dart';
 import 'package:poi/features/Debates/domain/repositories/debates_repository.dart';
 
 class DebatesRepositoryImpl implements DebatesRepository {
@@ -71,7 +72,7 @@ class DebatesRepositoryImpl implements DebatesRepository {
   }
 
   @override
-  Future<Either<Failure, Unit>> rateJudge(RateJudgeDto rateJudge) async {
+  Future<Either<Failure, RateJudgeResponseModel>> rateJudge(RateJudgeDto rateJudge) async {
     try {
       final remoteRateJudge = await remoteDataSource.rateJudge(rateJudge);
       return Right(remoteRateJudge);
@@ -111,6 +112,16 @@ class DebatesRepositoryImpl implements DebatesRepository {
       final remoteGetFeedbackByDebater =
           await remoteDataSource.getFeedbackByDebater();
       return Right(remoteGetFeedbackByDebater);
+    } catch (e) {
+      return Left(ServerFailure());
+    }
+  }
+
+   @override
+  Future<Either<Failure, DebateModel>> getFinishedDebates() async {
+    try {
+      final result = await remoteDataSource.getFinishedDebates();
+      return Right(result);
     } catch (e) {
       return Left(ServerFailure());
     }

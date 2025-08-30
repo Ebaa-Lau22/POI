@@ -107,6 +107,9 @@ Future<void> init() async {
       getDebatesUseCase: sl(),
       sendRequestFromJudgeUseCase: sl(),
       sendRequestFromDebaterUseCase: sl(),
+      addfeedbackUseCase: sl(),
+      getFinishedDebatesUseCase: sl(),
+      rateJudgeUseCase: sl()
     ),
   );
 

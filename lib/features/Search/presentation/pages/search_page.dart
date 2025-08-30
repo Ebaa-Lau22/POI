@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:poi/core/app_cubit/app_cubit.dart';
 import 'package:poi/core/app_cubit/app_states.dart';
@@ -140,6 +141,10 @@ class _SearchPageState extends State<SearchPage> {
                   child: StateBuilder(
                     cubit: context.read<SearchCubit>().selectedFilter,
                     builder: (selectedFilter) {
+                      if (selectedFilter == null) {
+                        return _buildPeopleList();
+                      }
+
                       switch (selectedFilter) {
                         case FilterEnum.people:
                           return _buildPeopleList();
@@ -216,19 +221,110 @@ class _SearchPageState extends State<SearchPage> {
           if (state.finishedDebatesData.isEmpty) {
             return const Center(child: Text('No finished debates found'));
           }
-          return ListView.builder(
-            itemCount: state.finishedDebatesData.length,
-            itemBuilder: (context, index) {
-              return SizedBox(
-                height: 80,
-                child: Card(
-                  color: AppColors.lighterColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+          return Expanded(
+            child: ListView.builder(
+              itemCount: state.finishedDebatesData.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  // height: 100,
+                  margin: const EdgeInsets.only(bottom: 16),
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: AppColors.mainLight,
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.1),
+                        blurRadius: 16,
+                        spreadRadius: 1,
+                        offset: const Offset(0, 6),
+                      ),
+                    ],
                   ),
-                ),
-              );
-            },
+                  child: Row(
+                    children: [
+                      // الصورة
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(14),
+                        child: Image.network(
+                          "https://static.vecteezy.com/system/resources/thumbnails/006/406/394/small/debate-line-icon-on-white-vector.jpg",
+                          width: 100,
+                          height: 100,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      // النوع + التاريخ + الوقت
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // نوع المناظرة
+                          Text(
+                            state.finishedDebatesData[index].type,
+                            style: const TextStyle(
+                              fontSize: 15,
+                              color: Colors.black54,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Ubuntu',
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          // التاريخ
+                          Row(
+                            children: [
+                              const Icon(
+                                Icons.calendar_month,
+                                size: 18,
+                                color: Colors.grey,
+                              ),
+                              const SizedBox(width: 6),
+                              Text(
+                                DateFormat('dd-MM-yyyy').format(
+                                  state.finishedDebatesData[index].startDate!
+                                      .toLocal(),
+                                ),
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500,
+                                  fontFamily: 'Ubuntu',
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 5),
+                          // الوقت
+                          Row(
+                            children: [
+                              const Icon(
+                                Icons.access_time,
+                                size: 18,
+                                color: Colors.grey,
+                              ),
+                              const SizedBox(width: 6),
+                              Text(
+                                DateFormat('HH:mm').format(
+                                  DateFormat('HH:mm:ss').parse(
+                                    state.finishedDebatesData[index].startTime,
+                                  ),
+                                ),
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500,
+                                  fontFamily: 'Ubuntu',
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
           );
         } else if (state is SearchGetFinishedDebatesLoadingState) {
           final color = ThemedColors(context.read<AppCubit>().isLightTheme);

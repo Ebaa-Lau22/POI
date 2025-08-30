@@ -32,14 +32,14 @@ class _HomePageState extends State<HomePage> {
         ),
 
         PersistentBottomNavBarItem(
-          icon: Icon(Icons.favorite_rounded),
+          icon: Icon(Icons.search_rounded),
           title: ("Search"),
           activeColorPrimary: AppColors.darkBlue,
           inactiveColorPrimary: Colors.grey[400],
         ),
 
         PersistentBottomNavBarItem(
-          icon: Icon(Icons.notifications_rounded),
+          icon: Icon(Icons.article),
           title: ("Blogs"),
           activeColorPrimary: AppColors.darkBlue,
           inactiveColorPrimary: Colors.grey[400],

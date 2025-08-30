@@ -7,10 +7,13 @@ import 'package:poi/core/app_cubit/app_cubit.dart';
 import 'package:poi/core/app_cubit/app_states.dart';
 import 'package:poi/core/app_cubit/state_builder.dart';
 import 'package:poi/core/theme/app_colors.dart';
+import 'package:poi/features/Authentication/presentation/bloc/logout_cubit.dart';
+import 'package:poi/features/Authentication/presentation/bloc/logout_state.dart';
 import 'package:poi/features/Debates/data/enums/debates_status.dart';
 import 'package:poi/features/Debates/data/models/debates_model.dart';
 import 'package:poi/features/Debates/presentation/bloc/debates_cubit.dart';
 import 'package:poi/features/Debates/presentation/bloc/debates_states.dart';
+import 'package:poi/features/Debates/presentation/pages/finished_debates_page.dart';
 import 'package:poi/features/Debates/presentation/pages/players_confirm_debates_page.dart';
 import 'package:poi/features/Debates/presentation/pages/teams_confirm_debates_page.dart';
 import 'package:poi/features/Debates/presentation/widgets/active_debate_widget.dart';
@@ -64,6 +67,68 @@ class _DebatesPageState extends State<DebatesPage>
               appBar: AppBar(
                 title: Text('Debates', style: TextStyle(fontSize: 18.sp)),
                 elevation: 0,
+                actions: [
+                  BlocConsumer<LogoutCubit, LogoutState>(
+                    listener: (context, state) {
+                      if (state is LogoutSuccessState) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text("Logged out successfully"),
+                          ),
+                        );
+                        Navigator.of(context).pushReplacementNamed('/login');
+                      } else if (state is LogoutErrorState) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text(state.errorMessage)),
+                        );
+                      }
+                    },
+                    builder: (context, state) {
+                      if (state is LogoutLoadingState) {
+                        return const Padding(
+                          padding: EdgeInsets.only(right: 16.0),
+                          child: Center(
+                            child: CircularProgressIndicator(
+                              color: Colors.white,
+                            ),
+                          ),
+                        );
+                      }
+                      return IconButton(
+                        icon: const Icon(Icons.logout),
+                        onPressed: () {
+                          // تأكيد الخروج
+                          showDialog(
+                            context: context,
+                            builder:
+                                (context) => AlertDialog(
+                                  title: const Text("Confirm Logout"),
+                                  content: const Text(
+                                    "Are you sure you want to logout?",
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      onPressed:
+                                          () => Navigator.of(context).pop(),
+                                      child: const Text("Cancel"),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                        context.read<LogoutCubit>().logout(
+                                          context,
+                                        );
+                                      },
+                                      child: const Text("Logout"),
+                                    ),
+                                  ],
+                                ),
+                          );
+                        },
+                      );
+                    },
+                  ),
+                ],
               ),
               body: Column(
                 children: [
@@ -190,6 +255,8 @@ class _DebatesPageState extends State<DebatesPage>
         return PlayersConfirmDebateWidget(debate: debate, index: index);
       case DebatesStatus.teamsConfirmed:
         return TeamsConfirmDebateDebateWidget(debate: debate, index: index);
+      case DebatesStatus.finished:
+        return FinishedDebateWidget(debate: debate, index: index);
       case DebatesStatus.past:
         return PastDebateWidget();
       default:

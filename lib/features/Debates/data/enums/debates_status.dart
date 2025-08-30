@@ -3,6 +3,7 @@ enum DebatesStatus {
   playersConfirmed,
   teamsConfirmed,
   active,
+  finished,
   past,
 }
 
@@ -17,6 +18,8 @@ extension DebatesStatusExtension on DebatesStatus {
         return 'Teams';
       case DebatesStatus.active:
         return 'Active';
+        case DebatesStatus.finished:
+        return 'Finished';
       case DebatesStatus.past:
         return 'Past';
     }
@@ -32,6 +35,8 @@ extension DebatesStatusExtension on DebatesStatus {
         return 'teamsConfirmed';
       case DebatesStatus.active:
         return 'ongoing';
+         case DebatesStatus.finished:
+        return 'finished';
       case DebatesStatus.past:
         return 'finished';
     }

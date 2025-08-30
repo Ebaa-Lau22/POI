@@ -10,7 +10,7 @@ import 'package:poi/features/Authentication/presentation/bloc/auth_cubit.dart';
 import 'package:poi/features/Authentication/presentation/bloc/logout_cubit.dart';
 import 'package:poi/features/Authentication/presentation/pages/Login_page.dart';
 import 'package:poi/features/Debates/presentation/bloc/debates_cubit.dart';
-import 'package:poi/features/Debates/presentation/pages/feedback_page.dart';
+import 'package:poi/features/Debates/presentation/pages/add_feedback_page.dart';
 import 'package:poi/features/Debates/presentation/pages/rating_page.dart';
 import 'package:poi/features/Search/presentation/bloc/search_cubit.dart';
 import 'package:poi/features/cached_data/domain/usecases/get_cached_locale_usecase.dart';
@@ -128,7 +128,7 @@ class MyApp extends StatelessWidget {
                           size: 35,
                         ),
                       ),
-                  child: JudgeRatingPage(),
+                  child: LoginPage(),
                 ),
               );
             },

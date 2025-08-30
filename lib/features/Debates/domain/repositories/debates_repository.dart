@@ -10,6 +10,7 @@ import 'package:poi/features/Debates/data/models/dto/send_request_from_judge_dto
 import 'package:poi/features/Debates/data/models/feedback_model.dart';
 import 'package:poi/features/Debates/data/models/get_feedback_for_debater_response_model.dart';
 import 'package:poi/features/Debates/data/models/new_motion_model.dart';
+import 'package:poi/features/Debates/data/models/rate_judge_response_model.dart';
 
 abstract class DebatesRepository {
   Future<Either<Failure, DebateModel>> getAnnouncedDebates({
@@ -20,11 +21,12 @@ abstract class DebatesRepository {
   Future<Either<Failure, AddFeedbackResponseModel>> addFeedback(
     AddFeedbackDto feedback,
   );
-  Future<Either<Failure, Unit>> rateJudge(RateJudgeDto rateJudge);
+  Future<Either<Failure, RateJudgeResponseModel>> rateJudge(RateJudgeDto rateJudge);
   Future<Either<Failure, Unit>> sendRequestFromJudge(
     SendRequestFromJudgeDto sendRequestFromJudge,
   );
   Future<Either<Failure, Unit>> sendRequestFromDebater(int debateid);
   Future<Either<Failure, GetFeedbackByDebaterResponseModel>>
   getFeedbackByDebater();
+  Future<Either<Failure, DebateModel>> getFinishedDebates();
 }

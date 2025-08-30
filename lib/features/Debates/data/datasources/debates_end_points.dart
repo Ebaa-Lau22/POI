@@ -9,4 +9,5 @@ class DebatesEndPoints {
   static String sendRequestFromDebater(int id) =>
       'debates/$id/applications/apply-debater';
   static String getFeedbackByDebater = 'getFeedbacksByDebater';
+   static const String FinishedDebates = 'debates?status[]=finished';
 }

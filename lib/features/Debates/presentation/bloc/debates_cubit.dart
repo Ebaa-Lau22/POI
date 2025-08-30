@@ -1,3 +1,4 @@
+import 'dart:nativewrappers/_internal/vm/lib/ffi_allocation_patch.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,8 +9,13 @@ import 'package:poi/core/function/error_message.dart';
 import 'package:poi/features/Debates/data/enums/debates_status.dart';
 import 'package:poi/features/Debates/data/enums/judge_type.dart';
 import 'package:poi/features/Debates/data/models/debates_model.dart';
+import 'package:poi/features/Debates/data/models/dto/add_feedback_dto.dart';
+import 'package:poi/features/Debates/data/models/dto/rate_judge_dto.dart';
 import 'package:poi/features/Debates/data/models/dto/send_request_from_judge_dto.dart';
+import 'package:poi/features/Debates/domain/usecases/add_feedback_use_case.dart';
+import 'package:poi/features/Debates/domain/usecases/get_confirmed_debates_use_case.dart';
 import 'package:poi/features/Debates/domain/usecases/get_debates_usecase.dart';
+import 'package:poi/features/Debates/domain/usecases/rate_judge_use_case.dart';
 import 'package:poi/features/Debates/domain/usecases/send_request_from_debater_use_case.dart';
 import 'package:poi/features/Debates/domain/usecases/send_request_from_judge_use_case.dart';
 import 'package:poi/features/Debates/presentation/bloc/debates_states.dart';
@@ -19,6 +25,9 @@ class DebatesCubit extends Cubit<DebatesStates> {
     required this.getDebatesUseCase,
     required this.sendRequestFromJudgeUseCase,
     required this.sendRequestFromDebaterUseCase,
+    required this.addfeedbackUseCase,
+    required this.getFinishedDebatesUseCase,
+    required this.rateJudgeUseCase,
   }) : super(DebatesInitialState());
   static DebatesCubit get(context) => BlocProvider.of(context);
   List<DebateData> debatesList = [];
@@ -29,6 +38,11 @@ class DebatesCubit extends Cubit<DebatesStates> {
   final GetDebatesUseCase getDebatesUseCase;
   final SendRequestFromJudgeUseCase sendRequestFromJudgeUseCase;
   final SendRequestFromDebaterUseCase sendRequestFromDebaterUseCase;
+  final AddFeedbackUseCase addfeedbackUseCase;
+  final RateJudgeUseCase rateJudgeUseCase;
+  final GetFinishedDebatesUseCase getFinishedDebatesUseCase;
+
+  List<DebateData> Debates = [];
 
   void onPageChanged(int index) {
     currentStatusCubit.changeValue(DebatesStatus.values[index]);
@@ -114,6 +128,60 @@ class DebatesCubit extends Cubit<DebatesStates> {
         ScaffoldMessenger.of(
           context,
         ).showSnackBar(SnackBar(content: Text("Joined the debate")));
+      },
+    );
+  }
+
+  Future<void> addFeedback({
+    required AddFeedbackDto dto,
+    required BuildContext context,
+  }) async {
+    emit(AddFeedbackLoading());
+    context.loaderOverlay.show();
+
+    final response = await addfeedbackUseCase.call(feedback: dto);
+
+    response.fold(
+      (error) {
+        context.loaderOverlay.hide();
+        emit(AddFeedbackError(mapFailureToMessage(error)));
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(mapFailureToMessage(error))));
+      },
+      (right) {
+        context.loaderOverlay.hide();
+        emit(AddFeedbackSuccess(response: right));
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Feedback sent successfully")),
+        );
+      },
+    );
+  }
+
+    Future<void> addRating({
+    required RateJudgeDto dto,
+    required BuildContext context,
+  }) async {
+    emit(AddFeedbackLoading());
+    context.loaderOverlay.show();
+
+    final response = await rateJudgeUseCase.call(rateJudge: dto);
+
+    response.fold(
+      (error) {
+        context.loaderOverlay.hide();
+        emit(RateJudgeError(mapFailureToMessage(error)));
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(mapFailureToMessage(error))));
+      },
+      (right) {
+        context.loaderOverlay.hide();
+        emit(RateJudgeSuccess(response: right));
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Feedback sent successfully")),
+        );
       },
     );
   }
