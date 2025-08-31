@@ -21,7 +21,9 @@ abstract class DebatesRepository {
   Future<Either<Failure, AddFeedbackResponseModel>> addFeedback(
     AddFeedbackDto feedback,
   );
-  Future<Either<Failure, RateJudgeResponseModel>> rateJudge(RateJudgeDto rateJudge);
+  Future<Either<Failure, RateJudgeResponseModel>> rateJudge(
+    RateJudgeDto rateJudge,
+  );
   Future<Either<Failure, Unit>> sendRequestFromJudge(
     SendRequestFromJudgeDto sendRequestFromJudge,
   );
