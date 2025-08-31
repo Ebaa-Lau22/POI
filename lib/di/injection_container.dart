@@ -21,6 +21,7 @@ import 'package:poi/features/Debates/data/datasources/debates_remote_data_source
 import 'package:poi/features/Debates/data/repositories/debates_repository_impl.dart';
 import 'package:poi/features/Debates/domain/repositories/debates_repository.dart';
 import 'package:poi/features/Debates/domain/usecases/add_feedback_use_case.dart';
+import 'package:poi/features/Debates/domain/usecases/get_confirmed_debates_use_case.dart';
 import 'package:poi/features/Debates/domain/usecases/get_debates_usecase.dart';
 import 'package:poi/features/Debates/domain/usecases/get_feedback_use_case.dart';
 import 'package:poi/features/Debates/domain/usecases/get_feedbacks_by_debater_use_case.dart.dart';
@@ -109,7 +110,7 @@ Future<void> init() async {
       sendRequestFromDebaterUseCase: sl(),
       addfeedbackUseCase: sl(),
       getFinishedDebatesUseCase: sl(),
-      rateJudgeUseCase: sl()
+      rateJudgeUseCase: sl(),
     ),
   );
 
@@ -137,6 +138,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => AddMotionUsecase(debateRepo: sl()));
   //Profile
   sl.registerLazySingleton(() => GetProfileUseCase(repository: sl()));
+  sl.registerLazySingleton(() => GetFinishedDebatesUseCase(repository: sl()));
   //Debates
   sl.registerLazySingleton(() => GetDebatesUseCase(repository: sl()));
   sl.registerLazySingleton(() => GetMotionsUseCase(repository: sl()));
