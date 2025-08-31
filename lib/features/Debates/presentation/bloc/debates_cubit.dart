@@ -1,4 +1,3 @@
-import 'dart:nativewrappers/_internal/vm/lib/ffi_allocation_patch.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -159,7 +158,7 @@ class DebatesCubit extends Cubit<DebatesStates> {
     );
   }
 
-    Future<void> addRating({
+  Future<void> addRating({
     required RateJudgeDto dto,
     required BuildContext context,
   }) async {
